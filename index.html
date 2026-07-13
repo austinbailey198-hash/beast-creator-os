@@ -621,6 +621,24 @@
   .brief-controls{display:flex;align-items:center;gap:10px;margin-top:14px;flex-wrap:wrap}
   .bc-lbl{font-size:11px;letter-spacing:.6px;text-transform:uppercase;color:var(--ink-dim)}
   #briefCreator{max-width:230px}
+  /* socials + talent profile */
+  .socials{display:inline-flex;gap:4px;vertical-align:middle}
+  .soc{width:22px;height:18px;border-radius:5px;display:inline-grid;place-items:center;font-size:9px;font-weight:700;font-family:var(--mono);
+    border:1px solid var(--line);background:var(--panel-2);color:var(--ink-dim);text-decoration:none;letter-spacing:.3px}
+  .soc:hover{color:#fff;border-color:transparent}
+  .soc.yt:hover{background:#FF0033;color:#fff}
+  .soc.tt:hover{background:#111;color:#fff;border-color:var(--ink-dim)}
+  .soc.ig:hover{background:#C13584;color:#fff}
+  .soc.tw:hover{background:#9146FF;color:#fff}
+  .profile{margin:12px 0 4px;border:1px solid var(--line);border-radius:11px;padding:13px 14px;background:var(--panel-2)}
+  .prof-soc{display:flex;align-items:center;gap:10px;margin-bottom:11px;flex-wrap:wrap}
+  .prof-handle{font-size:12px;color:var(--ink-dim)}
+  .prof-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px 10px}
+  @media(max-width:640px){.prof-stats{grid-template-columns:1fr 1fr}}
+  .pstat{display:flex;flex-direction:column;gap:2px;min-width:0}
+  .pk{font-size:9.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--ink-dim)}
+  .pv{font-size:13px;font-family:var(--mono)}
+  .prof-foot{font-size:10.5px;color:var(--ink-dim);margin-top:11px;padding-top:9px;border-top:1px solid var(--line)}
   /* toast */
   .toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,20px);z-index:80;background:var(--panel);border:1px solid var(--accent);
     color:var(--ink);border-radius:10px;padding:10px 16px;font-size:13px;box-shadow:0 16px 40px -18px #000,0 0 30px -14px var(--accent);opacity:0;pointer-events:none;transition:.25s}
@@ -1220,6 +1238,7 @@
     }).join('');
   }
   document.querySelector('#topfits').addEventListener('click',function(e){
+    if(e.target.closest('a'))return;
     var tr=e.target.closest('tr[data-name]'); if(tr){go('score');selectCreator(tr.getAttribute('data-name'));}
   });
 
@@ -1237,7 +1256,7 @@
       return (A-B)*crmState.dir;
     });
     document.querySelector('#crmTable tbody').innerHTML=rows.map(function(c){
-      return '<tr data-name="'+c.name+'"><td><div class="creator"><span class="av" style="background:'+brandColor[c.brand]+'">'+initials(c.name)+'</span><div><div>'+c.name+'</div><div style="font-size:11px;color:var(--ink-dim)">'+c.niche+'</div></div></div></td>'+
+      return '<tr data-name="'+c.name+'"><td><div class="creator"><span class="av" style="background:'+brandColor[c.brand]+'">'+initials(c.name)+'</span><div><div style="display:flex;align-items:center;gap:8px">'+c.name+' '+socialsHTML(c)+'</div><div style="font-size:11px;color:var(--ink-dim)">'+c.niche+'</div></div></div></td>'+
         '<td><span class="chip c-plain"><span class="cd" style="background:'+brandColor[c.brand]+'"></span>'+brandName[c.brand]+'</span></td>'+
         '<td>'+c.platform+'</td><td class="n">'+c.followers+'</td><td class="n">'+c.eng.toFixed(1)+'%</td><td>'+safetyChip(c.safety)+'</td>'+
         '<td><span style="font-size:12px;color:var(--ink-dim)">'+c.status+'</span></td><td class="n">'+fitPill(c.fit)+'</td></tr>';
@@ -1254,6 +1273,7 @@
     renderCRM();
   });
   document.querySelector('#crmTable').addEventListener('click',function(e){
+    if(e.target.closest('a'))return;
     var tr=e.target.closest('tr[data-name]'); if(tr){go('score');selectCreator(tr.getAttribute('data-name'));}
   });
 
@@ -1286,7 +1306,7 @@
     renderDetail();
   }
   function selectCreator(n){cmpName=null;selName=n;renderPickList();}
-  document.getElementById('pickList').addEventListener('click',function(e){var p=e.target.closest('.pick');if(p)selectCreator(p.getAttribute('data-name'));});
+  document.getElementById('pickList').addEventListener('click',function(e){if(e.target.closest('a'))return;var p=e.target.closest('.pick');if(p)selectCreator(p.getAttribute('data-name'));});
 
   function axesFor(c){var total=0,wsum=0;var axes=AX.map(function(a){var v=Math.round(a.f(c));total+=v*a.w;wsum+=a.w;return {k:a.k,w:a.w,v:v};});return {axes:axes,comp:Math.round(total/wsum)};}
   function similarFor(c){
@@ -1333,11 +1353,12 @@
         '<div class="verdict"><div style="font-size:11px;letter-spacing:.8px;text-transform:uppercase;color:var(--ink-dim)">Composite fit</div><b style="color:'+scoreColor(comp)+'">'+comp+'</b>'+
         '<div style="font-size:12px;color:var(--ink-dim)">'+c.name+' · '+brandName[c.brand]+' &nbsp; '+safetyChip(c.safety)+'</div></div></div>'+
         '<div style="font-size:13px;background:var(--panel-2);border:1px solid var(--line);border-radius:9px;padding:11px 13px;margin:6px 0 2px"><b style="color:var(--accent-ink)">Why this creator:</b> '+c.note+'</div>'+
-        simhtml+'<div class="axes">'+axhtml+'</div>';
+        profileHTML(c)+simhtml+'<div class="axes">'+axhtml+'</div>';
     }
     var sel=document.getElementById('cmpSel'); if(sel) sel.addEventListener('change',function(){cmpName=this.value||null;renderDetail();});
   }
   document.getElementById('scoreDetail').addEventListener('click',function(e){
+    if(e.target.closest('a'))return;
     var b=e.target.closest('[data-brief]'); if(b){draftBrief(b.getAttribute('data-brief'));return;}
     var s=e.target.closest('.simchip'); if(s){selectCreator(s.getAttribute('data-name'));}
   });
@@ -1637,8 +1658,8 @@
     return '<div class="rescard" data-name="'+c.name+'">'+
       '<div class="rank">#'+rank+'</div>'+
       '<span class="av" style="background:'+brandColor[c.brand]+'">'+initials(c.name)+'</span>'+
-      '<div class="rmeta"><b>'+c.name+'</b> <span class="tier '+c.tier+'">'+(tierLbl[c.tier]||c.tier)+'</span> '+
-      '<span class="rsub">'+c.platform+' · '+c.followers+' · '+brandName[c.brand]+'</span>'+
+      '<div class="rmeta"><b>'+c.name+'</b> <span class="tier '+c.tier+'">'+(tierLbl[c.tier]||c.tier)+'</span> '+socialsHTML(c)+
+      '<span class="rsub">'+c.platform+' · '+c.followers+' · '+brandName[c.brand]+' · '+audienceFor(c)+'</span>'+
       '<div class="rwhy">'+chips+'</div><div class="rnote">'+c.note+'</div></div>'+
       '<div class="rscore"><div class="rv" style="color:'+scoreColor(r.score)+'">'+r.score+'</div><div class="rl">match</div><button class="minibtn" data-brief="'+c.name+'">Brief →</button></div>'+
       '</div>';
@@ -1685,7 +1706,7 @@
   document.getElementById('shuffleBtn').addEventListener('click',function(){var x=QUICK[Math.floor(Math.random()*QUICK.length)];document.getElementById('scoutInput').value=x.q;doScout(x.q,true);});
   document.getElementById('deepToggle').addEventListener('click',function(){scoutDeep=!scoutDeep;this.classList.toggle('on',scoutDeep);this.setAttribute('aria-checked',scoutDeep);doScout(scoutLastQuery,true);});
   document.getElementById('scoutFile').addEventListener('change',function(){var f=this.files&&this.files[0];var chip=document.getElementById('fileChip');if(f){chip.hidden=false;chip.textContent='⎘ '+f.name;var base=f.name.replace(/\.[^.]+$/,'').replace(/[-_]/g,' ');var inp=document.getElementById('scoutInput');inp.value=(inp.value?inp.value+', ':'')+base;}});
-  document.getElementById('scoutResults').addEventListener('click',function(e){var b=e.target.closest('[data-brief]');if(b){e.stopPropagation();draftBrief(b.getAttribute('data-brief'));return;}var r=e.target.closest('.rescard');if(r){selectCreator(r.getAttribute('data-name'));go('score');}});
+  document.getElementById('scoutResults').addEventListener('click',function(e){if(e.target.closest('a'))return;var b=e.target.closest('[data-brief]');if(b){e.stopPropagation();draftBrief(b.getAttribute('data-brief'));return;}var r=e.target.closest('.rescard');if(r){selectCreator(r.getAttribute('data-name'));go('score');}});
   function initScout(){var inp=document.getElementById('scoutInput');inp.value=QUICK[0].q;renderScoutResults(QUICK[0].q);}
 
   /* ================= SMART FEATURES ================= */
@@ -1885,6 +1906,33 @@
     if(typeof navigator!=='undefined'&&navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(function(){toast('Brief copied to clipboard');},function(){toast('Copy blocked by browser');});}
     else toast('Copy not supported here');
   });
+
+  /* ================= TALENT PROFILE (socials + stats) ================= */
+  var SOCIAL={
+    YouTube:{ic:'YT',cls:'yt',url:function(n){return 'https://www.youtube.com/results?search_query='+encodeURIComponent(n);}},
+    TikTok:{ic:'TT',cls:'tt',url:function(n){return 'https://www.tiktok.com/search?q='+encodeURIComponent(n);}},
+    Instagram:{ic:'IG',cls:'ig',url:function(n){return 'https://www.google.com/search?q='+encodeURIComponent(n+' instagram');}},
+    Twitch:{ic:'TW',cls:'tw',url:function(n){return 'https://www.twitch.tv/search?term='+encodeURIComponent(n);}}
+  };
+  function platformsFor(c){var set=[c.platform];['YouTube','TikTok','Instagram','Twitch'].forEach(function(p){if(c.tags&&c.tags.indexOf(p.toLowerCase())>=0&&set.indexOf(p)<0)set.push(p);});return set;}
+  function socialsHTML(c){return '<span class="socials">'+platformsFor(c).map(function(p){var s=SOCIAL[p];return s?'<a class="soc '+s.cls+'" href="'+s.url(c.name)+'" target="_blank" rel="noopener" title="'+c.name+' on '+p+'">'+s.ic+'</a>':'';}).join('')+'</span>';}
+  function audienceFor(c){var t=c.tags||[];
+    if(t.indexOf('gaming')>=0||t.indexOf('streaming')>=0)return 'Gen-Z, male-skew';
+    if(t.indexOf('grwm')>=0||t.indexOf('aesthetic')>=0||t.indexOf('routine')>=0)return 'Gen-Z, female-skew';
+    if(t.indexOf('family-safe')>=0||t.indexOf('magic')>=0)return 'Family, all ages';
+    if(t.indexOf('college')>=0||t.indexOf('dorm')>=0)return 'College, 18-24';
+    if(t.indexOf('food')>=0)return 'Broad, 18-34';
+    return 'Gen-Z / Millennial';}
+  function cadenceFor(c){return c.platform==='Twitch'?'streams 4-5x / wk':c.platform==='YouTube'?'1-2 uploads / wk':'4-7 posts / wk';}
+  function marketFor(c){return (c.tags&&c.tags.indexOf('global')>=0)?'Global':'US-led, N. America';}
+  function pstat(k,v){return '<div class="pstat"><span class="pk">'+k+'</span><span class="pv">'+v+'</span></div>';}
+  function profileHTML(c){
+    return '<div class="profile"><div class="prof-soc">'+socialsHTML(c)+'<span class="prof-handle">'+c.niche+'</span></div>'+
+      '<div class="prof-stats">'+
+        pstat('Followers',c.followers)+pstat('Avg views',fmtReach(reachFor(c))+' / post')+pstat('Engagement',c.eng.toFixed(1)+'%')+
+        pstat('Audience',audienceFor(c))+pstat('Primary market',marketFor(c))+pstat('Cadence',cadenceFor(c))+
+      '</div><div class="prof-foot">Illustrative sample stats. Live, this pulls from platform APIs + ViewStats. Socials link out to search.</div></div>';
+  }
 
   /* ---------- render all ---------- */
   function renderAll(){renderTopFits();renderCRM();renderPickList();renderCal();renderCharts();renderSignals();initScout();renderBrief('Keith Lee');renderInsights('kpiInsights',4);renderInsights('dashInsights',3);renderGift();renderDecisions();initPlaybook();initBriefControls();}
