@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Beast Creator Partnerships OS</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2788%27%3E%F0%9F%8D%AB%3C/text%3E%3C/svg%3E">
 </head>
@@ -628,18 +628,40 @@
 
   @media print{.rail,.topbar,.coach,.palette,.scrim{display:none!important}.app{grid-template-columns:1fr}.view{display:block!important;page-break-inside:avoid}}
 
-  @media(max-width:760px){
+  /* ---------- mobile: off-canvas nav drawer ---------- */
+  .hamburger{display:none;width:38px;height:38px;flex:none;border-radius:9px;border:1px solid var(--line);
+    background:var(--panel-2);color:var(--ink);font-size:17px;cursor:pointer;align-items:center;justify-content:center}
+  .rail-close{display:none;margin-left:auto;width:32px;height:32px;border-radius:8px;border:1px solid var(--line);
+    background:var(--panel-2);color:var(--ink-dim);font-size:14px;cursor:pointer}
+  .nav-scrim{position:fixed;inset:0;z-index:65;background:#05070ab8;backdrop-filter:blur(2px);opacity:0;pointer-events:none;transition:opacity .25s}
+  .nav-scrim.open{opacity:1;pointer-events:auto}
+  @media(max-width:860px){
     .app{grid-template-columns:1fr}
-    .rail{position:static;height:auto;flex-direction:column}
-    nav{flex-direction:row;flex-wrap:wrap}
-    .topstats{width:100%;margin-left:0}
-    .tb-controls .ctlbtn span.lbl{display:none}
+    .rail{position:fixed;top:0;left:0;bottom:0;height:100vh;width:272px;max-width:84vw;z-index:70;
+      transform:translateX(-100%);transition:transform .25s cubic-bezier(.2,.7,.2,1);border-right:1px solid var(--line)}
+    .rail.open{transform:none;box-shadow:0 0 70px -10px #000}
+    .hamburger{display:inline-flex}
+    .rail-close{display:inline-flex}
+    .topstats{display:none}
+    #paletteBtn{display:none}
+    .protochip .lbl{display:none}
+    .topbar{padding:11px 16px;gap:10px}
+    .wrap{padding:16px}
+    nav .nav-i{padding:11px 12px;font-size:14.5px}
+    .bbtn{padding:11px 12px}
   }
+  @media(max-width:560px){
+    .pagetitle{font-size:15px}
+    .ctlbtn .lbl{display:none}
+    .verbadge{display:none}
+    .sectlabel{margin-top:20px}
+  }
+  @media (prefers-reduced-motion:reduce){.rail{transition:none}}
 </style>
 
 <div class="app">
   <!-- ============ RAIL ============ -->
-  <aside class="rail">
+  <aside class="rail" id="rail">
     <div class="brandmark">
       <div class="glyph">◑</div>
       <div>
@@ -647,6 +669,7 @@
         <span>Beast Industries</span>
         <div class="verbadge"><span class="live"></span>v2.0 · prototype</div>
       </div>
+      <button class="rail-close" id="navClose" aria-label="Close menu">✕</button>
     </div>
 
     <div class="switcher">
@@ -680,10 +703,12 @@
       <span class="proto">Prototype</span>
     </div>
   </aside>
+  <div class="nav-scrim" id="navScrim"></div>
 
   <!-- ============ MAIN ============ -->
   <main>
     <div class="topbar">
+      <button class="hamburger" id="navToggle" aria-label="Open menu">☰</button>
       <div>
         <div class="crumb">Beast Industries · <b id="crumbBrand">All brands</b></div>
         <div class="pagetitle" id="pageTitle">Scout</div>
@@ -1085,6 +1110,18 @@
       : (matchMedia('(prefers-color-scheme: dark)').matches ? 'light':'dark');
     root.setAttribute('data-theme',next);
   });
+
+  /* ---------- mobile nav drawer ---------- */
+  var railEl=document.getElementById('rail'), navScrim=document.getElementById('navScrim');
+  function openNav(){railEl.classList.add('open');navScrim.classList.add('open');}
+  function closeNav(){railEl.classList.remove('open');navScrim.classList.remove('open');}
+  document.getElementById('navToggle').addEventListener('click',openNav);
+  document.getElementById('navClose').addEventListener('click',closeNav);
+  navScrim.addEventListener('click',closeNav);
+  document.getElementById('nav').addEventListener('click',function(e){if(e.target.closest('.nav-i'))closeNav();});
+  document.getElementById('brandbtns').addEventListener('click',function(e){if(e.target.closest('.bbtn'))closeNav();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeNav();});
+  window.addEventListener('resize',closeNav);
 
   /* ---------- data ---------- */
   // fit = model score /100; safety g/w/c; illustrative sample analytics
