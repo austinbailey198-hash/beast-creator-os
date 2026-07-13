@@ -386,6 +386,56 @@
   .pli.c-crit{color:var(--crit);background:var(--crit-soft)}
   .pli.c-plain{color:var(--ink-dim);background:var(--panel-2)}
 
+  /* ---------- scout · sourcing engine ---------- */
+  .scout-hero{background:linear-gradient(165deg,var(--accent-soft),transparent 60%);border:1px solid var(--line);
+    border-radius:16px;padding:22px 24px 20px;box-shadow:0 18px 50px -34px var(--accent)}
+  .scout-hero .eyebrow{font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent-ink);font-weight:700}
+  .scout-hero h2{font-size:clamp(22px,3.1vw,33px);letter-spacing:-.5px;margin:8px 0;
+    text-shadow:0 0 34px color-mix(in srgb,var(--accent) 30%,transparent)}
+  .scout-sub{font-size:13.5px;color:var(--ink-dim);max-width:70ch;margin:0;line-height:1.5}
+  .scout-box{margin-top:16px;background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:14px 15px 11px;transition:.2s}
+  .scout-box:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft),0 0 34px -12px var(--accent)}
+  #scoutInput{width:100%;border:0;background:transparent;color:var(--ink);font-family:inherit;font-size:15px;
+    line-height:1.5;resize:none;outline:none;min-height:50px}
+  .scout-tools{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:6px;padding-top:11px;border-top:1px solid var(--line)}
+  .attach{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;color:var(--ink-dim);cursor:pointer;
+    border:1px solid var(--line);border-radius:8px;padding:7px 11px}
+  .attach:hover{color:var(--ink);border-color:var(--accent)}
+  .filechip{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--accent-ink);background:var(--accent-soft);
+    border:1px solid var(--accent);border-radius:8px;padding:6px 10px;font-family:var(--mono)}
+  .scout-actions{margin-left:auto;display:flex;gap:8px}
+  .btn.ghost{background:transparent}
+  .chips-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+  .qchip{font-size:12.5px;color:var(--ink-dim);background:var(--panel);border:1px solid var(--line);border-radius:20px;
+    padding:7px 13px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:.15s}
+  .qchip:hover{color:var(--ink);border-color:var(--accent);box-shadow:0 0 18px -9px var(--accent)}
+  .qchip .qd{width:7px;height:7px;border-radius:50%;flex:none}
+  .scout-audit{margin-top:16px;background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:15px 18px}
+  .audit-step{display:flex;align-items:center;gap:11px;font-size:13px;color:var(--ink-dim);padding:5px 0;opacity:.4;transition:.25s}
+  .audit-step.on{opacity:1;color:var(--ink)}
+  .audit-step .as{width:19px;height:19px;border-radius:50%;border:2px solid var(--line);flex:none;
+    display:grid;place-items:center;font-size:10px;font-family:var(--mono)}
+  .audit-step.on .as{border-color:var(--good);color:var(--good)}
+  .audit-step.run .as{border-color:var(--accent);border-top-color:transparent;animation:spin .7s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .scout-results{margin-top:16px;display:flex;flex-direction:column;gap:9px}
+  .scout-rescount{font-size:12px;color:var(--ink-dim);margin:2px 2px 4px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .rescard{display:grid;grid-template-columns:32px 30px 1fr auto;gap:13px;align-items:start;background:var(--panel);
+    border:1px solid var(--line);border-radius:12px;padding:12px 14px;cursor:pointer;transition:.15s}
+  .rescard:hover{border-color:var(--accent);box-shadow:0 10px 28px -20px var(--accent);transform:translateY(-1px)}
+  .rescard .rank{font-family:var(--mono);font-size:13px;color:var(--ink-dim);font-weight:700;text-align:center;padding-top:2px}
+  .rescard .av{margin-top:1px}
+  .rescard .rmeta{min-width:0}
+  .rescard .rmeta b{font-size:14px}
+  .rescard .rmeta .rsub{font-size:11.5px;color:var(--ink-dim)}
+  .rescard .rwhy{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px;align-items:center}
+  .rescard .rnote{font-size:12px;color:var(--ink-dim);margin-top:6px;line-height:1.45}
+  .mtag{font-size:10.5px;font-weight:600;padding:2px 8px;border-radius:20px;background:var(--accent-soft);color:var(--accent-ink);white-space:nowrap}
+  .rescard .rscore{text-align:right;padding-top:2px}
+  .rescard .rscore .rv{font-family:var(--mono);font-weight:700;font-size:18px}
+  .rescard .rscore .rl{font-size:9px;letter-spacing:.6px;text-transform:uppercase;color:var(--ink-dim)}
+  @media(max-width:640px){.rescard{grid-template-columns:26px 1fr auto}.rescard .av{display:none}}
+
   @media print{.rail,.topbar,.coach,.palette,.scrim{display:none!important}.app{grid-template-columns:1fr}.view{display:block!important;page-break-inside:avoid}}
 
   @media(max-width:760px){
@@ -421,7 +471,8 @@
 
     <nav id="nav">
       <div class="nlbl">Operate</div>
-      <div class="nav-i on" data-v="dash"><span class="ic">◇</span>Command Center</div>
+      <div class="nav-i on" data-v="scout"><span class="ic">⤬</span>Scout</div>
+      <div class="nav-i" data-v="dash"><span class="ic">◇</span>Command Center</div>
       <div class="nav-i" data-v="crm"><span class="ic">▤</span>Creator CRM</div>
       <div class="nav-i" data-v="score"><span class="ic">◎</span>Fit Scorecard</div>
       <div class="nlbl">Execute</div>
@@ -445,7 +496,7 @@
     <div class="topbar">
       <div>
         <div class="crumb">Beast Industries · <b id="crumbBrand">All brands</b></div>
-        <div class="pagetitle" id="pageTitle">Command Center</div>
+        <div class="pagetitle" id="pageTitle">Scout</div>
       </div>
       <div class="topstats">
         <div class="tstat"><span class="v" id="s-creators">3,412</span><span class="k">Creators</span></div>
@@ -462,8 +513,31 @@
 
     <div class="wrap">
 
+      <!-- ===== SCOUT ===== -->
+      <section class="view on" id="v-scout">
+        <div class="scout-hero">
+          <div class="eyebrow">Sourcing</div>
+          <h2>Describe the drop. Meet the creators who fit.</h2>
+          <p class="scout-sub">Type the brand, the concept, the audience, or attach a brief. Scout audits the roster and live signals, then ranks the creators who actually make sense for this exact task, with the reasons why.</p>
+          <div class="scout-box">
+            <textarea id="scoutInput" rows="2" placeholder="e.g. Feastables back-to-school bar, Gen-Z, honest food reviewers, TikTok-first"></textarea>
+            <div class="scout-tools">
+              <label class="attach"><input type="file" id="scoutFile" accept=".pdf,.doc,.docx,.txt" hidden>⎘ Attach brief</label>
+              <span class="filechip" id="fileChip" hidden></span>
+              <div class="scout-actions">
+                <button class="btn ghost" id="shuffleBtn">⤮ Shuffle</button>
+                <button class="btn primary" id="scoutRun">Scout creators →</button>
+              </div>
+            </div>
+          </div>
+          <div class="chips-row" id="quickChips"></div>
+        </div>
+        <div class="scout-audit" id="scoutAudit" hidden></div>
+        <div class="scout-results" id="scoutResults"></div>
+      </section>
+
       <!-- ===== DASHBOARD ===== -->
-      <section class="view on" id="v-dash">
+      <section class="view" id="v-dash">
         <p class="lead">One console for every creator relationship across the Beast portfolio. Each brand pulls a different creator profile, brief approach, and partnership structure. This switches the whole cockpit to match.</p>
 
         <div class="cards grid-4" style="margin-top:18px">
@@ -805,11 +879,11 @@
       <div class="opener-body">
         <div class="rowset">
           <div class="oline"><span class="ob">1</span><div><b>Switch brands</b> top-left. Each pulls a different creator profile and recolors the whole console.</div></div>
-          <div class="oline"><span class="ob">2</span><div><b>Everything is clickable.</b> Sort the roster, score a creator, open a live brief, read the gifting run of show.</div></div>
+          <div class="oline"><span class="ob">2</span><div><b>Start with Scout.</b> Describe a drop or attach a brief, and it ranks the creators who fit that exact task. Everything else is clickable too.</div></div>
           <div class="oline"><span class="ob">3</span><div><b>Press ⌘K</b> to jump anywhere, or take the quick tour to see each module once.</div></div>
         </div>
         <div class="opener-cta">
-          <button class="btn primary" id="exploreBtn">Enter the console</button>
+          <button class="btn primary" id="exploreBtn">Scout a drop →</button>
           <button class="btn" id="startTour">Take the tour</button>
         </div>
         <div class="sig"><span>Built by <b style="color:var(--ink)">Austin Bailey</b></span><span>Creator Partnerships · Beast Industries</span></div>
@@ -818,7 +892,7 @@
     <aside class="opener-side">
       <div class="metricstack">
         <div class="mcard" style="--ba:#C77B3A"><div class="mv">3,412</div><div class="mk">creators <b>scored</b> for fit across the three brands. Followers are the last signal, not the first.</div></div>
-        <div class="mcard" style="--ba:#2FA36B"><div class="mv">8 modules</div><div class="mk">roster · fit scorecard · briefs · gifting · calendar · KPIs · playbook</div></div>
+        <div class="mcard" style="--ba:#2FA36B"><div class="mv">9 modules</div><div class="mk">scout · roster · fit scorecard · briefs · gifting · calendar · KPIs · playbook</div></div>
         <div class="mcard" style="--ba:#2F6BFF"><div class="mv">500-creator</div><div class="mk">gifting activation mapped forecast to logistics. <b>A working system, not a mockup.</b></div></div>
       </div>
     </aside>
@@ -907,7 +981,7 @@
   function brandFilter(list){return curBrand==='all'?list:list.filter(function(c){return c.brand===curBrand;});}
 
   /* ---------- nav ---------- */
-  var titles={dash:"Command Center",crm:"Creator CRM",score:"Fit Scorecard",brief:"Brief Builder",gift:"Gifting Ops",cal:"Campaign Calendar",kpi:"KPI Reporting",play:"Operating Playbook"};
+  var titles={scout:"Scout",dash:"Command Center",crm:"Creator CRM",score:"Fit Scorecard",brief:"Brief Builder",gift:"Gifting Ops",cal:"Campaign Calendar",kpi:"KPI Reporting",play:"Operating Playbook"};
   function go(v){
     [].forEach.call(document.querySelectorAll('.nav-i'),function(n){n.classList.toggle('on',n.getAttribute('data-v')===v);});
     [].forEach.call(document.querySelectorAll('.view'),function(s){s.classList.toggle('on',s.id==='v-'+v);});
@@ -1097,6 +1171,7 @@
   /* ---------- command palette ---------- */
   var palette=document.getElementById('palette'),palInput=document.getElementById('palInput'),palResults=document.getElementById('palResults');
   var palCmds=[
+    {label:"Scout",sub:"sourcing",ic:"⤬",act:function(){go('scout');}},
     {label:"Command Center",sub:"dashboard",ic:"◇",act:function(){go('dash');}},
     {label:"Creator CRM",sub:"database",ic:"▤",act:function(){go('crm');}},
     {label:"Fit Scorecard",sub:"evaluate",ic:"◎",act:function(){go('score');}},
@@ -1143,7 +1218,8 @@
 
   /* ---------- guided tour ---------- */
   var tour=[
-    {v:'dash',t:"Command Center",b:"Start here. Top-line health for the whole portfolio, a live signal feed, and what needs a decision from me today. Flip brands top-left and the whole cockpit recolors and re-filters."},
+    {v:'scout',t:"Scout",b:"Start here. Describe a drop, attach a brief, or hit Shuffle. Scout audits the roster and ranks the creators who fit this exact task, with the reasons why. Click any result to open its full score."},
+    {v:'dash',t:"Command Center",b:"Top-line health for the whole portfolio, a live signal feed, and what needs a decision today. Flip brands top-left and the whole cockpit recolors and re-filters."},
     {v:'crm',t:"Creator CRM",b:"The 3,000+ roster, searchable and sortable. Every column is signal beyond followers: engagement quality, brand safety, collab status. Click any header to sort."},
     {v:'score',t:"Fit Scorecard",b:"How a creator gets scored before we spend. Six weighted axes produce one number any brand lead can read in seconds. Pick a creator to see the breakdown and the why."},
     {v:'brief',t:"Brief Builder",b:"A real, ready-to-send Feastables brief with talking points, product truth, guardrails, deliverables, FTC disclosure, and usage rights. A creator could act on this today."},
@@ -1169,8 +1245,121 @@
   document.getElementById('coachBack').addEventListener('click',function(){if(tStep>0){tStep--;renderCoach();}});
   document.getElementById('coachNext').addEventListener('click',function(){if(tStep<tour.length-1){tStep++;renderCoach();}else endTour();});
 
+  /* ---------- scout · sourcing engine ---------- */
+  var TAGS={
+    "Nick DiGiovanni":["food","chef","records","family-safe","unboxing","collab","youtube"],
+    "Keith Lee":["food","honest","review","trust","taste-test","tiktok"],
+    "Nara Smith":["food","scratch","aesthetic","gen-z","ingredients","tiktok"],
+    "B. Dylan Hollis":["food","baking","vintage","wholesome","family-safe","tiktok"],
+    "Owen Han":["food","sandwich","asmr","cinematic","taste-test","tiktok"],
+    "Zach Choi":["food","asmr","eating","global","youtube"],
+    "candyhunting":["candy","snack","news","launch","niche","instagram"],
+    "Alix Earle":["college","dorm","lifestyle","grwm","gen-z","tiktok"],
+    "Jynxzi":["gaming","twitch","streaming","gen-z"],
+    "Kai Cenat":["gaming","twitch","streaming","culture","gen-z"],
+    "Corporate Natalie":["office","workplace","corporate","comedy","instagram"],
+    "Dylan Anderson":["office","corporate","comedy","sketch","tiktok"],
+    "Kaeli Mae":["aesthetic","routine","lunch","gen-z","tiktok"],
+    "Ryan Trahan":["challenge","storytelling","ecosystem","youtube"],
+    "Zach King":["magic","vfx","family-safe","global","unboxing","tiktok"],
+    "Michelle Khare":["challenge","documentary","premium","youtube"],
+    "Airrack":["challenge","vlog","stunt","ecosystem","youtube"]
+  };
+  C.forEach(function(c){c.tags=TAGS[c.name]||[];});
+  var SYN={
+    'school':['college','dorm','lunch'],'back to school':['college','dorm','lunch'],
+    'college':['college','dorm'],'dorm':['college','dorm'],'lunch':['lunch','college'],
+    'gen z':['gen-z'],'gen-z':['gen-z'],'genz':['gen-z'],'young':['gen-z'],'teen':['gen-z'],
+    'gaming':['gaming','twitch','streaming'],'gamer':['gaming','twitch'],'game':['gaming','twitch'],
+    'stream':['streaming','twitch'],'twitch':['twitch','gaming'],
+    'honest':['honest','review','trust'],'review':['review','honest'],'trust':['trust','honest'],
+    'authentic':['honest','trust'],'real':['honest','trust','ingredients'],
+    'food':['food','chef','snack','asmr','taste-test','baking','candy','sandwich'],
+    'snack':['snack','candy','food'],'candy':['candy','snack'],'chocolate':['food','candy','snack'],
+    'taste':['taste-test','food'],'eat':['eating','food'],'cook':['chef','food','baking'],
+    'asmr':['asmr','eating'],'satisfying':['asmr','cinematic'],
+    'family':['family-safe','magic'],'kid':['family-safe'],'wholesome':['wholesome','family-safe'],'safe':['family-safe'],
+    'challenge':['challenge','stunt'],'stunt':['stunt','challenge'],'adventure':['challenge','vlog'],
+    'unboxing':['unboxing'],'reveal':['unboxing'],'drop':['unboxing','launch'],
+    'office':['office','workplace','corporate'],'work':['office','workplace'],'corporate':['corporate','office'],
+    'aesthetic':['aesthetic','routine'],'routine':['routine','aesthetic'],'grwm':['grwm','routine'],
+    'magic':['magic','vfx'],'vfx':['vfx','magic'],
+    'tiktok':['tiktok'],'youtube':['youtube'],'instagram':['instagram'],'insta':['instagram'],
+    'ecosystem':['ecosystem'],'mrbeast':['ecosystem','collab'],'beast':['ecosystem'],
+    'launch':['launch','news'],'premium':['premium'],'global':['global'],'story':['storytelling','documentary']
+  };
+  var QUICK=[
+    {b:'feastables',label:"Feastables · back-to-school bar",q:"Feastables back to school bar, Gen-Z, honest food reviewers, TikTok-first"},
+    {b:'lunchly',label:"Lunchly · gaming Gen-Z",q:"Lunchly gaming Gen-Z streamers, snack while you stream, Twitch"},
+    {b:'merch',label:"Beast Merch · challenge creators",q:"Beast Merch challenge and stunt storytellers, YouTube drops"},
+    {b:'feastables',label:"Feastables · ASMR taste tests",q:"Feastables ASMR taste test, cinematic satisfying food, TikTok"},
+    {b:'lunchly',label:"Lunchly · college & dorm",q:"Lunchly college dorm lunch, aesthetic routines, Gen-Z"},
+    {b:'merch',label:"Merch · family-safe global",q:"Beast Merch family-safe global reach, magic and unboxing reveals"}
+  ];
+  function scopeFor(q){q=q.toLowerCase();if(q.indexOf('feastables')>=0)return'feastables';if(q.indexOf('lunchly')>=0)return'lunchly';if(q.indexOf('merch')>=0)return'merch';return curBrand||'all';}
+  function runScout(query){
+    var q=' '+query.toLowerCase().replace(/[-_]/g,' ')+' ';
+    var brand=scopeFor(query);
+    var wanted={};
+    Object.keys(SYN).forEach(function(k){ if(q.indexOf(k)>=0) SYN[k].forEach(function(t){wanted[t]=1;}); });
+    var pool=brand==='all'?C:C.filter(function(c){return c.brand===brand;});
+    var res=pool.map(function(c){
+      var hits=[];
+      c.tags.forEach(function(t){ var tt=t.replace(/-/g,' '); if(wanted[t]||q.indexOf(' '+tt+' ')>=0){ if(hits.indexOf(t)<0)hits.push(t); } });
+      return {c:c,hits:hits,score:Math.min(99,Math.round(c.fit*0.5+hits.length*9))};
+    });
+    res.sort(function(a,b){return b.score-a.score||b.c.fit-a.c.fit;});
+    return {brand:brand,list:res.slice(0,7)};
+  }
+  function renderScoutResults(query){
+    var out=runScout(query);
+    document.getElementById('scoutResults').innerHTML=
+      '<div class="scout-rescount"><b style="color:var(--ink)">'+out.list.length+' creators</b> ranked for this brief · scope: '+brandName[out.brand]+
+      '<span style="margin-left:auto;opacity:.75">Prototype: matched against the sample roster</span></div>'+
+      out.list.map(function(r,i){
+        var c=r.c;
+        var chips=r.hits.slice(0,4).map(function(t){return '<span class="mtag">'+t.replace(/-/g,' ')+'</span>';}).join('');
+        if(!chips)chips='<span class="mtag" style="background:var(--panel-2);color:var(--ink-dim)">closest fit</span>';
+        return '<div class="rescard" data-name="'+c.name+'">'+
+          '<div class="rank">#'+(i+1)+'</div>'+
+          '<span class="av" style="background:'+brandColor[c.brand]+'">'+initials(c.name)+'</span>'+
+          '<div class="rmeta"><b>'+c.name+'</b> <span class="rsub">'+c.platform+' · '+c.followers+' · '+brandName[c.brand]+'</span>'+
+          '<div class="rwhy">'+chips+'</div><div class="rnote">'+c.note+'</div></div>'+
+          '<div class="rscore"><div class="rv" style="color:'+scoreColor(r.score)+'">'+r.score+'</div><div class="rl">match</div></div>'+
+          '</div>';
+      }).join('');
+  }
+  var AUDIT=["Reading your brief","Scanning roster · 3,412 creators","Cross-checking engagement quality","Mapping audience overlap","Screening brand safety","Ranking by fit"];
+  var auditTimer=null;
+  function playAudit(cb){
+    var el=document.getElementById('scoutAudit');el.hidden=false;
+    el.innerHTML=AUDIT.map(function(s,i){return '<div class="audit-step" data-i="'+i+'"><span class="as">'+(i+1)+'</span>'+s+'</div>';}).join('');
+    var steps=el.querySelectorAll('.audit-step'),i=0;
+    if(auditTimer)clearInterval(auditTimer);
+    function tick(){
+      if(i>0){steps[i-1].classList.remove('run');steps[i-1].classList.add('on');steps[i-1].querySelector('.as').textContent='✓';}
+      if(i<steps.length){steps[i].classList.add('on','run');i++;}
+      else{clearInterval(auditTimer);setTimeout(function(){el.hidden=true;cb();},260);}
+    }
+    tick();auditTimer=setInterval(tick,230);
+  }
+  function doScout(query,animate){
+    query=(query||'').trim(); var inp=document.getElementById('scoutInput');
+    if(!query){query=QUICK[0].q;inp.value=query;}
+    if(animate){document.getElementById('scoutResults').innerHTML='';playAudit(function(){renderScoutResults(query);});}
+    else{renderScoutResults(query);}
+  }
+  document.getElementById('quickChips').innerHTML=QUICK.map(function(x,i){return '<span class="qchip" data-i="'+i+'"><span class="qd" style="background:'+brandColor[x.b]+'"></span>'+x.label+'</span>';}).join('');
+  document.getElementById('quickChips').addEventListener('click',function(e){var q=e.target.closest('.qchip');if(!q)return;var x=QUICK[+q.getAttribute('data-i')];document.getElementById('scoutInput').value=x.q;doScout(x.q,true);});
+  document.getElementById('scoutRun').addEventListener('click',function(){doScout(document.getElementById('scoutInput').value,true);});
+  document.getElementById('scoutInput').addEventListener('keydown',function(e){if((e.metaKey||e.ctrlKey)&&e.key==='Enter'){e.preventDefault();doScout(this.value,true);}});
+  document.getElementById('shuffleBtn').addEventListener('click',function(){var x=QUICK[Math.floor(Math.random()*QUICK.length)];document.getElementById('scoutInput').value=x.q;doScout(x.q,true);});
+  document.getElementById('scoutFile').addEventListener('change',function(){var f=this.files&&this.files[0];var chip=document.getElementById('fileChip');if(f){chip.hidden=false;chip.textContent='⎘ '+f.name;var base=f.name.replace(/\.[^.]+$/,'').replace(/[-_]/g,' ');var inp=document.getElementById('scoutInput');inp.value=(inp.value?inp.value+', ':'')+base;}});
+  document.getElementById('scoutResults').addEventListener('click',function(e){var r=e.target.closest('.rescard');if(r){selectCreator(r.getAttribute('data-name'));go('score');}});
+  function initScout(){var inp=document.getElementById('scoutInput');inp.value=QUICK[0].q;renderScoutResults(QUICK[0].q);}
+
   /* ---------- render all ---------- */
-  function renderAll(){renderTopFits();renderCRM();renderPickList();renderCal();renderCharts();renderSignals();}
+  function renderAll(){renderTopFits();renderCRM();renderPickList();renderCal();renderCharts();renderSignals();initScout();}
   renderAll();
 })();
 </script>
