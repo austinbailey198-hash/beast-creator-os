@@ -554,6 +554,78 @@
   .cmp-verdict{margin-top:14px;font-size:13px;background:var(--panel-2);border:1px solid var(--line);border-radius:9px;padding:11px 13px;line-height:1.5}
   @media(max-width:640px){.cmp-row{grid-template-columns:1fr 24px 1fr 24px}.cmp-k{grid-column:1/-1}}
 
+  /* ---------- interactive tabs ---------- */
+  .live-tag{font-family:var(--mono);font-size:9px;letter-spacing:.5px;color:var(--good);border:1px solid var(--good);border-radius:20px;padding:1px 6px;margin-left:8px;vertical-align:middle;text-transform:uppercase}
+  /* gifting planner */
+  .giftplanner{padding:16px}
+  .gp-globals{display:flex;gap:22px;flex-wrap:wrap;margin:4px 2px;padding:12px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .gp-g{display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--ink-dim)}
+  .gp-g>span:first-child{min-width:96px}
+  .gp-g b{font-family:var(--mono);color:var(--ink);min-width:34px}
+  .gp-g input[type=range]{accent-color:#2F6BFF;width:120px}
+  .mini-field{display:inline-flex;align-items:center;gap:2px;background:var(--panel-2);border:1px solid var(--line);border-radius:8px;padding:4px 9px;color:var(--ink-dim)}
+  .mini-field input{border:0;background:transparent;color:var(--ink);font-family:var(--mono);font-size:13px;width:52px;outline:none}
+  .stepper{display:inline-flex;align-items:center;gap:8px}
+  .forecast .stepper{justify-content:flex-end}
+  .stp{width:22px;height:22px;border-radius:6px;border:1px solid var(--line);background:var(--panel-2);color:var(--ink);cursor:pointer;font-size:14px;line-height:1;display:grid;place-items:center;font-family:inherit}
+  .stp:hover{border-color:var(--accent);color:var(--accent-ink)}
+  .stepper>span{font-family:var(--mono);min-width:26px;text-align:center;display:inline-block}
+  /* calendar */
+  .cal-tools{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 12px}
+  .cal-metrics{display:flex;gap:18px;flex-wrap:wrap}
+  .cm{display:flex;flex-direction:column}
+  .cm b{font-family:var(--mono);font-size:16px;font-weight:700}
+  .cm span{font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:var(--ink-dim)}
+  .cal-actions{display:flex;gap:8px;align-items:center}
+  .cal-hint{font-size:11.5px;color:var(--ink-dim)}
+  .btn.ghost{background:transparent;padding:7px 12px;font-size:12.5px}
+  .calcell{cursor:pointer;transition:background .12s}
+  .calcell:hover{background:var(--accent-soft)}
+  /* charts */
+  .chart-head{display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .seg.sm button{font-size:11.5px;padding:4px 9px}
+  .barg:hover rect{filter:brightness(1.15)}
+  .barg:hover .barval{opacity:1!important}
+  #brandKpiTable tbody tr{cursor:pointer}
+  #brandKpiTable tbody tr:hover{background:var(--panel-2)}
+  .kpi-link{cursor:pointer}
+  .kpi-link:hover{border-color:var(--accent)}
+  .rb[data-jump]{cursor:pointer;border-radius:8px;padding:2px 4px;margin:0 -4px;transition:background .12s}
+  .rb[data-jump]:hover{background:var(--panel-2)}
+  /* readiness + playbook checklist */
+  .ready{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-top:16px}
+  .ready-top{display:flex;justify-content:space-between;font-size:13px;font-weight:600;margin-bottom:8px}
+  .ready-top span:last-child{font-family:var(--mono);color:var(--accent-ink)}
+  .ready-meter{height:8px;border-radius:5px;background:var(--panel-2);border:1px solid var(--line);overflow:hidden}
+  .ready-meter i{display:block;height:100%;background:var(--accent);transition:width .3s}
+  .ready-sub{display:flex;justify-content:space-between;font-size:11.5px;color:var(--ink-dim);margin-top:8px}
+  .linklike{background:0;border:0;color:var(--accent-ink);cursor:pointer;font:inherit;font-size:11.5px;text-decoration:underline}
+  .pl{cursor:pointer;border-radius:8px;padding:5px 7px;margin:0 -7px;transition:background .12s;align-items:center}
+  .pl:hover{background:var(--panel-2)}
+  .plchk{margin-left:auto;width:18px;height:18px;border-radius:5px;border:1px solid var(--line);flex:none;display:grid;place-items:center;font-size:11px;color:transparent}
+  .pl.done{opacity:.6}
+  .pl.done .plchk{background:var(--good);border-color:var(--good);color:#04110a}
+  .pl.done .plchk::after{content:"✓"}
+  .pl.done>div{text-decoration:line-through}
+  /* decisions + feed refresh */
+  .pill-count{font-family:var(--mono);font-size:11px;color:var(--accent-ink);background:var(--accent-soft);border:1px solid var(--accent);border-radius:20px;padding:1px 8px;margin-left:6px;vertical-align:middle}
+  .dec{display:flex;align-items:center;gap:10px;font-size:13px;padding:8px 0;border-bottom:1px solid var(--line)}
+  .dec:last-child{border-bottom:0}
+  .dec-x{flex:1;min-width:0}
+  .dec-act{display:flex;gap:6px;flex:none}
+  .dec-act .minibtn{margin-top:0}
+  .allclear{font-size:13px;color:var(--good);padding:10px 0}
+  .mini-refresh{background:var(--panel-2);border:1px solid var(--line);color:var(--ink-dim);border-radius:7px;padding:3px 9px;font-family:inherit;font-size:11px;cursor:pointer;text-transform:none;letter-spacing:0;margin-left:2px}
+  .mini-refresh:hover{color:var(--ink);border-color:var(--accent)}
+  /* brief controls */
+  .brief-controls{display:flex;align-items:center;gap:10px;margin-top:14px;flex-wrap:wrap}
+  .bc-lbl{font-size:11px;letter-spacing:.6px;text-transform:uppercase;color:var(--ink-dim)}
+  #briefCreator{max-width:230px}
+  /* toast */
+  .toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,20px);z-index:80;background:var(--panel);border:1px solid var(--accent);
+    color:var(--ink);border-radius:10px;padding:10px 16px;font-size:13px;box-shadow:0 16px 40px -18px #000,0 0 30px -14px var(--accent);opacity:0;pointer-events:none;transition:.25s}
+  .toast.show{opacity:1;transform:translate(-50%,0)}
+
   @media print{.rail,.topbar,.coach,.palette,.scrim{display:none!important}.app{grid-template-columns:1fr}.view{display:block!important;page-break-inside:avoid}}
 
   @media(max-width:760px){
@@ -670,10 +742,10 @@
         <p class="lead">One console for every creator relationship across the Beast portfolio. Each brand pulls a different creator profile, brief approach, and partnership structure. This switches the whole cockpit to match.</p>
 
         <div class="cards grid-4" style="margin-top:18px">
-          <div class="card kpi"><span class="lab">Reach booked · Q</span><span class="big">418M</span><span class="delta up">▲ 12% vs last Q</span></div>
-          <div class="card kpi"><span class="lab">Earned media value</span><span class="big">$3.9M</span><span class="delta up">▲ 8%</span></div>
-          <div class="card kpi"><span class="lab">Avg engagement rate</span><span class="big">6.4%</span><span class="delta up">▲ 0.7pt</span></div>
-          <div class="card kpi"><span class="lab">Cost per 1k views</span><span class="big">$4.10</span><span class="delta up">▼ 14% (better)</span></div>
+          <div class="card kpi kpi-link" data-jump="kpi"><span class="lab">Reach booked · Q</span><span class="big">418M</span><span class="delta up">▲ 12% vs last Q</span></div>
+          <div class="card kpi kpi-link" data-jump="kpi"><span class="lab">Earned media value</span><span class="big">$3.9M</span><span class="delta up">▲ 8%</span></div>
+          <div class="card kpi kpi-link" data-jump="kpi"><span class="lab">Avg engagement rate</span><span class="big">6.4%</span><span class="delta up">▲ 0.7pt</span></div>
+          <div class="card kpi kpi-link" data-jump="kpi"><span class="lab">Cost per 1k views</span><span class="big">$4.10</span><span class="delta up">▼ 14% (better)</span></div>
         </div>
 
         <div id="dashInsights" class="insights"></div>
@@ -682,29 +754,23 @@
         <div class="cards grid-2">
           <div class="card">
             <h3>Stage flow</h3>
-            <p class="sub">Where every active partnership sits right now.</p>
+            <p class="sub">Where every active partnership sits. Click a stage to open it in the roster.</p>
             <div class="rowbars" style="margin-top:14px">
-              <div class="rb"><div class="rbtop"><b>Sourced</b><span>62</span></div><div class="meter"><i style="width:100%"></i></div></div>
-              <div class="rb"><div class="rbtop"><b>Outreach sent</b><span>38</span></div><div class="meter"><i style="width:62%"></i></div></div>
-              <div class="rb"><div class="rbtop"><b>In negotiation</b><span>21</span></div><div class="meter"><i style="width:34%"></i></div></div>
-              <div class="rb"><div class="rbtop"><b>Contracted · in production</b><span>14</span></div><div class="meter"><i style="width:23%"></i></div></div>
-              <div class="rb"><div class="rbtop"><b>Live / posted</b><span>9</span></div><div class="meter"><i style="width:15%"></i></div></div>
+              <div class="rb" data-jump="crm"><div class="rbtop"><b>Sourced</b><span>62</span></div><div class="meter"><i style="width:100%"></i></div></div>
+              <div class="rb" data-jump="crm"><div class="rbtop"><b>Outreach sent</b><span>38</span></div><div class="meter"><i style="width:62%"></i></div></div>
+              <div class="rb" data-jump="crm"><div class="rbtop"><b>In negotiation</b><span>21</span></div><div class="meter"><i style="width:34%"></i></div></div>
+              <div class="rb" data-jump="crm"><div class="rbtop"><b>Contracted · in production</b><span>14</span></div><div class="meter"><i style="width:23%"></i></div></div>
+              <div class="rb" data-jump="crm"><div class="rbtop"><b>Live / posted</b><span>9</span></div><div class="meter"><i style="width:15%"></i></div></div>
             </div>
           </div>
           <div class="card">
-            <h3>Needs a decision from me</h3>
-            <p class="sub">The console surfaces what's blocked before it slips.</p>
-            <div style="display:flex;flex-direction:column;gap:9px;margin-top:14px">
-              <div style="display:flex;gap:10px;align-items:center;font-size:13px"><span class="chip c-crit">Overdue</span> Nick DiGiovanni cut #2: revision note unanswered 2 days</div>
-              <div style="display:flex;gap:10px;align-items:center;font-size:13px"><span class="chip c-warn">Rate gap</span> Alix Earle counter is 18% over Lunchly ceiling</div>
-              <div style="display:flex;gap:10px;align-items:center;font-size:13px"><span class="chip c-warn">Legal</span> 4 contracts awaiting FTC-disclosure clause sign-off</div>
-              <div style="display:flex;gap:10px;align-items:center;font-size:13px"><span class="chip c-accent">Forecast</span> Holiday gifting run needs quantity lock by Fri</div>
-              <div style="display:flex;gap:10px;align-items:center;font-size:13px"><span class="chip c-good">Ready</span> Keith Lee Feastables post cleared to publish</div>
-            </div>
+            <h3>Needs a decision from me <span class="pill-count" id="decCount"></span></h3>
+            <p class="sub">Resolve or snooze each one. The console clears them as you go.</p>
+            <div id="decisionList" style="margin-top:13px"></div>
           </div>
         </div>
 
-        <div class="sectlabel">Live signal feed</div>
+        <div class="sectlabel">Live signal feed <button class="mini-refresh" id="feedRefresh" title="Refresh feed">⟳ refresh</button></div>
         <div class="card" style="padding:6px 4px">
           <div id="signalFeed" style="display:flex;flex-direction:column"></div>
         </div>
@@ -765,7 +831,12 @@
       <!-- ===== BRIEF ===== -->
       <section class="view" id="v-brief">
         <p class="lead">A brief the creator can act on without a single follow-up call. Draft one from any creator in Scout or the roster, and it tailors itself: the format matches their platform, the angle matches how they actually make content.</p>
-        <div id="briefHost" style="margin-top:18px"></div>
+        <div class="brief-controls">
+          <label class="bc-lbl">Creator</label>
+          <select id="briefCreator" class="cmpsel"></select>
+          <button class="btn ghost" id="copyBrief">⧉ Copy brief</button>
+        </div>
+        <div id="briefHost" style="margin-top:14px"></div>
         <div class="note"><span class="pf">◎</span><div>Every brief tailors itself to the creator and the brand. Talking points, product truth, guardrails, deliverables, usage rights, and disclosure are baked in. Same skeleton, different soul.</div></div>
       </section>
 
@@ -773,11 +844,7 @@
       <section class="view" id="v-gift">
         <p class="lead">A 500-creator seeding activation, run like a supply-chain operation, because it is. Concept → manufacturer → forecast → logistics → measurement, with the quantity math that keeps ops honest.</p>
 
-        <div class="cards grid-3" style="margin-top:18px">
-          <div class="card kpi"><span class="lab">Creators in wave</span><span class="big">500</span><span class="delta">3 tiers · 4 waves</span></div>
-          <div class="card kpi"><span class="lab">Units to produce</span><span class="big">7,150</span><span class="delta">incl. 10% breakage buffer</span></div>
-          <div class="card kpi"><span class="lab">All-in budget</span><span class="big">$96.5k</span><span class="delta">$193 blended / creator</span></div>
-        </div>
+        <div class="cards grid-4" id="gpSummary" style="margin-top:18px"></div>
 
         <div class="sectlabel">The concept: "Beast Crate: Back to School"</div>
         <div class="card">
@@ -802,16 +869,16 @@
           </div>
         </div>
 
-        <div class="sectlabel">Quantity forecast</div>
-        <div class="tablewrap"><table class="forecast">
-          <thead><tr><th>Tier</th><th class="num">Creators</th><th class="num">Units / crate</th><th class="num">Subtotal</th><th class="num">+10% buffer</th></tr></thead>
-          <tbody>
-            <tr><td>A · Marquee</td><td class="num">50</td><td class="num">18</td><td class="num">900</td><td class="num">990</td></tr>
-            <tr><td>B · Core</td><td class="num">150</td><td class="num">14</td><td class="num">2,100</td><td class="num">2,310</td></tr>
-            <tr><td>C · Emerging</td><td class="num">300</td><td class="num">11</td><td class="num">3,300</td><td class="num">3,630</td></tr>
-          </tbody>
-          <tfoot><tr><td>Total</td><td class="num">500</td><td class="num">n/a</td><td class="num">6,300</td><td class="num">6,930</td></tr></tfoot>
-        </table></div>
+        <div class="sectlabel">Gifting planner <span class="live-tag">live</span></div>
+        <div class="card giftplanner">
+          <div class="gp-tiers" id="gpTiers"></div>
+          <div class="gp-globals">
+            <label class="gp-g"><span>Breakage buffer</span><input type="range" id="gpBuffer" min="0" max="25" value="10"><b id="gpBufferV">10%</b></label>
+            <label class="gp-g"><span>Over-source</span><input type="range" id="gpOver" min="0" max="40" value="20"><b id="gpOverV">20%</b></label>
+            <label class="gp-g"><span>All-in cost / unit</span><span class="mini-field">$<input id="gpCost" inputmode="decimal" value="8.00"></span></label>
+          </div>
+          <div class="tablewrap" style="margin-top:6px"><table class="forecast" id="gpTable"></table></div>
+        </div>
 
         <div class="sectlabel">Run of show</div>
         <div class="card"><div class="steps">
@@ -828,6 +895,10 @@
       <section class="view" id="v-cal">
         <p class="lead">One product launch, sequenced across creators so coverage compounds instead of colliding. Teaser, launch spike, sustain, then the UGC echo. Coordinated posting is the whole game.</p>
         <div class="sectlabel">Feastables Deluxe · Summer Drop · launch window</div>
+        <div class="cal-tools">
+          <div class="cal-metrics" id="calMetrics"></div>
+          <div class="cal-actions"><span class="cal-hint">Click any cell to schedule a post</span><button class="btn ghost" id="calAuto">⤮ Auto-sequence</button><button class="btn ghost" id="calReset">Reset</button></div>
+        </div>
         <div class="cal"><table class="caltable">
           <thead><tr><th style="text-align:left;padding-left:10px">Creator</th>
             <th>Aug 4</th><th>Aug 7</th><th>Aug 11</th><th>Aug 14</th><th>Aug 18</th><th>Aug 21</th><th>Aug 25</th><th>Aug 28</th></tr></thead>
@@ -857,8 +928,9 @@
 
         <div class="cards grid-2" style="margin-top:14px">
           <div class="card chartcard">
-            <h3>Reach vs. earned media value · 6 mo</h3>
-            <p class="sub">Reach climbing while CPM falls = the roster is getting more efficient.</p>
+            <div class="chart-head"><h3 id="chartBarsTitle">Reach · 6 mo</h3>
+              <div class="seg sm" id="rangeSeg"><button data-r="3">3mo</button><button class="on" data-r="6">6mo</button></div></div>
+            <div class="seg sm" id="metricSeg" style="margin:8px 0 4px"><button class="on" data-m="reach">Reach</button><button data-m="emv">Earned $</button><button data-m="eng">Engage</button><button data-m="gmv">Shop GMV</button></div>
             <div id="chartBars"></div>
           </div>
           <div class="card chartcard">
@@ -869,12 +941,12 @@
         </div>
 
         <div class="sectlabel">Per-brand scorecard · July</div>
-        <div class="tablewrap"><table>
+        <div class="tablewrap"><table id="brandKpiTable">
           <thead><tr><th>Brand</th><th class="n">Creators live</th><th class="n">Reach</th><th class="n">Eng. rate</th><th class="n">CPM</th><th class="n">On-time</th><th>Trend</th></tr></thead>
           <tbody>
-            <tr><td><span class="chip c-plain"><span class="cd" style="background:#C77B3A"></span>Feastables</span></td><td class="n">31</td><td class="n">78M</td><td class="n">6.8%</td><td class="n">$3.90</td><td class="n" style="color:var(--good)">97%</td><td class="n">▲</td></tr>
-            <tr><td><span class="chip c-plain"><span class="cd" style="background:#2FA36B"></span>Lunchly</span></td><td class="n">44</td><td class="n">51M</td><td class="n">7.9%</td><td class="n">$3.40</td><td class="n" style="color:var(--good)">95%</td><td class="n">▲</td></tr>
-            <tr><td><span class="chip c-plain"><span class="cd" style="background:#2F6BFF"></span>Beast Merch</span></td><td class="n">18</td><td class="n">17M</td><td class="n">5.1%</td><td class="n">$5.60</td><td class="n" style="color:var(--warn)">92%</td><td class="n">▲</td></tr>
+            <tr data-b="feastables"><td><span class="chip c-plain"><span class="cd" style="background:#C77B3A"></span>Feastables</span></td><td class="n">31</td><td class="n">78M</td><td class="n">6.8%</td><td class="n">$3.90</td><td class="n" style="color:var(--good)">97%</td><td class="n">▲</td></tr>
+            <tr data-b="lunchly"><td><span class="chip c-plain"><span class="cd" style="background:#2FA36B"></span>Lunchly</span></td><td class="n">44</td><td class="n">51M</td><td class="n">7.9%</td><td class="n">$3.40</td><td class="n" style="color:var(--good)">95%</td><td class="n">▲</td></tr>
+            <tr data-b="merch"><td><span class="chip c-plain"><span class="cd" style="background:#2F6BFF"></span>Beast Merch</span></td><td class="n">18</td><td class="n">17M</td><td class="n">5.1%</td><td class="n">$5.60</td><td class="n" style="color:var(--warn)">92%</td><td class="n">▲</td></tr>
           </tbody>
         </table></div>
         <div class="note"><span class="pf">▧</span><div>The number that matters most here is <b>on-time delivery</b>. Reach is the outcome; on-time is the system working. When it dips, everything downstream is about to.</div></div>
@@ -882,9 +954,15 @@
 
       <!-- ===== PLAYBOOK ===== -->
       <section class="view" id="v-play">
-        <p class="lead">The standards every partnership runs on. Same bar across Feastables, Lunchly, and Merch, so quality never depends on who is running the deal that week.</p>
+        <p class="lead">The standards every partnership runs on. Same bar across Feastables, Lunchly, and Merch, so quality never depends on who is running the deal that week. Tick each one as you clear it for an activation.</p>
 
-        <div class="cards grid-2" style="margin-top:18px">
+        <div class="ready">
+          <div class="ready-top"><span>Pre-flight readiness</span><span id="readyPct">0%</span></div>
+          <div class="ready-meter"><i id="readyBar" style="width:0%"></i></div>
+          <div class="ready-sub"><span id="readyCount">0 of 0 cleared</span><button class="linklike" id="readyReset">reset</button></div>
+        </div>
+
+        <div class="cards grid-2" style="margin-top:16px">
           <div class="card">
             <h3>How a creator clears the bar</h3>
             <p class="sub">No spend until all four are true.</p>
@@ -1239,43 +1317,73 @@
   ];
   var barColor={teaser:'var(--warn)',launch:'var(--accent)',sustain:'var(--good)',ugc:'var(--ink-dim)'};
   var barLabel={teaser:'Tease',launch:'LIVE',sustain:'Sust',ugc:'Echo'};
+  var CAL_SEQ=[0,'teaser','launch','sustain','ugc'];
+  var calDays=['Aug 4','Aug 7','Aug 11','Aug 14','Aug 18','Aug 21','Aug 25','Aug 28'];
   function renderCal(){
-    document.getElementById('calBody').innerHTML=calRows.map(function(r){
-      return '<tr><td class="lab">'+r.n+'</td>'+r.cells.map(function(c){
-        return '<td>'+(c?'<div class="bar" style="background:'+barColor[c]+'">'+barLabel[c]+'</div>':'')+'</td>';
+    document.getElementById('calBody').innerHTML=calRows.map(function(r,ri){
+      return '<tr><td class="lab">'+r.n+'</td>'+r.cells.map(function(c,ci){
+        return '<td class="calcell" data-r="'+ri+'" data-c="'+ci+'">'+(c?'<div class="bar" style="background:'+barColor[c]+'">'+barLabel[c]+'</div>':'')+'</td>';
       }).join('')+'</tr>';
     }).join('');
+    renderCalMetrics();
   }
-
-  /* ---------- charts ---------- */
-  function renderCharts(){
-    // bars: reach (M) + EMV ($k) 6 months
-    var reach=[92,104,111,98,127,146], emv=[2.1,2.4,2.6,2.3,3.1,3.9], mo=['Feb','Mar','Apr','May','Jun','Jul'];
-    var W=520,H=190,pad=30,bw=40,gap=(W-pad*2)/reach.length;
-    var maxR=160;
-    var bars=reach.map(function(v,i){
-      var x=pad+gap*i+gap/2, h=(v/maxR)*(H-pad-24), y=H-24-h;
-      var eh=(emv[i]/4.2)*(H-pad-24), ey=H-24-eh;
-      return '<rect x="'+(x-bw/2)+'" y="'+y+'" width="'+(bw*0.55)+'" height="'+h+'" rx="3" fill="var(--accent)"/>'+
-        '<rect x="'+(x+1)+'" y="'+ey+'" width="'+(bw*0.4)+'" height="'+eh+'" rx="3" fill="var(--accent-ink)" opacity="0.55"/>'+
-        '<text x="'+x+'" y="'+(H-8)+'" fill="var(--ink-dim)" font-size="10" text-anchor="middle" font-family="var(--mono)">'+mo[i]+'</text>';
-    }).join('');
-    document.getElementById('chartBars').innerHTML='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Reach and earned media value by month">'+bars+'</svg>'+
-      '<div class="legend"><span><i style="background:var(--accent)"></i>Reach (M)</span><span><i style="background:var(--accent-ink);opacity:.55"></i>Earned media ($M)</span></div>';
-
-    // line: CPM falling
-    var cpm=[6.2,5.8,5.4,5.1,4.6,4.1];
-    var W2=520,H2=190,p2=30,mx=6.8;
-    var pts=cpm.map(function(v,i){var x=p2+((W2-p2*2)/(cpm.length-1))*i;var y=H2-28-((v/mx)*(H2-p2-28));return [x,y];});
-    var path=pts.map(function(p,i){return (i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1);}).join(' ');
-    var area=path+' L'+pts[pts.length-1][0].toFixed(1)+' '+(H2-28)+' L'+pts[0][0].toFixed(1)+' '+(H2-28)+' Z';
-    var dots=pts.map(function(p,i){return '<circle cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="'+(i===pts.length-1?4.5:3)+'" fill="'+(i===pts.length-1?'var(--good)':'var(--accent-ink)')+'"/>'+
-      '<text x="'+p[0].toFixed(1)+'" y="'+(H2-8)+'" fill="var(--ink-dim)" font-size="10" text-anchor="middle" font-family="var(--mono)">'+['Feb','Mar','Apr','May','Jun','Jul'][i]+'</text>';}).join('');
-    document.getElementById('chartLine').innerHTML='<svg viewBox="0 0 '+W2+' '+H2+'" role="img" aria-label="Cost per thousand views trend, declining">'+
-      '<path d="'+area+'" fill="var(--accent-soft)"/>'+
-      '<path d="'+path+'" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>'+dots+
-      '<text x="'+pts[pts.length-1][0].toFixed(1)+'" y="'+(pts[pts.length-1][1]-10).toFixed(1)+'" fill="var(--good)" font-size="11" text-anchor="end" font-family="var(--mono)" font-weight="700">$4.10</text></svg>';
+  function renderCalMetrics(){
+    var el=document.getElementById('calMetrics'); if(!el)return;
+    var posts=0,active=0,day=calDays.map(function(){return 0;});
+    calRows.forEach(function(r){var has=false;r.cells.forEach(function(c,ci){if(c){posts++;day[ci]++;has=true;}});if(has)active++;});
+    var peak=Math.max.apply(null,day), peakDay=calDays[day.indexOf(peak)], infeed=day.filter(function(d){return d>0;}).length;
+    el.innerHTML=[['Posts',posts],['Creators live',active],['Peak day',peak+' · '+peakDay],['In-feed days',infeed+'/'+calDays.length]].map(function(m){
+      return '<div class="cm"><b>'+m[1]+'</b><span>'+m[0]+'</span></div>';}).join('');
   }
+  document.getElementById('calBody').addEventListener('click',function(e){
+    var td=e.target.closest('.calcell'); if(!td)return;
+    var ri=+td.getAttribute('data-r'),ci=+td.getAttribute('data-c');
+    var idx=CAL_SEQ.indexOf(calRows[ri].cells[ci]); calRows[ri].cells[ci]=CAL_SEQ[(idx+1)%CAL_SEQ.length]; renderCal();
+  });
+  document.getElementById('calReset').addEventListener('click',function(){calRows.forEach(function(r){r.cells=r.cells.map(function(){return 0;});});renderCal();toast('Calendar cleared');});
+  document.getElementById('calAuto').addEventListener('click',function(){
+    calRows.forEach(function(r,i){var cells=[0,0,0,0,0,0,0,0];var launch=i<2?3:Math.min(7,3+(i%3));var tease=Math.max(0,launch-2);
+      cells[tease]='teaser';cells[launch]='launch';if(launch+2<=7)cells[launch+2]=(i%2?'sustain':'ugc');r.cells=cells;});
+    renderCal();toast('Auto-sequenced across '+calRows.length+' creators');
+  });
+
+  /* ---------- charts (interactive) ---------- */
+  var kpiMonths=['Feb','Mar','Apr','May','Jun','Jul'];
+  var kpiSeries={
+    reach:{label:'Reach',unit:'M',data:[92,104,111,98,127,146]},
+    emv:{label:'Earned media',unit:'$M',data:[2.1,2.4,2.6,2.3,3.1,3.9]},
+    eng:{label:'Engagements',unit:'M',data:[6.1,6.8,7.0,6.5,8.4,9.3]},
+    gmv:{label:'TikTok Shop GMV',unit:'$k',data:[280,320,360,340,505,612]}
+  };
+  var chartMetric='reach', chartRange=6;
+  function fmtMetric(v,u){return u.charAt(0)==='$'?('$'+v+u.slice(1)):(v+u);}
+  function renderBars(){
+    var s=kpiSeries[chartMetric], n=chartRange, data=s.data.slice(-n), months=kpiMonths.slice(-n);
+    var W=520,H=190,pad=30,gap=(W-pad*2)/data.length,bw=Math.min(46,gap*0.5),maxV=Math.max.apply(null,data)*1.18;
+    var bars=data.map(function(v,i){var x=pad+gap*i+gap/2,h=(v/maxV)*(H-pad-26),y=H-24-h;
+      return '<g class="barg">'+
+        '<rect x="'+(x-bw/2).toFixed(1)+'" y="'+y.toFixed(1)+'" width="'+bw.toFixed(1)+'" height="'+h.toFixed(1)+'" rx="3" fill="var(--accent)"><title>'+months[i]+': '+fmtMetric(v,s.unit)+'</title></rect>'+
+        '<text class="barval" x="'+x.toFixed(1)+'" y="'+(y-6).toFixed(1)+'" fill="var(--ink)" font-size="10" text-anchor="middle" font-family="var(--mono)" opacity="0">'+fmtMetric(v,s.unit)+'</text>'+
+        '<text x="'+x.toFixed(1)+'" y="'+(H-8)+'" fill="var(--ink-dim)" font-size="10" text-anchor="middle" font-family="var(--mono)">'+months[i]+'</text></g>';}).join('');
+    document.getElementById('chartBars').innerHTML='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+s.label+' by month">'+bars+'</svg>';
+    var t=document.getElementById('chartBarsTitle'); if(t)t.textContent=s.label+' · '+n+' mo';
+  }
+  function renderLine(){
+    var cpm=[6.2,5.8,5.4,5.1,4.6,4.1].slice(-chartRange), mm=kpiMonths.slice(-chartRange);
+    var W=520,H=190,p=30,mx=6.8;
+    var pts=cpm.map(function(v,i){return [p+((W-p*2)/(cpm.length-1))*i, H-28-((v/mx)*(H-p-28))];});
+    var path=pts.map(function(pt,i){return (i?'L':'M')+pt[0].toFixed(1)+' '+pt[1].toFixed(1);}).join(' ');
+    var area=path+' L'+pts[pts.length-1][0].toFixed(1)+' '+(H-28)+' L'+pts[0][0].toFixed(1)+' '+(H-28)+' Z';
+    var dots=pts.map(function(pt,i){return '<circle cx="'+pt[0].toFixed(1)+'" cy="'+pt[1].toFixed(1)+'" r="'+(i===pts.length-1?4.5:3)+'" fill="'+(i===pts.length-1?'var(--good)':'var(--accent-ink)')+'"><title>'+mm[i]+': $'+cpm[i].toFixed(2)+' CPM</title></circle>'+
+      '<text x="'+pt[0].toFixed(1)+'" y="'+(H-8)+'" fill="var(--ink-dim)" font-size="10" text-anchor="middle" font-family="var(--mono)">'+mm[i]+'</text>';}).join('');
+    document.getElementById('chartLine').innerHTML='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Cost per thousand views trend">'+
+      '<path d="'+area+'" fill="var(--accent-soft)"/><path d="'+path+'" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>'+dots+
+      '<text x="'+pts[pts.length-1][0].toFixed(1)+'" y="'+(pts[pts.length-1][1]-10).toFixed(1)+'" fill="var(--good)" font-size="11" text-anchor="end" font-family="var(--mono)" font-weight="700">$'+cpm[cpm.length-1].toFixed(2)+'</text></svg>';
+  }
+  function renderCharts(){renderBars();renderLine();}
+  document.getElementById('metricSeg').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;chartMetric=b.getAttribute('data-m');[].forEach.call(this.children,function(x){x.classList.toggle('on',x===b);});renderBars();});
+  document.getElementById('rangeSeg').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;chartRange=+b.getAttribute('data-r');[].forEach.call(this.children,function(x){x.classList.toggle('on',x===b);});renderCharts();});
+  document.getElementById('brandKpiTable').addEventListener('click',function(e){var tr=e.target.closest('tr[data-b]');if(tr){pickBrand(tr.getAttribute('data-b'));toast('Filtered to '+brandName[tr.getAttribute('data-b')]);}});
 
   /* ---------- signal feed ---------- */
   var signals=[
@@ -1586,6 +1694,7 @@
       '<div class="do"><h5>Do</h5><ul><li>#ad or "paid partnership" tag on. FTC requires it</li><li>Keep your voice; the script is a starting point</li><li>Tag '+pr.tag+' and @beast</li></ul></div>'+
       '<div class="dont"><h5>Don\'t</h5><ul><li>No health or diet claims</li><li>No competitor call-outs by name</li><li>No minors as the focus</li><li>Don\'t bury the disclosure in the caption</li></ul></div></div>'+
       '<h4 style="margin-top:16px">Why you</h4><p>'+c.note+'</p></div></div></div>';
+    var bs=document.getElementById('briefCreator'); if(bs)bs.value=c.name;
   }
   function draftBrief(name){renderBrief(name);go('brief');}
 
@@ -1640,8 +1749,108 @@
     el.innerHTML='<div class="ins-head">Reading the numbers</div>'+ins.map(function(i){return '<div class="ins-row"><span class="ins-i" style="color:'+col[i.t]+'">'+icon[i.t]+'</span>'+i.x+'</div>';}).join('');
   }
 
+  /* ================= INTERACTIVITY ================= */
+  var toastTimer=null;
+  function toast(msg){
+    var t=document.getElementById('toast');
+    if(!t||!t.parentNode){t=document.createElement('div');t.id='toast';t.className='toast';document.body.appendChild(t);}
+    t.textContent=msg; t.classList.add('show');
+    if(toastTimer)clearTimeout(toastTimer); toastTimer=setTimeout(function(){t.classList.remove('show');},2200);
+  }
+
+  /* --- gifting planner --- */
+  var gift={tiers:[{k:'A',name:'Marquee',n:50,u:18,reach:3.5},{k:'B',name:'Core',n:150,u:14,reach:1.2},{k:'C',name:'Emerging',n:300,u:11,reach:0.35}],buffer:10,over:20,cost:8.0};
+  function stepper(k,f,v){return '<div class="stepper"><button class="stp" data-t="'+k+'" data-f="'+f+'" data-d="-1">−</button><span>'+v+'</span><button class="stp" data-t="'+k+'" data-f="'+f+'" data-d="1">+</button></div>';}
+  function renderGift(){
+    var totCr=0,totBuf=0,reach=0;
+    var body=gift.tiers.map(function(t){var sub=t.n*t.u,buf=Math.ceil(sub*(1+gift.buffer/100));totCr+=t.n;totBuf+=buf;reach+=t.n*t.reach;
+      return '<tr><td>'+t.k+' · '+t.name+'</td><td class="num">'+stepper(t.k,'n',t.n)+'</td><td class="num">'+stepper(t.k,'u',t.u)+'</td><td class="num">'+fmtNum(sub)+'</td><td class="num">'+fmtNum(buf)+'</td></tr>';
+    }).join('');
+    var source=Math.ceil(totCr*(1+gift.over/100)), budget=Math.round(totBuf*gift.cost), waves=Math.max(1,Math.ceil(totCr/125));
+    document.getElementById('gpTable').innerHTML='<thead><tr><th>Tier</th><th class="num">Creators</th><th class="num">Units / crate</th><th class="num">Subtotal</th><th class="num">+buffer</th></tr></thead><tbody>'+body+'</tbody>'+
+      '<tfoot><tr><td>Total</td><td class="num">'+totCr+'</td><td class="num">n/a</td><td class="num"></td><td class="num">'+fmtNum(totBuf)+'</td></tr></tfoot>';
+    document.getElementById('gpSummary').innerHTML=[
+      ['Creators in wave',totCr,waves+' waves · source '+source],
+      ['Units to produce',fmtNum(totBuf),gift.buffer+'% breakage buffer'],
+      ['All-in budget','$'+fmtNum(budget),(totCr?'$'+Math.round(budget/totCr):'$0')+' / creator'],
+      ['Est. seeded reach',reach.toFixed(1)+'M','if everyone posts']
+    ].map(function(m){return '<div class="card kpi"><span class="lab">'+m[0]+'</span><span class="big">'+m[1]+'</span><span class="delta">'+m[2]+'</span></div>';}).join('');
+    document.getElementById('gpBufferV').textContent=gift.buffer+'%';
+    document.getElementById('gpOverV').textContent=gift.over+'%';
+  }
+  document.getElementById('gpTable').addEventListener('click',function(e){var b=e.target.closest('.stp');if(!b)return;
+    var t=gift.tiers.filter(function(x){return x.k===b.getAttribute('data-t');})[0],f=b.getAttribute('data-f'),d=+b.getAttribute('data-d');
+    if(f==='n')t.n=Math.max(0,t.n+d*10); else t.u=Math.max(1,t.u+d); renderGift();});
+  document.getElementById('gpBuffer').addEventListener('input',function(){gift.buffer=+this.value;renderGift();});
+  document.getElementById('gpOver').addEventListener('input',function(){gift.over=+this.value;renderGift();});
+  document.getElementById('gpCost').addEventListener('input',function(){var v=parseFloat(this.value);gift.cost=isNaN(v)?0:v;renderGift();});
+
+  /* --- command center: decisions + feed refresh --- */
+  var decisions=[
+    {sev:'crit',tag:'Overdue',x:'Nick DiGiovanni cut #2 revision, unanswered 2 days'},
+    {sev:'warn',tag:'Rate gap',x:'Alix Earle counter is 18% over the Lunchly ceiling'},
+    {sev:'warn',tag:'Legal',x:'4 contracts awaiting FTC-disclosure sign-off'},
+    {sev:'accent',tag:'Forecast',x:'Holiday gifting run needs a quantity lock by Fri'},
+    {sev:'good',tag:'Ready',x:'Keith Lee Feastables post cleared to publish'}
+  ];
+  function renderDecisions(){
+    var el=document.getElementById('decisionList'); if(!el)return;
+    var cnt=document.getElementById('decCount'); if(cnt)cnt.textContent=decisions.length?decisions.length+' open':'clear';
+    if(!decisions.length){el.innerHTML='<div class="allclear">✓ All clear. Nothing blocked right now.</div>';return;}
+    el.innerHTML=decisions.map(function(d,i){return '<div class="dec"><span class="chip c-'+d.sev+'">'+d.tag+'</span><span class="dec-x">'+d.x+'</span>'+
+      '<span class="dec-act"><button class="minibtn" data-dec="'+i+'" data-a="snooze">Snooze</button><button class="minibtn accent" data-dec="'+i+'" data-a="resolve">Resolve</button></span></div>';}).join('');
+  }
+  document.getElementById('decisionList').addEventListener('click',function(e){var b=e.target.closest('[data-dec]');if(!b)return;
+    var i=+b.getAttribute('data-dec'),a=b.getAttribute('data-a'),d=decisions.splice(i,1)[0];
+    if(a==='resolve'){toast('Resolved: '+d.tag);}else{decisions.push(d);toast('Snoozed: '+d.tag);} renderDecisions();});
+  var signalPool=[
+    {ic:"◎",c:"var(--good)",x:"Fit model re-scored the Merch roster. <b>Dude Perfect</b> moved to a 90 fit."},
+    {ic:"⤬",c:"var(--accent-ink)",x:"Scout deep dive surfaced <b>Markie Devo</b> for the Feastables launch leak."},
+    {ic:"▣",c:"var(--warn)",x:"Gifting wave 2 addresses captured for <b>212 creators</b>."},
+    {ic:"$",c:"var(--good)",x:"<b>Feastables</b> earned media crossed <b>$3.9M</b> this quarter."},
+    {ic:"✎",c:"var(--accent-ink)",x:"Brief drafted for <b>Keith Lee</b>, cleared to send."},
+    {ic:"◍",c:"var(--ink-dim)",x:"Legal cleared disclosure language for the back-to-school wave."}
+  ];
+  var signalPtr=0, stamps=['just now','3 min','9 min','24 min','1 hr','2 hr'];
+  document.getElementById('feedRefresh').addEventListener('click',function(){
+    var s=signalPool[signalPtr%signalPool.length]; signalPtr++;
+    signals.unshift({t:'just now',ic:s.ic,c:s.c,x:s.x});
+    signals=signals.slice(0,6).map(function(sig,i){return {t:stamps[i]||sig.t,ic:sig.ic,c:sig.c,x:sig.x};});
+    renderSignals(); toast('Feed refreshed');
+  });
+
+  /* --- playbook checklist --- */
+  function initPlaybook(){
+    var view=document.getElementById('v-play'); if(!view)return;
+    [].forEach.call(view.querySelectorAll('.pl'),function(pl){ if(!pl.querySelector('.plchk')){var s=document.createElement('span');s.className='plchk';pl.appendChild(s);} });
+    updateReady();
+  }
+  function updateReady(){
+    var view=document.getElementById('v-play'); if(!view)return;
+    var items=view.querySelectorAll('.pl').length, done=view.querySelectorAll('.pl.done').length;
+    var pct=items?Math.round(done/items*100):0;
+    var pb=document.getElementById('readyBar'); if(pb){pb.style.width=pct+'%';pb.style.background=pct===100?'var(--good)':'var(--accent)';}
+    var pp=document.getElementById('readyPct'); if(pp)pp.textContent=pct+'%';
+    var pc=document.getElementById('readyCount'); if(pc)pc.textContent=done+' of '+items+' cleared';
+  }
+  document.getElementById('v-play').addEventListener('click',function(e){var pl=e.target.closest('.pl');if(!pl)return;pl.classList.toggle('done');updateReady();});
+  document.getElementById('readyReset').addEventListener('click',function(){[].forEach.call(document.getElementById('v-play').querySelectorAll('.pl.done'),function(p){p.classList.remove('done');});updateReady();});
+
+  /* --- brief controls --- */
+  function initBriefControls(){
+    var sel=document.getElementById('briefCreator'); if(!sel)return;
+    sel.innerHTML=C.map(function(c){return '<option value="'+c.name+'">'+c.name+' · '+brandName[c.brand]+'</option>';}).join('');
+    sel.value='Keith Lee';
+    sel.addEventListener('change',function(){renderBrief(this.value);});
+  }
+  document.getElementById('copyBrief').addEventListener('click',function(){
+    var txt=(document.getElementById('briefHost').textContent||'').replace(/[ \t]+/g,' ').replace(/\n\s*\n\s*/g,'\n\n').trim();
+    if(typeof navigator!=='undefined'&&navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(function(){toast('Brief copied to clipboard');},function(){toast('Copy blocked by browser');});}
+    else toast('Copy not supported here');
+  });
+
   /* ---------- render all ---------- */
-  function renderAll(){renderTopFits();renderCRM();renderPickList();renderCal();renderCharts();renderSignals();initScout();renderBrief('Keith Lee');renderInsights('kpiInsights',4);renderInsights('dashInsights',3);}
+  function renderAll(){renderTopFits();renderCRM();renderPickList();renderCal();renderCharts();renderSignals();initScout();renderBrief('Keith Lee');renderInsights('kpiInsights',4);renderInsights('dashInsights',3);renderGift();renderDecisions();initPlaybook();initBriefControls();}
   renderAll();
 })();
 </script>
