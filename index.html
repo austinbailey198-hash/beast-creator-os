@@ -1,0 +1,1178 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Beast Creator Partnerships OS</title>
+<meta name="description" content="Creator Partnerships operating console for Beast Industries.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2788%27%3E%F0%9F%8D%AB%3C/text%3E%3C/svg%3E">
+<meta property="og:title" content="Beast Creator Partnerships OS">
+<meta property="og:description" content="One console for every creator deal across the portfolio.">
+</head>
+<body>
+<style>
+  :root{
+    --ground:#0E1117; --panel:#161B22; --panel-2:#1C232C; --line:#273040;
+    --ink:#E9EEF5; --ink-dim:#9AA7B8; --ink-faint:#63708350;
+    --accent:#2F6BFF; --accent-soft:#2f6bff26; --accent-ink:#8FB6FF;
+    --good:#33C481; --good-soft:#33c48122;
+    --warn:#E5A93B; --warn-soft:#e5a93b22;
+    --crit:#E5534B; --crit-soft:#e5534b22;
+    --mono:ui-monospace,"SF Mono","Cascadia Mono","JetBrains Mono",Menlo,monospace;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --radius:12px; --shadow:0 1px 0 #ffffff08 inset, 0 12px 30px -18px #000;
+  }
+  :root[data-theme="light"], :root:not([data-theme]) {}
+  @media (prefers-color-scheme: light){
+    :root{
+      --ground:#F4F5F2; --panel:#FFFFFF; --panel-2:#F7F8F6; --line:#E2E5E0;
+      --ink:#161C22; --ink-dim:#5A6673; --ink-faint:#8b96a220;
+      --accent-ink:#1E4FCB; --accent-soft:#2f6bff14;
+      --good-soft:#33c48118; --warn-soft:#e5a93b1e; --crit-soft:#e5534b18;
+      --shadow:0 1px 0 #ffffff inset, 0 14px 30px -22px #23324a55;
+    }
+  }
+  :root[data-theme="light"]{
+    --ground:#F4F5F2; --panel:#FFFFFF; --panel-2:#F7F8F6; --line:#E2E5E0;
+    --ink:#161C22; --ink-dim:#5A6673; --ink-faint:#8b96a220;
+    --accent-ink:#1E4FCB; --accent-soft:#2f6bff14;
+    --good-soft:#33c48118; --warn-soft:#e5a93b1e; --crit-soft:#e5534b18;
+    --shadow:0 1px 0 #ffffff inset, 0 14px 30px -22px #23324a55;
+  }
+  :root[data-theme="dark"]{
+    --ground:#0E1117; --panel:#161B22; --panel-2:#1C232C; --line:#273040;
+    --ink:#E9EEF5; --ink-dim:#9AA7B8; --accent-ink:#8FB6FF; --accent-soft:#2f6bff26;
+    --good-soft:#33c48122; --warn-soft:#e5a93b22; --crit-soft:#e5534b22;
+    --shadow:0 1px 0 #ffffff08 inset, 0 12px 30px -18px #000;
+  }
+  /* brand accent theming */
+  :root[data-brand="feastables"]{ --accent:#C77B3A; --accent-soft:#c77b3a26; --accent-ink:#E0A461; }
+  :root[data-brand="lunchly"]{ --accent:#2FA36B; --accent-soft:#2fa36b26; --accent-ink:#5FD79A; }
+  :root[data-brand="merch"]{ --accent:#2F6BFF; --accent-soft:#2f6bff26; --accent-ink:#8FB6FF; }
+
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);
+    -webkit-font-smoothing:antialiased;line-height:1.5;font-size:15px}
+  a{color:var(--accent-ink);text-decoration:none}
+  h1,h2,h3,h4{margin:0;line-height:1.15;text-wrap:balance;font-weight:680}
+  .num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+  .app{display:grid;grid-template-columns:230px 1fr;min-height:100vh}
+
+  /* ---------- rail ---------- */
+  .rail{background:var(--panel);border-right:1px solid var(--line);
+    display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto}
+  .brandmark{padding:18px 18px 12px;display:flex;gap:10px;align-items:center;border-bottom:1px solid var(--line)}
+  .glyph{width:34px;height:34px;border-radius:9px;background:linear-gradient(150deg,var(--accent),var(--accent-ink));
+    display:grid;place-items:center;font-size:18px;box-shadow:var(--shadow);flex:none}
+  .brandmark b{font-size:14px;letter-spacing:.2px;display:block}
+  .brandmark span{font-size:11px;color:var(--ink-dim);letter-spacing:.4px;text-transform:uppercase}
+  .switcher{padding:12px}
+  .switcher .lbl{font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-dim);margin:2px 4px 8px}
+  .brandbtns{display:flex;flex-direction:column;gap:6px}
+  .bbtn{display:flex;gap:9px;align-items:center;padding:9px 10px;border-radius:9px;border:1px solid transparent;
+    background:transparent;color:var(--ink);cursor:pointer;font-size:13px;font-family:inherit;text-align:left;width:100%}
+  .bbtn:hover{background:var(--panel-2)}
+  .bbtn .dot{width:9px;height:9px;border-radius:50%;flex:none}
+  .bbtn[data-b="feastables"] .dot{background:#C77B3A}
+  .bbtn[data-b="lunchly"] .dot{background:#2FA36B}
+  .bbtn[data-b="merch"] .dot{background:#2F6BFF}
+  .bbtn[data-b="all"] .dot{background:linear-gradient(90deg,#C77B3A,#2FA36B,#2F6BFF)}
+  .bbtn.on{background:var(--accent-soft);border-color:var(--accent);font-weight:640}
+  .bbtn small{color:var(--ink-dim);margin-left:auto;font-family:var(--mono);font-size:11px}
+  nav{padding:8px 10px 4px;display:flex;flex-direction:column;gap:2px;border-top:1px solid var(--line);margin-top:6px}
+  .nlbl{font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-dim);margin:12px 6px 6px}
+  .nav-i{display:flex;gap:10px;align-items:center;padding:8px 10px;border-radius:8px;color:var(--ink-dim);
+    cursor:pointer;font-size:13.5px;border:1px solid transparent}
+  .nav-i:hover{color:var(--ink);background:var(--panel-2)}
+  .nav-i.on{color:var(--ink);background:var(--accent-soft);border-color:var(--accent);font-weight:600}
+  .nav-i .ic{width:18px;text-align:center;flex:none;opacity:.9}
+  .railfoot{margin-top:auto;padding:14px;border-top:1px solid var(--line);font-size:11px;color:var(--ink-dim)}
+  .railfoot b{color:var(--ink);font-weight:600}
+
+  /* ---------- main ---------- */
+  main{min-width:0;display:flex;flex-direction:column}
+  .topbar{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--ground) 88%,transparent);
+    backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    display:flex;gap:14px;align-items:center;padding:12px 22px;flex-wrap:wrap}
+  .crumb{font-size:12px;color:var(--ink-dim)}
+  .crumb b{color:var(--ink);font-weight:600}
+  .pagetitle{font-size:17px;font-weight:680}
+  .topstats{margin-left:auto;display:flex;gap:18px;flex-wrap:wrap}
+  .tstat{display:flex;flex-direction:column;gap:1px}
+  .tstat .v{font-family:var(--mono);font-size:15px;font-weight:600;font-variant-numeric:tabular-nums}
+  .tstat .k{font-size:10px;letter-spacing:.5px;text-transform:uppercase;color:var(--ink-dim)}
+  .theme-t{background:var(--panel-2);border:1px solid var(--line);color:var(--ink-dim);
+    width:34px;height:34px;border-radius:8px;cursor:pointer;font-size:15px}
+  .wrap{padding:22px;max-width:1200px;width:100%}
+  .view{display:none;animation:fade .25s ease}
+  .view.on{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+  .cards{display:grid;gap:14px}
+  .grid-2{grid-template-columns:1fr 1fr}
+  .grid-3{grid-template-columns:repeat(3,1fr)}
+  .grid-4{grid-template-columns:repeat(4,1fr)}
+  @media(max-width:900px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+  .card h3{font-size:13px;letter-spacing:.3px;margin-bottom:4px}
+  .card .sub{font-size:12px;color:var(--ink-dim)}
+  .kpi{display:flex;flex-direction:column;gap:6px}
+  .kpi .big{font-family:var(--mono);font-size:30px;font-weight:680;font-variant-numeric:tabular-nums;letter-spacing:-1px}
+  .kpi .lab{font-size:11px;letter-spacing:.8px;text-transform:uppercase;color:var(--ink-dim)}
+  .kpi .delta{font-size:11.5px;font-family:var(--mono)}
+  .up{color:var(--good)} .down{color:var(--crit)}
+  .sectlabel{font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--ink-dim);
+    margin:26px 2px 12px;display:flex;align-items:center;gap:10px}
+  .sectlabel::after{content:"";flex:1;height:1px;background:var(--line)}
+  .lead{font-size:13.5px;color:var(--ink-dim);max-width:70ch;margin:2px 0 0}
+
+  /* chips */
+  .chip{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:3px 8px;
+    border-radius:20px;border:1px solid var(--line);white-space:nowrap;line-height:1.3}
+  .chip .cd{width:6px;height:6px;border-radius:50%}
+  .c-good{color:var(--good);background:var(--good-soft);border-color:transparent}
+  .c-warn{color:var(--warn);background:var(--warn-soft);border-color:transparent}
+  .c-crit{color:var(--crit);background:var(--crit-soft);border-color:transparent}
+  .c-accent{color:var(--accent-ink);background:var(--accent-soft);border-color:transparent}
+  .c-plain{color:var(--ink-dim)}
+  .tier{font-family:var(--mono);font-size:10px;letter-spacing:.5px;padding:2px 6px;border-radius:5px;border:1px solid var(--line);color:var(--ink-dim)}
+  .tier.marquee{color:#E0A461;border-color:#c77b3a55;background:#c77b3a14}
+  .tier.core{color:var(--accent-ink);border-color:var(--accent);background:var(--accent-soft)}
+  .tier.niche{color:var(--ink-dim)}
+
+  /* table */
+  .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel)}
+  table{border-collapse:collapse;width:100%;min-width:820px;font-size:13px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+  th{font-size:10.5px;letter-spacing:.6px;text-transform:uppercase;color:var(--ink-dim);font-weight:600;
+    position:sticky;top:0;background:var(--panel);cursor:pointer;user-select:none}
+  th:hover{color:var(--ink)}
+  tbody tr{cursor:pointer}
+  tbody tr:hover{background:var(--panel-2)}
+  td .creator{display:flex;align-items:center;gap:9px}
+  .av{width:26px;height:26px;border-radius:7px;display:grid;place-items:center;font-size:12px;font-weight:700;color:#fff;flex:none}
+  td.n{font-family:var(--mono);font-variant-numeric:tabular-nums;text-align:right}
+  .score-pill{font-family:var(--mono);font-weight:700;font-size:12.5px;padding:2px 8px;border-radius:6px;display:inline-block;min-width:34px;text-align:center}
+  .toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+  .seg{display:inline-flex;background:var(--panel-2);border:1px solid var(--line);border-radius:9px;padding:3px;gap:2px}
+  .seg button{border:0;background:transparent;color:var(--ink-dim);font-family:inherit;font-size:12.5px;
+    padding:5px 11px;border-radius:6px;cursor:pointer}
+  .seg button.on{background:var(--accent-soft);color:var(--accent-ink);font-weight:600}
+  .search{flex:1;min-width:180px;display:flex;align-items:center;gap:8px;background:var(--panel-2);
+    border:1px solid var(--line);border-radius:9px;padding:7px 11px}
+  .search input{border:0;background:transparent;color:var(--ink);font-family:inherit;font-size:13.5px;width:100%;outline:none}
+  .count-note{font-size:12px;color:var(--ink-dim);margin:10px 2px 0}
+
+  /* meters */
+  .meter{height:7px;border-radius:4px;background:var(--panel-2);overflow:hidden;position:relative;border:1px solid var(--line)}
+  .meter i{display:block;height:100%;border-radius:4px;background:var(--accent)}
+  .rowbars{display:flex;flex-direction:column;gap:13px}
+  .rb .rbtop{display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:5px}
+  .rb .rbtop b{font-weight:600}
+  .rb .rbtop span{font-family:var(--mono);color:var(--ink-dim)}
+
+  /* scorecard */
+  .scorecard{display:grid;grid-template-columns:340px 1fr;gap:16px}
+  @media(max-width:860px){.scorecard{grid-template-columns:1fr}}
+  .picklist{display:flex;flex-direction:column;gap:6px;max-height:520px;overflow-y:auto;padding-right:4px}
+  .pick{display:flex;gap:10px;align-items:center;padding:9px 11px;border:1px solid var(--line);border-radius:10px;
+    background:var(--panel);cursor:pointer}
+  .pick:hover{border-color:var(--accent)}
+  .pick.on{border-color:var(--accent);background:var(--accent-soft)}
+  .pick .meta{min-width:0}
+  .pick .meta b{font-size:13px;display:block}
+  .pick .meta span{font-size:11px;color:var(--ink-dim)}
+  .pick .ps{margin-left:auto;font-family:var(--mono);font-weight:700}
+  .gauge{display:flex;gap:16px;align-items:center;margin-bottom:6px}
+  .ring{width:96px;height:96px;flex:none}
+  .verdict b{font-size:26px;font-family:var(--mono);font-weight:700}
+  .axes{display:flex;flex-direction:column;gap:14px;margin-top:14px}
+  .axis .atop{display:flex;justify-content:space-between;align-items:baseline;font-size:13px;margin-bottom:5px}
+  .axis .atop .w{font-size:10.5px;color:var(--ink-dim);font-family:var(--mono)}
+  .axis .why{font-size:12px;color:var(--ink-dim);margin-top:6px}
+
+  /* brief */
+  .brief{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  .brief-h{padding:18px 20px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,var(--accent-soft),transparent)}
+  .brief-h .ey{font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--accent-ink);font-weight:600}
+  .brief-h h2{font-size:22px;margin:4px 0 6px}
+  .brief-meta{display:flex;gap:18px;flex-wrap:wrap;font-size:12px;color:var(--ink-dim);margin-top:8px}
+  .brief-meta b{color:var(--ink);font-family:var(--mono)}
+  .brief-body{padding:20px;display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  @media(max-width:820px){.brief-body{grid-template-columns:1fr}}
+  .bsec h4{font-size:12px;letter-spacing:.6px;text-transform:uppercase;color:var(--accent-ink);margin-bottom:9px}
+  .bsec ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px;font-size:13px}
+  .bsec p{font-size:13px;margin:0 0 8px;color:var(--ink-dim)}
+  .dd{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .dd .do,.dd .dont{border:1px solid var(--line);border-radius:9px;padding:11px}
+  .dd .do{background:var(--good-soft)} .dd .dont{background:var(--crit-soft)}
+  .dd h5{font-size:11px;letter-spacing:.5px;text-transform:uppercase;margin-bottom:7px}
+  .dd .do h5{color:var(--good)} .dd .dont h5{color:var(--crit)}
+  .dd ul{padding-left:15px;font-size:12px;gap:4px}
+  .deliverables{display:flex;flex-direction:column;gap:8px}
+  .deliv{display:flex;gap:10px;align-items:center;padding:9px 11px;border:1px solid var(--line);border-radius:9px;background:var(--panel-2);font-size:12.5px}
+  .deliv .pf{font-size:15px}
+
+  /* gifting / timeline */
+  .steps{display:flex;flex-direction:column;gap:0}
+  .step{display:grid;grid-template-columns:120px 1fr;gap:16px;padding:14px 0;border-bottom:1px dashed var(--line)}
+  .step .when{font-family:var(--mono);font-size:12px;color:var(--accent-ink);padding-top:2px}
+  .step h4{font-size:14px;margin-bottom:4px}
+  .step p{font-size:12.5px;color:var(--ink-dim);margin:0}
+  .forecast{width:100%;font-size:13px;border-collapse:collapse;min-width:520px}
+  .forecast td,.forecast th{padding:9px 12px;border-bottom:1px solid var(--line)}
+  .forecast tfoot td{font-weight:700;border-top:2px solid var(--line);border-bottom:0}
+
+  /* calendar */
+  .cal{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--panel)}
+  .caltable{min-width:760px;border-collapse:collapse;width:100%;font-size:12px}
+  .caltable th{background:var(--panel);position:sticky;top:0}
+  .caltable td,.caltable th{border:1px solid var(--line);padding:0;height:34px;text-align:center;cursor:default}
+  .caltable td.lab{text-align:left;padding:6px 10px;white-space:nowrap;font-weight:600;background:var(--panel-2)}
+  .bar{height:20px;border-radius:5px;margin:6px 3px;display:flex;align-items:center;justify-content:center;
+    font-size:10px;color:#0d1117;font-weight:700;font-family:var(--mono)}
+
+  /* charts */
+  .chartcard svg{width:100%;height:auto;display:block}
+  .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--ink-dim);margin-top:10px}
+  .legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:middle}
+
+  /* map / 90 days */
+  .maprow{display:grid;grid-template-columns:1.1fr 1fr;gap:14px;border:1px solid var(--line);border-radius:11px;
+    padding:14px 16px;background:var(--panel);margin-bottom:10px}
+  @media(max-width:820px){.maprow{grid-template-columns:1fr}}
+  .maprow .req{font-size:13px}
+  .maprow .req b{color:var(--accent-ink)}
+  .maprow .prf{font-size:12.5px;color:var(--ink-dim);border-left:2px solid var(--accent);padding-left:12px}
+  .phase{border:1px solid var(--line);border-radius:11px;overflow:hidden;margin-bottom:12px}
+  .phase-h{padding:11px 15px;background:var(--panel-2);display:flex;gap:10px;align-items:center;font-weight:640;font-size:14px}
+  .phase-h .tag{font-family:var(--mono);font-size:10px;color:var(--accent-ink);border:1px solid var(--accent);
+    padding:2px 7px;border-radius:20px;background:var(--accent-soft)}
+  .phase ul{margin:0;padding:12px 15px 15px 32px;font-size:13px;display:flex;flex-direction:column;gap:7px}
+
+  .note{font-size:11.5px;color:var(--ink-dim);background:var(--panel-2);border:1px solid var(--line);
+    border-radius:9px;padding:10px 13px;margin-top:14px;display:flex;gap:9px}
+  .note .pf{font-size:14px}
+  .footprint{padding:26px 22px;color:var(--ink-dim);font-size:12px;border-top:1px solid var(--line);margin-top:20px}
+  .footprint b{color:var(--ink)}
+
+  /* ---------- V2 elevation ---------- */
+  /* version + audience badge */
+  .verbadge{display:flex;align-items:center;gap:7px;font-size:10px;font-family:var(--mono);
+    color:var(--ink-dim);border:1px solid var(--line);border-radius:20px;padding:3px 9px;margin-top:8px}
+  .verbadge .live{width:6px;height:6px;border-radius:50%;background:var(--good);box-shadow:0 0 0 0 var(--good);animation:pulse 2.4s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 #33c48166}70%{box-shadow:0 0 0 7px #33c48100}100%{box-shadow:0 0 0 0 #33c48100}}
+  .audbadge{font-size:10.5px;font-family:var(--mono);color:var(--accent-ink);background:var(--accent-soft);
+    border:1px solid var(--accent);border-radius:20px;padding:4px 10px;white-space:nowrap}
+
+  /* topbar controls */
+  .tb-controls{display:flex;gap:8px;align-items:center}
+  .ctlbtn{display:inline-flex;gap:7px;align-items:center;background:var(--panel-2);border:1px solid var(--line);
+    color:var(--ink-dim);border-radius:8px;padding:7px 11px;cursor:pointer;font-family:inherit;font-size:12.5px}
+  .ctlbtn:hover{color:var(--ink);border-color:var(--accent)}
+  .ctlbtn kbd{font-family:var(--mono);font-size:10px;background:var(--ground);border:1px solid var(--line);
+    border-radius:4px;padding:1px 5px;color:var(--ink-dim)}
+  .toggle{display:inline-flex;align-items:center;gap:8px;cursor:pointer;user-select:none;font-size:12.5px;color:var(--ink-dim)}
+  .toggle .tk{width:34px;height:19px;border-radius:20px;background:var(--panel-2);border:1px solid var(--line);position:relative;transition:.2s}
+  .toggle .tk::after{content:"";position:absolute;top:1.5px;left:1.5px;width:14px;height:14px;border-radius:50%;background:var(--ink-dim);transition:.2s}
+  .toggle.on .tk{background:var(--accent-soft);border-color:var(--accent)}
+  .toggle.on .tk::after{transform:translateX(15px);background:var(--accent)}
+  .toggle.on{color:var(--ink)}
+
+  /* JD map annotation strip */
+  .jdmap{display:none;gap:13px;align-items:flex-start;border:1px solid var(--accent);
+    background:linear-gradient(100deg,var(--accent-soft),transparent 80%);border-radius:12px;
+    padding:13px 16px;margin:0 0 4px}
+  body.jd-on .jdmap{display:flex;animation:fade .3s ease}
+  .jdmap .mk{font-size:16px;flex:none;line-height:1.4}
+  .jdmap .jt{font-size:10px;letter-spacing:1.3px;text-transform:uppercase;color:var(--accent-ink);font-weight:700;margin-bottom:3px}
+  .jdmap q{font-style:italic;color:var(--ink)}
+  .jdmap .fit{font-size:12.5px;color:var(--ink-dim);margin-top:5px}
+  .jdmap .fit b{color:var(--ink)}
+
+  /* cold-open overlay */
+  .scrim{position:fixed;inset:0;z-index:60;background:#05070ad9;backdrop-filter:blur(6px);
+    display:grid;place-items:center;padding:20px;animation:fade .3s ease}
+  .scrim[hidden]{display:none}
+  .opener{max-width:940px;width:100%;background:var(--panel);border:1px solid var(--line);border-radius:18px;
+    box-shadow:0 30px 80px -30px #000;overflow:hidden;display:grid;grid-template-columns:1.3fr .82fr}
+  .opener-main{display:flex;flex-direction:column;min-width:0}
+  .opener-side{background:linear-gradient(180deg,var(--panel-2),var(--panel));border-left:1px solid var(--line);
+    padding:24px 22px;display:flex;align-items:center}
+  .metricstack{display:flex;flex-direction:column;gap:12px;width:100%}
+  .mcard{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--ba);border-radius:12px;
+    padding:13px 15px;box-shadow:-10px 0 30px -20px var(--ba)}
+  .mcard .mv{font-family:var(--mono);font-size:23px;font-weight:700;letter-spacing:-1px;
+    text-shadow:0 0 22px color-mix(in srgb,var(--ba) 50%,transparent)}
+  .mcard .mk{font-size:12px;color:var(--ink-dim);margin-top:3px;line-height:1.45}
+  .mcard .mk b{color:var(--ink);font-weight:600}
+  @media(max-width:820px){.opener{grid-template-columns:1fr}.opener-side{border-left:0;border-top:1px solid var(--line)}}
+  .opener-top{padding:26px 28px 18px;background:linear-gradient(160deg,var(--accent-soft),transparent);border-bottom:1px solid var(--line)}
+  .opener .eyebrow{font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent-ink);font-weight:700}
+  .opener h1{font-size:27px;margin:9px 0 8px;letter-spacing:-.4px}
+  .opener p{font-size:14px;color:var(--ink-dim);margin:0;max-width:52ch}
+  .opener-body{padding:20px 28px 24px}
+  .opener .rowset{display:flex;flex-direction:column;gap:11px;margin-bottom:20px}
+  .oline{display:flex;gap:11px;align-items:flex-start;font-size:13.5px}
+  .oline .ob{width:22px;height:22px;border-radius:6px;background:var(--accent-soft);color:var(--accent-ink);
+    display:grid;place-items:center;font-size:12px;flex:none;font-weight:700}
+  .oline b{font-weight:640}
+  .opener-cta{display:flex;gap:10px;flex-wrap:wrap}
+  .btn{border:1px solid var(--line);background:var(--panel-2);color:var(--ink);border-radius:10px;
+    padding:11px 18px;cursor:pointer;font-family:inherit;font-size:13.5px;font-weight:600}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+  .btn.primary:hover{filter:brightness(1.08)}
+  .btn:hover{border-color:var(--accent)}
+  .opener .sig{font-size:11.5px;color:var(--ink-dim);margin-top:16px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px}
+
+  /* command palette */
+  .palette{position:fixed;inset:0;z-index:70;background:#05070ab0;backdrop-filter:blur(3px);display:grid;
+    place-items:start center;padding-top:14vh;animation:fade .15s ease}
+  .palette[hidden]{display:none}
+  .pbox{width:min(560px,92vw);background:var(--panel);border:1px solid var(--line);border-radius:14px;
+    box-shadow:0 30px 80px -30px #000;overflow:hidden}
+  .pbox input{width:100%;border:0;border-bottom:1px solid var(--line);background:transparent;color:var(--ink);
+    font-family:inherit;font-size:16px;padding:15px 18px;outline:none}
+  .presults{max-height:340px;overflow-y:auto;padding:6px}
+  .pitem{display:flex;gap:12px;align-items:center;padding:10px 12px;border-radius:9px;cursor:pointer;font-size:13.5px}
+  .pitem .pic{width:20px;text-align:center;opacity:.85}
+  .pitem .psub{color:var(--ink-dim);font-size:11.5px;margin-left:auto;font-family:var(--mono)}
+  .pitem.sel,.pitem:hover{background:var(--accent-soft)}
+  .pfoot{border-top:1px solid var(--line);padding:8px 14px;font-size:11px;color:var(--ink-dim);display:flex;gap:14px}
+  .pfoot kbd{font-family:var(--mono);background:var(--panel-2);border:1px solid var(--line);border-radius:4px;padding:1px 5px}
+
+  /* guided tour coach */
+  .coach{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:55;width:min(560px,94vw);
+    background:var(--panel);border:1px solid var(--accent);border-radius:14px;box-shadow:0 24px 60px -24px #000;
+    padding:16px 18px;animation:coachin .3s ease}
+  .coach[hidden]{display:none}
+  @keyframes coachin{from{opacity:0;transform:translate(-50%,12px)}to{opacity:1;transform:translate(-50%,0)}}
+  .coach .ctop{display:flex;align-items:center;gap:10px;margin-bottom:7px}
+  .coach .cstep{font-family:var(--mono);font-size:11px;color:var(--accent-ink);background:var(--accent-soft);
+    border:1px solid var(--accent);border-radius:20px;padding:2px 9px}
+  .coach h4{font-size:15px}
+  .coach p{font-size:13px;color:var(--ink-dim);margin:0 0 12px}
+  .coach .cnav{display:flex;gap:8px;align-items:center}
+  .coach .dots{display:flex;gap:5px;margin-right:auto}
+  .coach .dots i{width:6px;height:6px;border-radius:50%;background:var(--line)}
+  .coach .dots i.on{background:var(--accent);width:16px;border-radius:6px}
+  .coach .btn{padding:8px 14px;font-size:12.5px}
+  .coach .skip{background:transparent;border-color:transparent;color:var(--ink-dim)}
+
+  :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+
+  /* ---------- glow layer · follows the active brand accent (MrBeast blue by default) ---------- */
+  .glyph{box-shadow:var(--shadow),0 0 24px -3px var(--accent)}
+  .nav-i.on{box-shadow:inset 0 0 0 1px var(--accent),0 8px 22px -14px var(--accent)}
+  .bbtn.on{box-shadow:0 8px 22px -13px var(--accent)}
+  .kpi .big{text-shadow:0 0 34px color-mix(in srgb,var(--accent) 38%,transparent)}
+  .jdmap{box-shadow:0 12px 44px -24px var(--accent)}
+  .btn.primary{box-shadow:0 0 0 1px var(--accent),0 12px 34px -8px var(--accent)}
+  .coach{box-shadow:0 24px 60px -24px #000,0 0 66px -24px var(--accent)}
+  .opener h1{text-shadow:0 0 42px color-mix(in srgb,var(--accent) 42%,transparent)}
+  .pitem.sel{box-shadow:inset 0 0 0 1px var(--accent)}
+  .topbar{box-shadow:0 1px 0 color-mix(in srgb,var(--accent) 22%,transparent)}
+  .score-pill{box-shadow:0 0 16px -6px currentColor}
+  .ctlbtn:hover,.theme-t:hover{box-shadow:0 0 18px -8px var(--accent)}
+
+  /* ---------- playbook lists ---------- */
+  .playlist{display:flex;flex-direction:column;gap:11px;margin-top:14px}
+  .pl{display:flex;gap:11px;align-items:flex-start;font-size:13.5px;line-height:1.45}
+  .pli{flex:none;min-width:22px;height:22px;border-radius:6px;display:grid;place-items:center;
+    font-family:var(--mono);font-size:11px;font-weight:700;margin-top:1px}
+  .pli.c-accent{color:var(--accent-ink);background:var(--accent-soft)}
+  .pli.c-good{color:var(--good);background:var(--good-soft)}
+  .pli.c-crit{color:var(--crit);background:var(--crit-soft)}
+  .pli.c-plain{color:var(--ink-dim);background:var(--panel-2)}
+
+  @media print{.rail,.topbar,.coach,.palette,.scrim{display:none!important}.app{grid-template-columns:1fr}.view{display:block!important;page-break-inside:avoid}}
+
+  @media(max-width:760px){
+    .app{grid-template-columns:1fr}
+    .rail{position:static;height:auto;flex-direction:column}
+    nav{flex-direction:row;flex-wrap:wrap}
+    .topstats{width:100%;margin-left:0}
+    .tb-controls .ctlbtn span.lbl{display:none}
+  }
+</style>
+
+<div class="app">
+  <!-- ============ RAIL ============ -->
+  <aside class="rail">
+    <div class="brandmark">
+      <div class="glyph">◑</div>
+      <div>
+        <b>Creator Partnerships OS</b>
+        <span>Beast Industries</span>
+        <div class="verbadge"><span class="live"></span>v2.0 · operational</div>
+      </div>
+    </div>
+
+    <div class="switcher">
+      <div class="lbl">Brand portfolio</div>
+      <div class="brandbtns" id="brandbtns">
+        <button class="bbtn on" data-b="all"><span class="dot"></span>All brands <small>3,412</small></button>
+        <button class="bbtn" data-b="feastables"><span class="dot"></span>Feastables <small>1,608</small></button>
+        <button class="bbtn" data-b="lunchly"><span class="dot"></span>Lunchly <small>1,140</small></button>
+        <button class="bbtn" data-b="merch"><span class="dot"></span>Beast Merch <small>664</small></button>
+      </div>
+    </div>
+
+    <nav id="nav">
+      <div class="nlbl">Operate</div>
+      <div class="nav-i on" data-v="dash"><span class="ic">◇</span>Command Center</div>
+      <div class="nav-i" data-v="crm"><span class="ic">▤</span>Creator CRM</div>
+      <div class="nav-i" data-v="score"><span class="ic">◎</span>Fit Scorecard</div>
+      <div class="nlbl">Execute</div>
+      <div class="nav-i" data-v="brief"><span class="ic">✎</span>Brief Builder</div>
+      <div class="nav-i" data-v="gift"><span class="ic">▣</span>Gifting Ops</div>
+      <div class="nav-i" data-v="cal"><span class="ic">▦</span>Campaign Calendar</div>
+      <div class="nlbl">Report</div>
+      <div class="nav-i" data-v="kpi"><span class="ic">▧</span>KPI Reporting</div>
+      <div class="nlbl">Standards</div>
+      <div class="nav-i" data-v="play"><span class="ic">◆</span>Operating Playbook</div>
+    </nav>
+
+    <div class="railfoot">
+      <b>Austin Bailey</b><br>Creator Partnerships lead<br>
+      <span style="opacity:.7">Beast Industries · signed in</span>
+    </div>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <main>
+    <div class="topbar">
+      <div>
+        <div class="crumb">Beast Industries · <b id="crumbBrand">All brands</b></div>
+        <div class="pagetitle" id="pageTitle">Command Center</div>
+      </div>
+      <div class="topstats">
+        <div class="tstat"><span class="v" id="s-creators">3,412</span><span class="k">Creators</span></div>
+        <div class="tstat"><span class="v">14</span><span class="k">Live campaigns</span></div>
+        <div class="tstat"><span class="v">$284k</span><span class="k">Committed</span></div>
+        <div class="tstat"><span class="v" style="color:var(--good)">96%</span><span class="k">On-time</span></div>
+      </div>
+      <div class="tb-controls">
+        <button class="ctlbtn" id="tourBtn" title="Guided tour">◇ <span class="lbl">Tour</span></button>
+        <button class="ctlbtn" id="paletteBtn" title="Jump anywhere">⌘ <kbd>K</kbd></button>
+        <button class="theme-t" id="themeT" title="Toggle theme">◐</button>
+      </div>
+    </div>
+
+    <div class="wrap">
+
+      <!-- ===== DASHBOARD ===== -->
+      <section class="view on" id="v-dash">
+        <p class="lead">One console for every creator relationship across the Beast portfolio. Each brand pulls a different creator profile, brief approach, and partnership structure. This switches the whole cockpit to match.</p>
+
+        <div class="cards grid-4" style="margin-top:18px">
+          <div class="card kpi"><span class="lab">Reach booked · Q</span><span class="big">418M</span><span class="delta up">▲ 12% vs last Q</span></div>
+          <div class="card kpi"><span class="lab">Earned media value</span><span class="big">$3.9M</span><span class="delta up">▲ 8%</span></div>
+          <div class="card kpi"><span class="lab">Avg engagement rate</span><span class="big">6.4%</span><span class="delta up">▲ 0.7pt</span></div>
+          <div class="card kpi"><span class="lab">Cost per 1k views</span><span class="big">$4.10</span><span class="delta up">▼ 14% (better)</span></div>
+        </div>
+
+        <div class="sectlabel">Pipeline this week</div>
+        <div class="cards grid-2">
+          <div class="card">
+            <h3>Stage flow</h3>
+            <p class="sub">Where every active partnership sits right now.</p>
+            <div class="rowbars" style="margin-top:14px">
+              <div class="rb"><div class="rbtop"><b>Sourced</b><span>62</span></div><div class="meter"><i style="width:100%"></i></div></div>
+              <div class="rb"><div class="rbtop"><b>Outreach sent</b><span>38</span></div><div class="meter"><i style="width:62%"></i></div></div>
+              <div class="rb"><div class="rbtop"><b>In negotiation</b><span>21</span></div><div class="meter"><i style="width:34%"></i></div></div>
+              <div class="rb"><div class="rbtop"><b>Contracted · in production</b><span>14</span></div><div class="meter"><i style="width:23%"></i></div></div>
+              <div class="rb"><div class="rbtop"><b>Live / posted</b><span>9</span></div><div class="meter"><i style="width:15%"></i></div></div>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Needs a decision from me</h3>
+            <p class="sub">The console surfaces what's blocked before it slips.</p>
+            <div style="display:flex;flex-direction:column;gap:9px;margin-top:14px">
+              <div style="display:flex;gap:10px;align-items:center;font-size:13px"><span class="chip c-crit">Overdue</span> Nick DiGiovanni cut #2: revision note unanswered 2 days</div>
+              <div style="display:flex;gap:10px;align-items:center;font-size:13px"><span class="chip c-warn">Rate gap</span> Alix Earle counter is 18% over Lunchly ceiling</div>
+              <div style="display:flex;gap:10px;align-items:center;font-size:13px"><span class="chip c-warn">Legal</span> 4 contracts awaiting FTC-disclosure clause sign-off</div>
+              <div style="display:flex;gap:10px;align-items:center;font-size:13px"><span class="chip c-accent">Forecast</span> Holiday gifting run needs quantity lock by Fri</div>
+              <div style="display:flex;gap:10px;align-items:center;font-size:13px"><span class="chip c-good">Ready</span> Keith Lee Feastables post cleared to publish</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sectlabel">Live signal feed</div>
+        <div class="card" style="padding:6px 4px">
+          <div id="signalFeed" style="display:flex;flex-direction:column"></div>
+        </div>
+
+        <div class="sectlabel">Top fits surfaced this week</div>
+        <p class="lead" style="margin-bottom:12px">Ranked by the fit model, not by follower count. Full logic lives in <a data-jump="score">Fit Scorecard</a>.</p>
+        <div class="tablewrap">
+          <table id="topfits"><thead><tr>
+            <th>Creator</th><th>Brand</th><th>Platform</th><th class="n">Audience</th><th class="n">Eng.</th><th>Tier</th><th class="n">Fit</th>
+          </tr></thead><tbody></tbody></table>
+        </div>
+      </section>
+
+      <!-- ===== CRM ===== -->
+      <section class="view" id="v-crm">
+        <p class="lead">The live roster. Searchable, filterable, and scored on real signal. Every row is analytics <em>beyond</em> the follower number: engagement quality, audience fit, brand safety, and collab history.</p>
+        <div class="toolbar" style="margin-top:16px">
+          <div class="search"><span style="opacity:.6">⌕</span><input id="crmSearch" placeholder="Search creators, niche, platform…"></div>
+          <div class="seg" id="platSeg">
+            <button class="on" data-p="all">All</button>
+            <button data-p="YouTube">YouTube</button>
+            <button data-p="TikTok">TikTok</button>
+            <button data-p="Twitch">Twitch</button>
+            <button data-p="Instagram">IG</button>
+          </div>
+          <div class="seg" id="tierSeg">
+            <button class="on" data-t="all">All tiers</button>
+            <button data-t="marquee">Marquee</button>
+            <button data-t="core">Core</button>
+            <button data-t="niche">Niche</button>
+          </div>
+        </div>
+        <div class="tablewrap">
+          <table id="crmTable"><thead><tr>
+            <th data-sort="name">Creator</th>
+            <th data-sort="brand">Brand fit</th>
+            <th data-sort="platform">Platform</th>
+            <th data-sort="followers" class="n">Audience</th>
+            <th data-sort="eng" class="n">Eng. rate</th>
+            <th data-sort="safety">Brand safety</th>
+            <th data-sort="status">Status</th>
+            <th data-sort="fit" class="n">Fit ▾</th>
+          </tr></thead><tbody></tbody></table>
+        </div>
+        <div class="count-note" id="crmCount"></div>
+        <div class="note"><span class="pf">◔</span><div>This view shows a curated slice of the full 3,000+ record base. Audience and engagement figures here are <b>illustrative sample data</b>. Live, the base pulls from platform APIs and ViewStats and refreshes on its own, never hand-typed.</div></div>
+      </section>
+
+      <!-- ===== SCORECARD ===== -->
+      <section class="view" id="v-score">
+        <p class="lead">How a creator clears the bar before we spend a dollar. Six weighted axes turn a gut call into a score any brand lead can read in five seconds. Pick a creator to see the breakdown.</p>
+        <div class="scorecard" style="margin-top:18px">
+          <div class="picklist" id="pickList"></div>
+          <div class="card" id="scoreDetail"></div>
+        </div>
+      </section>
+
+      <!-- ===== BRIEF ===== -->
+      <section class="view" id="v-brief">
+        <p class="lead">A brief the creator can act on without a single follow-up call. Talking points, product truth, guardrails, deliverables, usage rights, and disclosure baked in. This is a real one, ready to send.</p>
+        <div class="brief" style="margin-top:18px">
+          <div class="brief-h">
+            <div class="ey">Feastables · Creator Brief</div>
+            <h2>Deluxe Dark Almond · Summer Drop</h2>
+            <p style="font-size:13px;color:var(--ink-dim);margin:2px 0 0;max-width:64ch">Make the first bite look as good as it tastes. We want real reactions from people your audience already trusts on food, not an ad read.</p>
+            <div class="brief-meta">
+              <span>Creator · <b>Keith Lee</b></span>
+              <span>Format · <b>1× TikTok + 1× IG Reel</b></span>
+              <span>Go-live · <b>Aug 14, 7pm ET</b></span>
+              <span>Fee · <b>[locked in contract]</b></span>
+              <span>Usage · <b>60-day whitelist</b></span>
+            </div>
+          </div>
+          <div class="brief-body">
+            <div class="bsec">
+              <h4>The one thing</h4>
+              <p>If a viewer remembers one thing: <b>Deluxe is the real-chocolate upgrade. 55% cacao, whole roasted almonds, nothing fake.</b> Everything else supports that.</p>
+              <h4 style="margin-top:16px">Talking points</h4>
+              <ul>
+                <li>Honest first-bite reaction, your real rating scale.</li>
+                <li>Snap the bar on camera. The clean break is the proof of quality.</li>
+                <li>"Made with better stuff." Real cacao, real almonds, no palm oil.</li>
+                <li>Where to grab it: Walmart + feastables.com, this week.</li>
+              </ul>
+              <h4 style="margin-top:16px">Product truth (don't overclaim)</h4>
+              <ul>
+                <li>55% cacao dark chocolate, whole roasted almonds.</li>
+                <li>Fair Trade cocoa. Say "better ingredients," not "healthy."</li>
+                <li>Contains almonds + milk. Show nothing as allergen-free.</li>
+              </ul>
+            </div>
+            <div class="bsec">
+              <h4>Deliverables</h4>
+              <div class="deliverables">
+                <div class="deliv"><span class="pf">▶</span> 1× TikTok, 30-60s, native taste-test</div>
+                <div class="deliv"><span class="pf">▶</span> 1× IG Reel cross-post, same cut OK</div>
+                <div class="deliv"><span class="pf">◍</span> 2× Story frames w/ product link sticker</div>
+                <div class="deliv"><span class="pf">◷</span> Cut #1 due Aug 9 · 1 revision round</div>
+              </div>
+              <h4 style="margin-top:16px">Guardrails</h4>
+              <div class="dd">
+                <div class="do"><h5>Do</h5><ul>
+                  <li>#ad or "paid partnership" tag on. FTC requires it</li>
+                  <li>Keep your voice; script is a starting point</li>
+                  <li>Good natural light on the snap moment</li>
+                  <li>Tag @feastables + @beast</li>
+                </ul></div>
+                <div class="dont"><h5>Don't</h5><ul>
+                  <li>No health/diet claims</li>
+                  <li>No competitor call-outs by name</li>
+                  <li>No kids as the focus of the video</li>
+                  <li>Don't bury the disclosure in the caption</li>
+                </ul></div>
+              </div>
+              <h4 style="margin-top:16px">Why you</h4>
+              <p>Your audience takes your food takes as gospel. The honest-rating format <em>is</em> the ad. We're not asking you to sell; we're asking you to react.</p>
+            </div>
+          </div>
+        </div>
+        <div class="note"><span class="pf">◎</span><div>Every brief is brand-tuned: swap to <b>Lunchly</b> and the voice goes Gen-Z / dorm-and-gaming; swap to <b>Merch</b> and it's fandom-and-drop energy. Same skeleton, different soul.</div></div>
+      </section>
+
+      <!-- ===== GIFTING ===== -->
+      <section class="view" id="v-gift">
+        <p class="lead">A 500-creator seeding activation, run like a supply-chain operation, because it is. Concept → manufacturer → forecast → logistics → measurement, with the quantity math that keeps ops honest.</p>
+
+        <div class="cards grid-3" style="margin-top:18px">
+          <div class="card kpi"><span class="lab">Creators in wave</span><span class="big">500</span><span class="delta">3 tiers · 4 waves</span></div>
+          <div class="card kpi"><span class="lab">Units to produce</span><span class="big">7,150</span><span class="delta">incl. 10% breakage buffer</span></div>
+          <div class="card kpi"><span class="lab">All-in budget</span><span class="big">$96.5k</span><span class="delta">$193 blended / creator</span></div>
+        </div>
+
+        <div class="sectlabel">The concept: "Beast Crate: Back to School"</div>
+        <div class="card">
+          <div class="brief-body" style="grid-template-columns:1fr 1fr;padding:0">
+            <div class="bsec">
+              <h4>Mood board notes</h4>
+              <ul>
+                <li>Matte-black crate, crowbar-open reveal. The unboxing is the content.</li>
+                <li>Feastables + Lunchly co-pack: "fuel for the first day back."</li>
+                <li>Personalized note card w/ creator's @ printed, so it's postable.</li>
+                <li>One "golden ticket" per 100 crates → surprise campaign hook.</li>
+              </ul>
+            </div>
+            <div class="bsec">
+              <h4>Tier structure</h4>
+              <ul>
+                <li><b>Tier A · 50 marquee</b>: custom crate, handwritten note, early drop</li>
+                <li><b>Tier B · 150 core</b>: standard crate, full product set</li>
+                <li><b>Tier C · 300 niche/emerging</b>: mailer box, hero SKUs</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="sectlabel">Quantity forecast</div>
+        <div class="tablewrap"><table class="forecast">
+          <thead><tr><th>Tier</th><th class="num">Creators</th><th class="num">Units / crate</th><th class="num">Subtotal</th><th class="num">+10% buffer</th></tr></thead>
+          <tbody>
+            <tr><td>A · Marquee</td><td class="num">50</td><td class="num">18</td><td class="num">900</td><td class="num">990</td></tr>
+            <tr><td>B · Core</td><td class="num">150</td><td class="num">14</td><td class="num">2,100</td><td class="num">2,310</td></tr>
+            <tr><td>C · Emerging</td><td class="num">300</td><td class="num">11</td><td class="num">3,300</td><td class="num">3,630</td></tr>
+          </tbody>
+          <tfoot><tr><td>Total</td><td class="num">500</td><td class="num">n/a</td><td class="num">6,300</td><td class="num">6,930</td></tr></tfoot>
+        </table></div>
+
+        <div class="sectlabel">Run of show</div>
+        <div class="card"><div class="steps">
+          <div class="step"><div class="when">Wk 1-2</div><div><h4>Lock concept + manufacturer</h4><p>Finalize crate SKU list with supply chain; get sample from packaging vendor; confirm lead time against go-live. Reconcile against real inventory before promising units.</p></div></div>
+          <div class="step"><div class="when">Wk 2-3</div><div><h4>Source + score 500 creators</h4><p>Pull from CRM, run fit model, over-source 20% to absorb no-replies. Legal pre-clears any FTC/gifting-disclosure language.</p></div></div>
+          <div class="step"><div class="when">Wk 3-4</div><div><h4>Outreach + address capture</h4><p>Personalized DMs, secure shipping consent + W-9 where needed, dedupe addresses, flag minors out (18+ only, no exceptions).</p></div></div>
+          <div class="step"><div class="when">Wk 5</div><div><h4>Assembly + QC + wave ship</h4><p>Staggered ship in 4 waves so content doesn't all land same day. Track numbers by tier; hold buffer stock for reships.</p></div></div>
+          <div class="step"><div class="when">Wk 6-8</div><div><h4>Capture + measure</h4><p>Monitor organic posts, log EMV + engagement per creator, ID the top 10% for paid follow-up partnerships.</p></div></div>
+        </div></div>
+        <div class="note"><span class="pf">▣</span><div>Gifting seeds the funnel; the winners get promoted into paid, whitelisted partnerships. The crate isn't the campaign. It's the audition.</div></div>
+      </section>
+
+      <!-- ===== CALENDAR ===== -->
+      <section class="view" id="v-cal">
+        <p class="lead">One product launch, sequenced across creators so coverage compounds instead of colliding. Teaser, launch spike, sustain, then the UGC echo. Coordinated posting is the whole game.</p>
+        <div class="sectlabel">Feastables Deluxe · Summer Drop · launch window</div>
+        <div class="cal"><table class="caltable">
+          <thead><tr><th style="text-align:left;padding-left:10px">Creator</th>
+            <th>Aug 4</th><th>Aug 7</th><th>Aug 11</th><th>Aug 14</th><th>Aug 18</th><th>Aug 21</th><th>Aug 25</th><th>Aug 28</th></tr></thead>
+          <tbody id="calBody"></tbody>
+        </table></div>
+        <div class="legend">
+          <span><i style="background:var(--warn)"></i>Teaser</span>
+          <span><i style="background:var(--accent)"></i>Launch post</span>
+          <span><i style="background:var(--good)"></i>Sustain / restock</span>
+          <span><i style="background:var(--ink-dim)"></i>UGC echo</span>
+        </div>
+        <div class="note"><span class="pf">▦</span><div>Marquee creators anchor the <b>Aug 14 launch spike</b>; core + niche stagger through the tail so the brand stays in-feed for three weeks off one drop.</div></div>
+      </section>
+
+      <!-- ===== KPI ===== -->
+      <section class="view" id="v-kpi">
+        <p class="lead">The monthly board deck, on tap. Every number ties to a brand KPI: reach, earned value, engagement quality, conversion, and the operational metric that actually predicts renewal, on-time delivery.</p>
+
+        <div class="cards grid-4" style="margin-top:18px">
+          <div class="card kpi"><span class="lab">Total reach · Jul</span><span class="big">146M</span><span class="delta up">▲ 9%</span></div>
+          <div class="card kpi"><span class="lab">Engagements</span><span class="big">9.3M</span><span class="delta up">▲ 11%</span></div>
+          <div class="card kpi"><span class="lab">TikTok Shop GMV</span><span class="big">$612k</span><span class="delta up">▲ 21%</span></div>
+          <div class="card kpi"><span class="lab">Sentiment (pos)</span><span class="big">91%</span><span class="delta up">▲ 3pt</span></div>
+        </div>
+
+        <div class="cards grid-2" style="margin-top:14px">
+          <div class="card chartcard">
+            <h3>Reach vs. earned media value · 6 mo</h3>
+            <p class="sub">Reach climbing while CPM falls = the roster is getting more efficient.</p>
+            <div id="chartBars"></div>
+          </div>
+          <div class="card chartcard">
+            <h3>Spend efficiency trend</h3>
+            <p class="sub">Cost per 1k views, lower is better.</p>
+            <div id="chartLine"></div>
+          </div>
+        </div>
+
+        <div class="sectlabel">Per-brand scorecard · July</div>
+        <div class="tablewrap"><table>
+          <thead><tr><th>Brand</th><th class="n">Creators live</th><th class="n">Reach</th><th class="n">Eng. rate</th><th class="n">CPM</th><th class="n">On-time</th><th>Trend</th></tr></thead>
+          <tbody>
+            <tr><td><span class="chip c-plain"><span class="cd" style="background:#C77B3A"></span>Feastables</span></td><td class="n">31</td><td class="n">78M</td><td class="n">6.8%</td><td class="n">$3.90</td><td class="n" style="color:var(--good)">97%</td><td class="n">▲</td></tr>
+            <tr><td><span class="chip c-plain"><span class="cd" style="background:#2FA36B"></span>Lunchly</span></td><td class="n">44</td><td class="n">51M</td><td class="n">7.9%</td><td class="n">$3.40</td><td class="n" style="color:var(--good)">95%</td><td class="n">▲</td></tr>
+            <tr><td><span class="chip c-plain"><span class="cd" style="background:#2F6BFF"></span>Beast Merch</span></td><td class="n">18</td><td class="n">17M</td><td class="n">5.1%</td><td class="n">$5.60</td><td class="n" style="color:var(--warn)">92%</td><td class="n">▲</td></tr>
+          </tbody>
+        </table></div>
+        <div class="note"><span class="pf">▧</span><div>The number that matters most here is <b>on-time delivery</b>. Reach is the outcome; on-time is the system working. When it dips, everything downstream is about to.</div></div>
+      </section>
+
+      <!-- ===== PLAYBOOK ===== -->
+      <section class="view" id="v-play">
+        <p class="lead">The standards every partnership runs on. Same bar across Feastables, Lunchly, and Merch, so quality never depends on who is running the deal that week.</p>
+
+        <div class="cards grid-2" style="margin-top:18px">
+          <div class="card">
+            <h3>How a creator clears the bar</h3>
+            <p class="sub">No spend until all four are true.</p>
+            <div class="playlist">
+              <div class="pl"><span class="pli c-accent">01</span><div>Composite fit of 78 or higher, scored on the six axes, not follower count.</div></div>
+              <div class="pl"><span class="pli c-good">02</span><div>Brand safety reads Clear, or Monitor with a written mitigation attached.</div></div>
+              <div class="pl"><span class="pli c-accent">03</span><div>Audience demo matches the brand target, checked in-platform, not assumed.</div></div>
+              <div class="pl"><span class="pli c-accent">04</span><div>The product fits their format without forcing a stiff ad read.</div></div>
+            </div>
+          </div>
+          <div class="card">
+            <h3>What every brief ships with</h3>
+            <p class="sub">All seven, or it does not go out.</p>
+            <div class="playlist">
+              <div class="pl"><span class="pli c-plain">·</span><div>The one thing a viewer should remember</div></div>
+              <div class="pl"><span class="pli c-plain">·</span><div>Talking points in the creator's voice</div></div>
+              <div class="pl"><span class="pli c-plain">·</span><div>Product truth, with claims we will not make</div></div>
+              <div class="pl"><span class="pli c-plain">·</span><div>Do and don't guardrails</div></div>
+              <div class="pl"><span class="pli c-plain">·</span><div>Deliverables and due dates</div></div>
+              <div class="pl"><span class="pli c-plain">·</span><div>Disclosure requirement, in-frame</div></div>
+              <div class="pl"><span class="pli c-plain">·</span><div>Usage rights and whitelist window</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cards grid-2">
+          <div class="card">
+            <h3>Compliance, non-negotiable</h3>
+            <div class="playlist">
+              <div class="pl"><span class="pli c-crit">!</span><div>Paid-partnership disclosure on every post, in-frame, never buried in a caption.</div></div>
+              <div class="pl"><span class="pli c-crit">!</span><div>18+ creators only. No minors sourced, listed, or shipped to. No exceptions.</div></div>
+              <div class="pl"><span class="pli c-crit">!</span><div>Usage rights and whitelist window locked in the contract before go-live.</div></div>
+              <div class="pl"><span class="pli c-crit">!</span><div>Legal clears disclosure language before outreach on any gifting wave.</div></div>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Delivery SLA</h3>
+            <div class="playlist">
+              <div class="pl"><span class="pli c-accent">→</span><div>Cut #1 lands on the brief date. One revision round, 48-hour turn.</div></div>
+              <div class="pl"><span class="pli c-accent">→</span><div>On-time means posted inside the go-live window we agreed. Nothing softer.</div></div>
+              <div class="pl"><span class="pli c-accent">→</span><div>Over-source 20% on every activation to absorb the no-replies.</div></div>
+              <div class="pl"><span class="pli c-accent">→</span><div>Gifting winners get promoted into paid, whitelisted deals.</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="note"><span class="pf">◆</span><div>This is the reason partnerships run the same whether I am in the room or not. Write the standard down once, hold every deal to it.</div></div>
+      </section>
+
+    </div>
+
+    <div class="footprint">
+      <b>Beast Creator Partnerships OS</b> · v2.0. Creator names are real public figures shown as illustrative fits; audience and engagement figures are sample data. Built by Austin Bailey.
+    </div>
+  </main>
+</div>
+
+<!-- ===== cold-open ===== -->
+<div class="scrim" id="opener">
+  <div class="opener">
+    <div class="opener-main">
+      <div class="opener-top">
+        <div class="eyebrow">Beast Industries · Creator Partnerships</div>
+        <h1>One console for every creator deal across the portfolio.</h1>
+        <p>Feastables, Lunchly, and Beast Merch each need a different creator, a different brief, and a different structure. This runs all three from one place: roster, scoring, briefs, gifting, and reporting.</p>
+      </div>
+      <div class="opener-body">
+        <div class="rowset">
+          <div class="oline"><span class="ob">1</span><div><b>Switch brands</b> top-left. Each pulls a different creator profile and recolors the whole console.</div></div>
+          <div class="oline"><span class="ob">2</span><div><b>Everything is clickable.</b> Sort the roster, score a creator, open a live brief, read the gifting run of show.</div></div>
+          <div class="oline"><span class="ob">3</span><div><b>Press ⌘K</b> to jump anywhere, or take the quick tour to see each module once.</div></div>
+        </div>
+        <div class="opener-cta">
+          <button class="btn primary" id="exploreBtn">Enter the console</button>
+          <button class="btn" id="startTour">Take the tour</button>
+        </div>
+        <div class="sig"><span>Built by <b style="color:var(--ink)">Austin Bailey</b></span><span>Creator Partnerships · Beast Industries</span></div>
+      </div>
+    </div>
+    <aside class="opener-side">
+      <div class="metricstack">
+        <div class="mcard" style="--ba:#C77B3A"><div class="mv">3,412</div><div class="mk">creators <b>scored</b> for fit across the three brands. Followers are the last signal, not the first.</div></div>
+        <div class="mcard" style="--ba:#2FA36B"><div class="mv">8 modules</div><div class="mk">roster · fit scorecard · briefs · gifting · calendar · KPIs · playbook</div></div>
+        <div class="mcard" style="--ba:#2F6BFF"><div class="mv">500-creator</div><div class="mk">gifting activation mapped forecast to logistics. <b>A working system, not a mockup.</b></div></div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<!-- ===== command palette ===== -->
+<div class="palette" id="palette" hidden>
+  <div class="pbox">
+    <input id="palInput" placeholder="Jump to a module or action…" autocomplete="off" aria-label="Command palette">
+    <div class="presults" id="palResults"></div>
+    <div class="pfoot"><span><kbd>↑</kbd><kbd>↓</kbd> navigate</span><span><kbd>↵</kbd> open</span><span><kbd>esc</kbd> close</span></div>
+  </div>
+</div>
+
+<!-- ===== guided tour ===== -->
+<div class="coach" id="coach" hidden>
+  <div class="ctop"><span class="cstep" id="coachStep">1 / 8</span><h4 id="coachTitle"></h4></div>
+  <p id="coachBody"></p>
+  <div class="cnav">
+    <div class="dots" id="coachDots"></div>
+    <button class="btn skip" id="coachSkip">Skip</button>
+    <button class="btn" id="coachBack">Back</button>
+    <button class="btn primary" id="coachNext">Next</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var root=document.documentElement;
+
+  /* ---------- theme ---------- */
+  document.getElementById('themeT').addEventListener('click',function(){
+    var cur=root.getAttribute('data-theme');
+    var next = cur==='dark' ? 'light' : cur==='light' ? 'dark'
+      : (matchMedia('(prefers-color-scheme: dark)').matches ? 'light':'dark');
+    root.setAttribute('data-theme',next);
+  });
+
+  /* ---------- data ---------- */
+  // fit = model score /100; safety g/w/c; illustrative sample analytics
+  var C=[
+    {name:"Nick DiGiovanni",platform:"YouTube",brand:"feastables",niche:"Chef · food records",followers:"25.4M",eng:5.9,safety:"g",tier:"marquee",status:"In production",fit:96,note:"Already did the MrBeast world-record chocolate collab already, so he's food-native and proven inside the ecosystem."},
+    {name:"Keith Lee",platform:"TikTok",brand:"feastables",niche:"Honest food reviews",followers:"16.2M",eng:8.4,safety:"g",tier:"marquee",status:"Cleared to post",fit:95,note:"Highest-trust food voice on the platform. His honest-rating format IS the ad, so no script needed."},
+    {name:"Nara Smith",platform:"TikTok",brand:"feastables",niche:"From-scratch food aesthetic",followers:"11.3M",eng:7.1,safety:"g",tier:"marquee",status:"Outreach sent",fit:91,note:"'Made from scratch' aesthetic maps perfectly onto the real-ingredients story. Huge Gen-Z pull."},
+    {name:"B. Dylan Hollis",platform:"TikTok",brand:"feastables",niche:"Vintage baking",followers:"12.8M",eng:6.6,safety:"g",tier:"core",status:"Sourced",fit:88,note:"Wholesome, wildly re-watchable baking content. Chocolate is on-format and his energy is brand-safe gold."},
+    {name:"Owen Han",platform:"TikTok",brand:"feastables",niche:"Sandwich / food ASMR",followers:"6.1M",eng:6.9,safety:"g",tier:"core",status:"Negotiation",fit:84,note:"Clean, cinematic food shots. Great for the 'snap the bar' hero moment."},
+    {name:"Zach Choi",platform:"YouTube",brand:"feastables",niche:"Eating ASMR",followers:"14.9M",eng:4.2,safety:"g",tier:"core",status:"Sourced",fit:80,note:"Massive reach, mute-friendly ASMR travels globally. Lower eng-rate but huge absolute engagement."},
+    {name:"candyhunting",platform:"Instagram",brand:"feastables",niche:"New-candy news",followers:"0.9M",eng:9.1,safety:"g",tier:"niche",status:"Sourced",fit:83,note:"The authority account for new-candy drops. Small, but the exact buyers. Perfect for a launch leak."},
+
+    {name:"Alix Earle",platform:"TikTok",brand:"lunchly",niche:"College lifestyle / GRWM",followers:"7.9M",eng:8.8,safety:"w",tier:"marquee",status:"Rate gap",fit:90,note:"Owns the college-girl daily-life feed. Dorm-lunch placement is native; watch rate ceiling."},
+    {name:"Jynxzi",platform:"Twitch",brand:"lunchly",niche:"Gaming / Gen-Z",followers:"5.6M",eng:9.4,safety:"w",tier:"marquee",status:"Outreach sent",fit:89,note:"One of the fastest-growing Gen-Z gaming voices. Snack-while-streaming is the most native placement there is."},
+    {name:"Kai Cenat",platform:"Twitch",brand:"lunchly",niche:"Live culture",followers:"16.8M",eng:7.7,safety:"w",tier:"marquee",status:"Sourced",fit:87,note:"Gen-Z culture engine. Enormous pull; needs tight brand-safety guardrails + live moderation plan."},
+    {name:"Corporate Natalie",platform:"Instagram",brand:"lunchly",niche:"Workplace humor",followers:"2.4M",eng:6.2,safety:"g",tier:"core",status:"Sourced",fit:78,note:"Desk-lunch comedy angle opens the 20-something office audience Lunchly under-indexes on."},
+    {name:"Dylan Anderson",platform:"TikTok",brand:"lunchly",niche:"Corporate comedy",followers:"3.1M",eng:6.8,safety:"g",tier:"core",status:"Sourced",fit:76,note:"Same office-lunch lane, sketch format. Pairs well with Corporate Natalie for a coordinated moment."},
+    {name:"Kaeli Mae",platform:"TikTok",brand:"lunchly",niche:"Aesthetic routines",followers:"7.2M",eng:5.4,safety:"g",tier:"core",status:"Sourced",fit:74,note:"'Aesthetic lunch prep' format. High saves, strong female Gen-Z reach; eng-rate softer."},
+
+    {name:"Ryan Trahan",platform:"YouTube",brand:"merch",niche:"Challenge storytelling",followers:"19.5M",eng:7.3,safety:"g",tier:"marquee",status:"In production",fit:94,note:"MrBeast-adjacent, elite storyteller. Merch drops ride his narrative arcs naturally."},
+    {name:"Zach King",platform:"TikTok",brand:"merch",niche:"Magic / VFX",followers:"81M",eng:4.9,safety:"g",tier:"marquee",status:"Sourced",fit:88,note:"Global family reach, brand-safe. Merch reveal as a magic 'appear' is on-format and shareable."},
+    {name:"Michelle Khare",platform:"YouTube",brand:"merch",niche:"Challenge / doc",followers:"5.4M",eng:8.1,safety:"g",tier:"core",status:"Negotiation",fit:82,note:"High-production challenge docs; premium merch fits her aspirational, high-effort audience."},
+    {name:"Airrack",platform:"YouTube",brand:"merch",niche:"Challenge / vlog",followers:"14.1M",eng:5.7,safety:"w",tier:"core",status:"Sourced",fit:80,note:"MrBeast-ecosystem challenge creator; big reach, merch tie-ins land with his 'stunt' format."}
+  ];
+
+  var brandName={all:"All brands",feastables:"Feastables",lunchly:"Lunchly",merch:"Beast Merch"};
+  var brandColor={feastables:"#C77B3A",lunchly:"#2FA36B",merch:"#2F6BFF"};
+  function initials(n){return n.split(' ').map(function(w){return w[0]}).join('').slice(0,2).toUpperCase();}
+  function scoreColor(s){return s>=90?'var(--good)':s>=80?'var(--accent-ink)':s>=70?'var(--warn)':'var(--crit)';}
+  function safetyChip(s){return s==='g'?'<span class="chip c-good">Clear</span>':s==='w'?'<span class="chip c-warn">Monitor</span>':'<span class="chip c-crit">Flag</span>';}
+  function tierChip(t){return '<span class="tier '+t+'">'+t.toUpperCase()+'</span>';}
+  function fitPill(s){return '<span class="score-pill" style="background:color-mix(in srgb,'+scoreColor(s)+' 16%,transparent);color:'+scoreColor(s)+'">'+s+'</span>';}
+
+  /* ---------- brand switching ---------- */
+  var curBrand='all';
+  document.getElementById('brandbtns').addEventListener('click',function(e){
+    var b=e.target.closest('.bbtn'); if(!b)return;
+    curBrand=b.getAttribute('data-b');
+    [].forEach.call(this.children,function(x){x.classList.toggle('on',x===b);});
+    if(curBrand==='all') root.removeAttribute('data-brand'); else root.setAttribute('data-brand',curBrand);
+    document.getElementById('crumbBrand').textContent=brandName[curBrand];
+    var counts={all:'3,412',feastables:'1,608',lunchly:'1,140',merch:'664'};
+    document.getElementById('s-creators').textContent=counts[curBrand];
+    renderAll();
+  });
+
+  function brandFilter(list){return curBrand==='all'?list:list.filter(function(c){return c.brand===curBrand;});}
+
+  /* ---------- nav ---------- */
+  var titles={dash:"Command Center",crm:"Creator CRM",score:"Fit Scorecard",brief:"Brief Builder",gift:"Gifting Ops",cal:"Campaign Calendar",kpi:"KPI Reporting",play:"Operating Playbook"};
+  function go(v){
+    [].forEach.call(document.querySelectorAll('.nav-i'),function(n){n.classList.toggle('on',n.getAttribute('data-v')===v);});
+    [].forEach.call(document.querySelectorAll('.view'),function(s){s.classList.toggle('on',s.id==='v-'+v);});
+    document.getElementById('pageTitle').textContent=titles[v];
+    window.scrollTo(0,0);
+  }
+  document.getElementById('nav').addEventListener('click',function(e){
+    var n=e.target.closest('.nav-i'); if(n) go(n.getAttribute('data-v'));
+  });
+  document.addEventListener('click',function(e){
+    var j=e.target.closest('[data-jump]'); if(j){e.preventDefault();go(j.getAttribute('data-jump'));}
+  });
+
+  /* ---------- renderers ---------- */
+  function renderTopFits(){
+    var rows=brandFilter(C).slice().sort(function(a,b){return b.fit-a.fit;}).slice(0,6);
+    document.querySelector('#topfits tbody').innerHTML=rows.map(function(c){
+      return '<tr data-name="'+c.name+'"><td><div class="creator"><span class="av" style="background:'+brandColor[c.brand]+'">'+initials(c.name)+'</span>'+c.name+'</div></td>'+
+        '<td><span class="chip c-plain"><span class="cd" style="background:'+brandColor[c.brand]+'"></span>'+brandName[c.brand]+'</span></td>'+
+        '<td>'+c.platform+'</td><td class="n">'+c.followers+'</td><td class="n">'+c.eng.toFixed(1)+'%</td><td>'+tierChip(c.tier)+'</td><td class="n">'+fitPill(c.fit)+'</td></tr>';
+    }).join('');
+  }
+  document.querySelector('#topfits').addEventListener('click',function(e){
+    var tr=e.target.closest('tr[data-name]'); if(tr){go('score');selectCreator(tr.getAttribute('data-name'));}
+  });
+
+  var crmState={q:'',plat:'all',tier:'all',sort:'fit',dir:-1};
+  function renderCRM(){
+    var rows=brandFilter(C).filter(function(c){
+      if(crmState.plat!=='all'&&c.platform!==crmState.plat)return false;
+      if(crmState.tier!=='all'&&c.tier!==crmState.tier)return false;
+      if(crmState.q){var s=(c.name+' '+c.niche+' '+c.platform).toLowerCase();if(s.indexOf(crmState.q)<0)return false;}
+      return true;
+    });
+    rows.sort(function(a,b){
+      var A=a[crmState.sort],B=b[crmState.sort];
+      if(typeof A==='string')return A.localeCompare(B)*crmState.dir;
+      return (A-B)*crmState.dir;
+    });
+    document.querySelector('#crmTable tbody').innerHTML=rows.map(function(c){
+      return '<tr data-name="'+c.name+'"><td><div class="creator"><span class="av" style="background:'+brandColor[c.brand]+'">'+initials(c.name)+'</span><div><div>'+c.name+'</div><div style="font-size:11px;color:var(--ink-dim)">'+c.niche+'</div></div></div></td>'+
+        '<td><span class="chip c-plain"><span class="cd" style="background:'+brandColor[c.brand]+'"></span>'+brandName[c.brand]+'</span></td>'+
+        '<td>'+c.platform+'</td><td class="n">'+c.followers+'</td><td class="n">'+c.eng.toFixed(1)+'%</td><td>'+safetyChip(c.safety)+'</td>'+
+        '<td><span style="font-size:12px;color:var(--ink-dim)">'+c.status+'</span></td><td class="n">'+fitPill(c.fit)+'</td></tr>';
+    }).join('');
+    document.getElementById('crmCount').textContent='Showing '+rows.length+' of '+brandFilter(C).length+' curated records · '+(curBrand==='all'?'3,412':'thousands')+' in full base.';
+  }
+  document.getElementById('crmSearch').addEventListener('input',function(){crmState.q=this.value.toLowerCase().trim();renderCRM();});
+  document.getElementById('platSeg').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;crmState.plat=b.getAttribute('data-p');[].forEach.call(this.children,function(x){x.classList.toggle('on',x===b);});renderCRM();});
+  document.getElementById('tierSeg').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;crmState.tier=b.getAttribute('data-t');[].forEach.call(this.children,function(x){x.classList.toggle('on',x===b);});renderCRM();});
+  document.querySelector('#crmTable thead').addEventListener('click',function(e){
+    var th=e.target.closest('th');if(!th||!th.getAttribute('data-sort'))return;
+    var k=th.getAttribute('data-sort');
+    if(crmState.sort===k)crmState.dir*=-1;else{crmState.sort=k;crmState.dir=(k==='name'||k==='platform'||k==='status'||k==='brand')?1:-1;}
+    renderCRM();
+  });
+  document.querySelector('#crmTable').addEventListener('click',function(e){
+    var tr=e.target.closest('tr[data-name]'); if(tr){go('score');selectCreator(tr.getAttribute('data-name'));}
+  });
+
+  /* ---------- scorecard ---------- */
+  var AX=[
+    {k:'Audience fit',w:25,f:function(c){return Math.min(100,c.fit+ (c.tier==='niche'?4:0));}},
+    {k:'Engagement quality',w:20,f:function(c){return Math.min(100,Math.round(c.eng*11));}},
+    {k:'Brand safety',w:20,f:function(c){return c.safety==='g'?96:c.safety==='w'?70:40;}},
+    {k:'Content native-ness',w:15,f:function(c){return Math.min(100,c.fit+2);}},
+    {k:'Commercial history',w:10,f:function(c){return c.tier==='marquee'?92:c.tier==='core'?80:64;}},
+    {k:'Authenticity / trust',w:10,f:function(c){return Math.min(100,c.fit+ (c.safety==='g'?3:-6));}}
+  ];
+  var axWhy={
+    'Audience fit':'How closely the audience demo + interests match the brand target, not raw size.',
+    'Engagement quality':'Real interaction depth (saves, shares, comments) vs. passive views.',
+    'Brand safety':'History, tone, and moderation risk. Feeds the go/monitor/flag call.',
+    'Content native-ness':'Does the product fit their format without feeling like an ad?',
+    'Commercial history':'Track record delivering paid brand work on time and on-brief.',
+    'Authenticity / trust':'How much the audience actually believes their recommendations.'
+  };
+  var selName=null;
+  function renderPickList(){
+    var rows=brandFilter(C).slice().sort(function(a,b){return b.fit-a.fit;});
+    if(!selName||!rows.some(function(c){return c.name===selName;})) selName=rows[0]?rows[0].name:null;
+    document.getElementById('pickList').innerHTML=rows.map(function(c){
+      return '<div class="pick'+(c.name===selName?' on':'')+'" data-name="'+c.name+'"><span class="av" style="background:'+brandColor[c.brand]+'">'+initials(c.name)+'</span>'+
+        '<div class="meta"><b>'+c.name+'</b><span>'+c.platform+' · '+c.followers+'</span></div>'+
+        '<span class="ps" style="color:'+scoreColor(c.fit)+'">'+c.fit+'</span></div>';
+    }).join('');
+    renderDetail();
+  }
+  function selectCreator(n){selName=n;renderPickList();}
+  document.getElementById('pickList').addEventListener('click',function(e){var p=e.target.closest('.pick');if(p)selectCreator(p.getAttribute('data-name'));});
+
+  function renderDetail(){
+    var c=C.find(function(x){return x.name===selName;});
+    if(!c){document.getElementById('scoreDetail').innerHTML='<p class="sub">No creators for this brand filter.</p>';return;}
+    var total=0,wsum=0;
+    var axhtml=AX.map(function(a){
+      var v=Math.round(a.f(c)); total+=v*a.w; wsum+=a.w;
+      return '<div class="axis"><div class="atop"><span><b>'+a.k+'</b></span><span><span class="w">wt '+a.w+'%</span> &nbsp;<b class="num" style="color:'+scoreColor(v)+'">'+v+'</b></span></div>'+
+        '<div class="meter"><i style="width:'+v+'%;background:'+scoreColor(v)+'"></i></div>'+
+        '<div class="why">'+axWhy[a.k]+'</div></div>';
+    }).join('');
+    var comp=Math.round(total/wsum);
+    var circ=2*Math.PI*40, off=circ*(1-comp/100);
+    document.getElementById('scoreDetail').innerHTML=
+      '<div class="gauge"><svg class="ring" viewBox="0 0 96 96"><circle cx="48" cy="48" r="40" fill="none" stroke="var(--line)" stroke-width="9"/>'+
+      '<circle cx="48" cy="48" r="40" fill="none" stroke="'+scoreColor(comp)+'" stroke-width="9" stroke-linecap="round" stroke-dasharray="'+circ+'" stroke-dashoffset="'+off+'" transform="rotate(-90 48 48)"/></svg>'+
+      '<div class="verdict"><div style="font-size:11px;letter-spacing:.8px;text-transform:uppercase;color:var(--ink-dim)">Composite fit</div><b style="color:'+scoreColor(comp)+'">'+comp+'</b>'+
+      '<div style="font-size:12px;color:var(--ink-dim)">'+c.name+' · '+brandName[c.brand]+' &nbsp; '+safetyChip(c.safety)+'</div></div></div>'+
+      '<div style="font-size:13px;background:var(--panel-2);border:1px solid var(--line);border-radius:9px;padding:11px 13px;margin:6px 0 2px"><b style="color:var(--accent-ink)">Why this creator:</b> '+c.note+'</div>'+
+      '<div class="axes">'+axhtml+'</div>';
+  }
+
+  /* ---------- calendar ---------- */
+  var calRows=[
+    {n:"Keith Lee",b:"feastables",cells:[0,'launch',0,'launch',0,'sustain',0,0]},
+    {n:"Nick DiGiovanni",b:"feastables",cells:['teaser',0,'launch',0,'sustain',0,0,0]},
+    {n:"Nara Smith",b:"feastables",cells:[0,'teaser',0,'launch',0,0,'ugc',0]},
+    {n:"Owen Han",b:"feastables",cells:[0,0,'teaser',0,'launch',0,'sustain',0]},
+    {n:"candyhunting",b:"feastables",cells:['teaser',0,0,'launch',0,0,0,'ugc']},
+    {n:"B. Dylan Hollis",b:"feastables",cells:[0,0,0,0,'launch',0,'sustain',0]},
+    {n:"Zach Choi",b:"feastables",cells:[0,0,0,0,0,'launch',0,'ugc']}
+  ];
+  var barColor={teaser:'var(--warn)',launch:'var(--accent)',sustain:'var(--good)',ugc:'var(--ink-dim)'};
+  var barLabel={teaser:'Tease',launch:'LIVE',sustain:'Sust',ugc:'Echo'};
+  function renderCal(){
+    document.getElementById('calBody').innerHTML=calRows.map(function(r){
+      return '<tr><td class="lab">'+r.n+'</td>'+r.cells.map(function(c){
+        return '<td>'+(c?'<div class="bar" style="background:'+barColor[c]+'">'+barLabel[c]+'</div>':'')+'</td>';
+      }).join('')+'</tr>';
+    }).join('');
+  }
+
+  /* ---------- charts ---------- */
+  function renderCharts(){
+    // bars: reach (M) + EMV ($k) 6 months
+    var reach=[92,104,111,98,127,146], emv=[2.1,2.4,2.6,2.3,3.1,3.9], mo=['Feb','Mar','Apr','May','Jun','Jul'];
+    var W=520,H=190,pad=30,bw=40,gap=(W-pad*2)/reach.length;
+    var maxR=160;
+    var bars=reach.map(function(v,i){
+      var x=pad+gap*i+gap/2, h=(v/maxR)*(H-pad-24), y=H-24-h;
+      var eh=(emv[i]/4.2)*(H-pad-24), ey=H-24-eh;
+      return '<rect x="'+(x-bw/2)+'" y="'+y+'" width="'+(bw*0.55)+'" height="'+h+'" rx="3" fill="var(--accent)"/>'+
+        '<rect x="'+(x+1)+'" y="'+ey+'" width="'+(bw*0.4)+'" height="'+eh+'" rx="3" fill="var(--accent-ink)" opacity="0.55"/>'+
+        '<text x="'+x+'" y="'+(H-8)+'" fill="var(--ink-dim)" font-size="10" text-anchor="middle" font-family="var(--mono)">'+mo[i]+'</text>';
+    }).join('');
+    document.getElementById('chartBars').innerHTML='<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Reach and earned media value by month">'+bars+'</svg>'+
+      '<div class="legend"><span><i style="background:var(--accent)"></i>Reach (M)</span><span><i style="background:var(--accent-ink);opacity:.55"></i>Earned media ($M)</span></div>';
+
+    // line: CPM falling
+    var cpm=[6.2,5.8,5.4,5.1,4.6,4.1];
+    var W2=520,H2=190,p2=30,mx=6.8;
+    var pts=cpm.map(function(v,i){var x=p2+((W2-p2*2)/(cpm.length-1))*i;var y=H2-28-((v/mx)*(H2-p2-28));return [x,y];});
+    var path=pts.map(function(p,i){return (i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1);}).join(' ');
+    var area=path+' L'+pts[pts.length-1][0].toFixed(1)+' '+(H2-28)+' L'+pts[0][0].toFixed(1)+' '+(H2-28)+' Z';
+    var dots=pts.map(function(p,i){return '<circle cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="'+(i===pts.length-1?4.5:3)+'" fill="'+(i===pts.length-1?'var(--good)':'var(--accent-ink)')+'"/>'+
+      '<text x="'+p[0].toFixed(1)+'" y="'+(H2-8)+'" fill="var(--ink-dim)" font-size="10" text-anchor="middle" font-family="var(--mono)">'+['Feb','Mar','Apr','May','Jun','Jul'][i]+'</text>';}).join('');
+    document.getElementById('chartLine').innerHTML='<svg viewBox="0 0 '+W2+' '+H2+'" role="img" aria-label="Cost per thousand views trend, declining">'+
+      '<path d="'+area+'" fill="var(--accent-soft)"/>'+
+      '<path d="'+path+'" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>'+dots+
+      '<text x="'+pts[pts.length-1][0].toFixed(1)+'" y="'+(pts[pts.length-1][1]-10).toFixed(1)+'" fill="var(--good)" font-size="11" text-anchor="end" font-family="var(--mono)" font-weight="700">$4.10</text></svg>';
+  }
+
+  /* ---------- signal feed ---------- */
+  var signals=[
+    {t:"just now",ic:"◎",c:"var(--good)",x:"Fit model re-scored 1,608 Feastables creators. <b>Keith Lee</b> surfaced to #1."},
+    {t:"7 min",ic:"✎",c:"var(--accent-ink)",x:"Brief sent to <b>Nick DiGiovanni</b> for Deluxe Dark Almond. Cut #1 due Aug 9."},
+    {t:"22 min",ic:"▣",c:"var(--warn)",x:"Holiday gifting forecast updated to <b>6,930 units</b> incl. buffer, pending Fri lock."},
+    {t:"1 hr",ic:"$",c:"var(--good)",x:"<b>Lunchly</b> TikTok Shop GMV crossed <b>$612k</b> for July, up 21%."},
+    {t:"2 hr",ic:"⚑",c:"var(--crit)",x:"Rate gap flagged: <b>Alix Earle</b> counter 18% over Lunchly ceiling. Needs a call."},
+    {t:"3 hr",ic:"◍",c:"var(--ink-dim)",x:"Legal cleared FTC-disclosure clause for 3 of 4 pending contracts."}
+  ];
+  function renderSignals(){
+    document.getElementById('signalFeed').innerHTML=signals.map(function(s,i){
+      return '<div style="display:flex;gap:12px;align-items:flex-start;padding:11px 14px;'+(i<signals.length-1?'border-bottom:1px solid var(--line)':'')+'">'+
+        '<span style="width:22px;height:22px;border-radius:6px;background:color-mix(in srgb,'+s.c+' 16%,transparent);color:'+s.c+';display:grid;place-items:center;font-size:12px;flex:none">'+s.ic+'</span>'+
+        '<div style="font-size:13px;flex:1">'+s.x+'</div>'+
+        '<span style="font-family:var(--mono);font-size:11px;color:var(--ink-dim);white-space:nowrap">'+s.t+'</span></div>';
+    }).join('');
+  }
+
+  /* ---------- cold-open ---------- */
+  var opener=document.getElementById('opener');
+  function closeOpener(){opener.setAttribute('hidden','');}
+  document.getElementById('exploreBtn').addEventListener('click',closeOpener);
+  document.getElementById('startTour').addEventListener('click',function(){closeOpener();startTour();});
+
+  /* ---------- command palette ---------- */
+  var palette=document.getElementById('palette'),palInput=document.getElementById('palInput'),palResults=document.getElementById('palResults');
+  var palCmds=[
+    {label:"Command Center",sub:"dashboard",ic:"◇",act:function(){go('dash');}},
+    {label:"Creator CRM",sub:"database",ic:"▤",act:function(){go('crm');}},
+    {label:"Fit Scorecard",sub:"evaluate",ic:"◎",act:function(){go('score');}},
+    {label:"Brief Builder",sub:"briefs",ic:"✎",act:function(){go('brief');}},
+    {label:"Gifting Ops",sub:"gifting",ic:"▣",act:function(){go('gift');}},
+    {label:"Campaign Calendar",sub:"calendar",ic:"▦",act:function(){go('cal');}},
+    {label:"KPI Reporting",sub:"reports",ic:"▧",act:function(){go('kpi');}},
+    {label:"Operating Playbook",sub:"standards",ic:"◆",act:function(){go('play');}},
+    {label:"Switch to Feastables",sub:"brand",ic:"●",act:function(){pickBrand('feastables');}},
+    {label:"Switch to Lunchly",sub:"brand",ic:"●",act:function(){pickBrand('lunchly');}},
+    {label:"Switch to Beast Merch",sub:"brand",ic:"●",act:function(){pickBrand('merch');}},
+    {label:"All brands",sub:"brand",ic:"●",act:function(){pickBrand('all');}},
+    {label:"Start guided tour",sub:"help",ic:"◇",act:function(){startTour();}},
+    {label:"Toggle theme",sub:"view",ic:"◐",act:function(){document.getElementById('themeT').click();}}
+  ];
+  var palSel=0,palFiltered=palCmds.slice();
+  function openPalette(){palette.removeAttribute('hidden');palInput.value='';palFiltered=palCmds.slice();palSel=0;renderPal();palInput.focus();}
+  function closePalette(){palette.setAttribute('hidden','');}
+  function renderPal(){
+    palResults.innerHTML=palFiltered.map(function(c,i){
+      return '<div class="pitem'+(i===palSel?' sel':'')+'" data-i="'+i+'"><span class="pic">'+c.ic+'</span>'+c.label+'<span class="psub">'+c.sub+'</span></div>';
+    }).join('')||'<div class="pitem" style="color:var(--ink-dim)">No matches</div>';
+  }
+  palInput.addEventListener('input',function(){
+    var q=this.value.toLowerCase().trim();
+    palFiltered=palCmds.filter(function(c){return (c.label+' '+c.sub).toLowerCase().indexOf(q)>=0;});
+    palSel=0;renderPal();
+  });
+  palInput.addEventListener('keydown',function(e){
+    if(e.key==='ArrowDown'){e.preventDefault();palSel=Math.min(palSel+1,palFiltered.length-1);renderPal();}
+    else if(e.key==='ArrowUp'){e.preventDefault();palSel=Math.max(palSel-1,0);renderPal();}
+    else if(e.key==='Enter'){e.preventDefault();if(palFiltered[palSel]){palFiltered[palSel].act();closePalette();}}
+    else if(e.key==='Escape'){closePalette();}
+  });
+  palResults.addEventListener('click',function(e){var it=e.target.closest('.pitem');if(it&&it.getAttribute('data-i')!==null){palFiltered[+it.getAttribute('data-i')].act();closePalette();}});
+  palette.addEventListener('click',function(e){if(e.target===palette)closePalette();});
+  document.getElementById('paletteBtn').addEventListener('click',openPalette);
+  document.addEventListener('keydown',function(e){
+    if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();palette.hasAttribute('hidden')?openPalette():closePalette();}
+    else if(e.key==='Escape'){if(!palette.hasAttribute('hidden'))closePalette();if(!opener.hasAttribute('hidden'))closeOpener();}
+  });
+  // helper so palette can drive brand switch
+  function pickBrand(b){var btn=document.querySelector('.bbtn[data-b="'+b+'"]');if(btn)btn.click();}
+
+  /* ---------- guided tour ---------- */
+  var tour=[
+    {v:'dash',t:"Command Center",b:"Start here. Top-line health for the whole portfolio, a live signal feed, and what needs a decision from me today. Flip brands top-left and the whole cockpit recolors and re-filters."},
+    {v:'crm',t:"Creator CRM",b:"The 3,000+ roster, searchable and sortable. Every column is signal beyond followers: engagement quality, brand safety, collab status. Click any header to sort."},
+    {v:'score',t:"Fit Scorecard",b:"How a creator gets scored before we spend. Six weighted axes produce one number any brand lead can read in seconds. Pick a creator to see the breakdown and the why."},
+    {v:'brief',t:"Brief Builder",b:"A real, ready-to-send Feastables brief with talking points, product truth, guardrails, deliverables, FTC disclosure, and usage rights. A creator could act on this today."},
+    {v:'gift',t:"Gifting Ops",b:"A 500-creator seeding activation run like supply chain: concept, tiers, quantity forecast with buffer, manufacturer coordination, and a wave-shipped run of show."},
+    {v:'cal',t:"Campaign Calendar",b:"One drop, sequenced across creators so the brand stays in-feed for three weeks. Marquee anchors the launch spike; the rest stagger the tail."},
+    {v:'kpi',t:"KPI Reporting",b:"The monthly board view: reach, earned value, TikTok Shop GMV, sentiment, and on-time delivery. Every number ties to a brand KPI."},
+    {v:'play',t:"Operating Playbook",b:"The standards every partnership runs on: the selection bar, what a brief must include, the compliance rules, and the delivery SLA. This is how it stays consistent."}
+  ];
+  var coach=document.getElementById('coach'),tStep=0;
+  function renderCoach(){
+    var s=tour[tStep];go(s.v);
+    document.getElementById('coachStep').textContent=(tStep+1)+' / '+tour.length;
+    document.getElementById('coachTitle').textContent=s.t;
+    document.getElementById('coachBody').textContent=s.b;
+    document.getElementById('coachDots').innerHTML=tour.map(function(_,i){return '<i class="'+(i===tStep?'on':'')+'"></i>';}).join('');
+    document.getElementById('coachBack').style.visibility=tStep===0?'hidden':'visible';
+    document.getElementById('coachNext').textContent=tStep===tour.length-1?'Finish':'Next';
+  }
+  function startTour(){tStep=0;coach.removeAttribute('hidden');renderCoach();}
+  function endTour(){coach.setAttribute('hidden','');}
+  document.getElementById('tourBtn').addEventListener('click',startTour);
+  document.getElementById('coachSkip').addEventListener('click',endTour);
+  document.getElementById('coachBack').addEventListener('click',function(){if(tStep>0){tStep--;renderCoach();}});
+  document.getElementById('coachNext').addEventListener('click',function(){if(tStep<tour.length-1){tStep++;renderCoach();}else endTour();});
+
+  /* ---------- render all ---------- */
+  function renderAll(){renderTopFits();renderCRM();renderPickList();renderCal();renderCharts();renderSignals();}
+  renderAll();
+})();
+</script>
+</body>
+</html>
