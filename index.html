@@ -7,7 +7,7 @@
 <meta name="description" content="Creator Partnerships operating console for Beast Industries.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2788%27%3E%F0%9F%8D%AB%3C/text%3E%3C/svg%3E">
 <meta property="og:title" content="Beast Creator Partnerships OS">
-<meta property="og:description" content="Describe a drop, get the creators who fit.">
+<meta property="og:description" content="Describe a drop, get the creators who fit. Deep dive past the obvious names.">
 </head>
 <body>
 <style>
@@ -473,6 +473,24 @@
   .protochip b{color:var(--ink);font-weight:600}
   @media(max-width:960px){.protochip .lbl{display:none}}
 
+  /* ---------- deep dive toggle · tier badges · deeper-cuts divider ---------- */
+  .deeptoggle{display:inline-flex;align-items:center;gap:8px;cursor:pointer;user-select:none;font-size:12.5px;
+    color:var(--ink-dim);border:1px solid var(--line);border-radius:8px;padding:6px 11px}
+  .deeptoggle .dtk{width:30px;height:17px;border-radius:20px;background:var(--panel-2);border:1px solid var(--line);position:relative;transition:.2s;flex:none}
+  .deeptoggle .dtk::after{content:"";position:absolute;top:1px;left:1px;width:13px;height:13px;border-radius:50%;background:var(--ink-dim);transition:.2s}
+  .deeptoggle:hover{color:var(--ink);border-color:#2F6BFF}
+  .deeptoggle.on{color:#7ba6ff;border-color:#2F6BFF;box-shadow:0 0 18px -8px #2f6bffcc}
+  .deeptoggle.on .dtk{background:#2f6bff33;border-color:#2F6BFF}
+  .deeptoggle.on .dtk::after{transform:translateX(13px);background:#2F6BFF}
+  .tier.rising{color:#7ba6ff;border-color:#2f6bff66;background:#2f6bff1f}
+  .tier.micro{color:var(--good);border-color:#33c48155;background:#33c4811a}
+  .tier.emerging{color:var(--warn);border-color:#e5a93b55;background:#e5a93b1a}
+  .rescard .rmeta .tier{vertical-align:middle;margin-left:3px}
+  .deepdiv{display:flex;align-items:center;gap:12px;margin:16px 2px 6px;font-size:11px;letter-spacing:1px;
+    text-transform:uppercase;color:var(--accent-ink);font-weight:700}
+  .deepdiv::before,.deepdiv::after{content:"";height:1px;background:linear-gradient(90deg,transparent,#2f6bff66,transparent);flex:1}
+  .deepdiv span{white-space:nowrap}
+
   @media print{.rail,.topbar,.coach,.palette,.scrim{display:none!important}.app{grid-template-columns:1fr}.view{display:block!important;page-break-inside:avoid}}
 
   @media(max-width:760px){
@@ -556,12 +574,13 @@
         <div class="scout-hero">
           <div class="eyebrow">Sourcing engine · Live</div>
           <h2>Describe the drop. Meet the creators who fit.</h2>
-          <p class="scout-sub">Type the brand, the concept, the audience, or attach a brief. Scout audits the roster and live signals, then ranks the creators who actually make sense for this exact task, with the reasons why.</p>
+          <p class="scout-sub">Type the brand, the concept, the audience, or attach a brief. Scout audits the roster and live signals, then ranks the creators who fit this exact task, with the reasons why. Flip on <b>Deep dive</b> to go past the obvious names into the rising, micro, and niche creators most people miss.</p>
           <div class="scout-box">
             <textarea id="scoutInput" rows="2" placeholder="e.g. Feastables back-to-school bar, Gen-Z, honest food reviewers, TikTok-first"></textarea>
             <div class="scout-tools">
               <label class="attach"><input type="file" id="scoutFile" accept=".pdf,.doc,.docx,.txt" hidden>⎘ Attach brief</label>
               <span class="filechip" id="fileChip" hidden></span>
+              <span class="deeptoggle" id="deepToggle" role="switch" aria-checked="false" tabindex="0" title="Search past the top names into rising, micro, and niche creators"><span class="dtk"></span>Deep dive</span>
               <div class="scout-actions">
                 <button class="btn ghost" id="shuffleBtn">⤮ Shuffle</button>
                 <button class="btn primary" id="scoutRun">Scout creators →</button>
@@ -983,6 +1002,13 @@
     {name:"candyhunting",platform:"Instagram",brand:"feastables",niche:"New-candy news",followers:"0.9M",eng:9.1,safety:"g",tier:"niche",status:"Sourced",fit:83,note:"The authority account for new-candy drops. Small, but the exact buyers. Perfect for a launch leak."},
     {name:"Joshua Weissman",platform:"YouTube",brand:"feastables",niche:"Chef · But Better",followers:"10.1M",eng:6.0,safety:"g",tier:"marquee",status:"Sourced",fit:89,note:"High-production food creator with a huge, engaged base. The 'but better' format is a natural for a real-ingredients bar."},
     {name:"Emily Mariko",platform:"TikTok",brand:"feastables",niche:"Aesthetic food",followers:"12.5M",eng:5.5,safety:"g",tier:"core",status:"Sourced",fit:84,note:"Calm, aspirational food aesthetic with heavy saves. Reaches the Gen-Z audience Feastables wants."},
+    {name:"lazypotnoodle",platform:"TikTok",brand:"feastables",niche:"Dorm gourmet cooking",followers:"2.2M",eng:9.3,safety:"g",tier:"rising",status:"Sourced",fit:81,note:"Cooks full gourmet meals from a dorm bed. Huge saves and a young crowd that treats snacks as a lifestyle."},
+    {name:"FitWaffle",platform:"TikTok",brand:"feastables",niche:"Easy desserts",followers:"5.9M",eng:6.4,safety:"g",tier:"core",status:"Sourced",fit:82,note:"Three-ingredient dessert hooks built around chocolate. High shareability, strong female skew."},
+    {name:"Eitan Bernath",platform:"TikTok",brand:"feastables",niche:"Young chef energy",followers:"4.1M",eng:6.8,safety:"g",tier:"rising",status:"Sourced",fit:80,note:"Gen-Z chef with brand-friendly polish. Carries a product without losing his own voice."},
+    {name:"Dollar Tree Dinners",platform:"TikTok",brand:"feastables",niche:"Budget meals",followers:"2.3M",eng:7.5,safety:"g",tier:"micro",status:"Sourced",fit:74,note:"Deeply trusted budget-food voice. A value angle on an affordable bar reads genuine, not salesy."},
+    {name:"Poppy O'Toole",platform:"TikTok",brand:"feastables",niche:"Pro chef · potatoes",followers:"4.3M",eng:6.1,safety:"g",tier:"core",status:"Sourced",fit:78,note:"Professional-chef credibility with mass appeal. Good for a quality-of-ingredients story."},
+    {name:"Markie Devo",platform:"Instagram",brand:"feastables",niche:"Snack scout · new drops",followers:"1.1M",eng:8.9,safety:"g",tier:"micro",status:"Sourced",fit:79,note:"The insider who breaks new-snack news. Seeds a launch to the exact people who chase drops."},
+    {name:"Snackolator",platform:"Instagram",brand:"feastables",niche:"New snack finds",followers:"0.4M",eng:10.2,safety:"g",tier:"micro",status:"Sourced",fit:76,note:"Tiny but pure snack-obsessive following. High-intent buyers for a first-look reveal."},
 
     {name:"Alix Earle",platform:"TikTok",brand:"lunchly",niche:"College lifestyle / GRWM",followers:"7.9M",eng:8.8,safety:"w",tier:"marquee",status:"Rate gap",fit:90,note:"Owns the college-girl daily-life feed. Dorm-lunch placement is native; watch rate ceiling."},
     {name:"Jynxzi",platform:"Twitch",brand:"lunchly",niche:"Gaming / Gen-Z",followers:"5.6M",eng:9.4,safety:"w",tier:"marquee",status:"Outreach sent",fit:89,note:"One of the fastest-growing Gen-Z gaming voices. Snack-while-streaming is the most native placement there is."},
@@ -992,13 +1018,25 @@
     {name:"Kaeli Mae",platform:"TikTok",brand:"lunchly",niche:"Aesthetic routines",followers:"7.2M",eng:5.4,safety:"g",tier:"core",status:"Sourced",fit:74,note:"'Aesthetic lunch prep' format. High saves, strong female Gen-Z reach; eng-rate softer."},
     {name:"IShowSpeed",platform:"YouTube",brand:"lunchly",niche:"Gaming · live energy",followers:"38.0M",eng:8.5,safety:"w",tier:"marquee",status:"Sourced",fit:88,note:"Global Gen-Z gaming reach and viral energy. Enormous pull; needs a tight brand-safety plan around the live moments."},
     {name:"Sketch",platform:"Twitch",brand:"lunchly",niche:"Gaming · wholesome",followers:"4.2M",eng:8.0,safety:"g",tier:"core",status:"Sourced",fit:83,note:"Wholesome, fast-rising gaming voice with a loyal Gen-Z crowd. Snack-while-streaming reads as native, not an ad."},
+    {name:"Caseoh",platform:"Twitch",brand:"lunchly",niche:"Gaming · big personality",followers:"5.0M",eng:9.2,safety:"w",tier:"rising",status:"Sourced",fit:85,note:"One of the fastest-rising gaming personalities. Food bits are already part of his humor, so a snack fits."},
+    {name:"Cinna",platform:"Twitch",brand:"lunchly",niche:"Variety streamer",followers:"1.3M",eng:9.0,safety:"w",tier:"rising",status:"Sourced",fit:82,note:"Award-winning rising streamer with a devoted Gen-Z base. A sponsor reads native inside long live sessions."},
+    {name:"Fanum",platform:"YouTube",brand:"lunchly",niche:"AMP · Gen-Z comedy",followers:"5.5M",eng:7.4,safety:"w",tier:"core",status:"Sourced",fit:81,note:"AMP member with meme reach that defines Gen-Z snack culture. The 'Fanum tax' basically made snacking a bit."},
+    {name:"Duke Dennis",platform:"YouTube",brand:"lunchly",niche:"AMP · gaming",followers:"4.5M",eng:7.1,safety:"w",tier:"core",status:"Sourced",fit:80,note:"AMP reach with a loyal, mostly-male Gen-Z audience. Strong for gaming-adjacent lunch placement."},
+    {name:"ExtraEmily",platform:"Twitch",brand:"lunchly",niche:"Variety · IRL",followers:"1.1M",eng:8.7,safety:"w",tier:"rising",status:"Sourced",fit:79,note:"Fast-growing variety streamer with high chat energy. Strong for a live unboxing or taste-test bit."},
+    {name:"PlaqueBoyMax",platform:"Twitch",brand:"lunchly",niche:"Music + gaming",followers:"1.6M",eng:8.8,safety:"w",tier:"rising",status:"Sourced",fit:78,note:"Music-studio streams pull a young, engaged crowd. A snack in the booth is a natural recurring placement."},
+    {name:"Emiru",platform:"Twitch",brand:"lunchly",niche:"Cosplay · variety",followers:"1.9M",eng:7.9,safety:"g",tier:"core",status:"Sourced",fit:80,note:"Top female streamer with a creative, brand-safe production. Reaches the audience Lunchly under-indexes on."},
 
     {name:"Ryan Trahan",platform:"YouTube",brand:"merch",niche:"Challenge storytelling",followers:"19.5M",eng:7.3,safety:"g",tier:"marquee",status:"In production",fit:94,note:"MrBeast-adjacent, elite storyteller. Merch drops ride his narrative arcs naturally."},
     {name:"Zach King",platform:"TikTok",brand:"merch",niche:"Magic / VFX",followers:"81M",eng:4.9,safety:"g",tier:"marquee",status:"Sourced",fit:88,note:"Global family reach, brand-safe. Merch reveal as a magic 'appear' is on-format and shareable."},
     {name:"Michelle Khare",platform:"YouTube",brand:"merch",niche:"Challenge / doc",followers:"5.4M",eng:8.1,safety:"g",tier:"core",status:"Negotiation",fit:82,note:"High-production challenge docs; premium merch fits her aspirational, high-effort audience."},
     {name:"Airrack",platform:"YouTube",brand:"merch",niche:"Challenge / vlog",followers:"14.1M",eng:5.7,safety:"w",tier:"core",status:"Sourced",fit:80,note:"MrBeast-ecosystem challenge creator; big reach, merch tie-ins land with his 'stunt' format."},
     {name:"Dude Perfect",platform:"YouTube",brand:"merch",niche:"Trick shots · family",followers:"60.1M",eng:5.0,safety:"g",tier:"marquee",status:"Sourced",fit:90,note:"Family-safe stunt and trick-shot machine with its own merch empire. Built-in audience for a Beast drop."},
-    {name:"Mark Rober",platform:"YouTube",brand:"merch",niche:"Science · challenge",followers:"62.0M",eng:6.5,safety:"g",tier:"marquee",status:"Sourced",fit:86,note:"Family-safe science and challenge content at massive scale. Aspirational fit for premium merch tie-ins."}
+    {name:"Mark Rober",platform:"YouTube",brand:"merch",niche:"Science · challenge",followers:"62.0M",eng:6.5,safety:"g",tier:"marquee",status:"Sourced",fit:86,note:"Family-safe science and challenge content at massive scale. Aspirational fit for premium merch tie-ins."},
+    {name:"Ben Azelart",platform:"YouTube",brand:"merch",niche:"Challenge · stunts",followers:"20.0M",eng:5.8,safety:"g",tier:"core",status:"Sourced",fit:83,note:"Family-safe stunt and challenge creator with a huge young audience. Built-in fandom for a merch drop."},
+    {name:"Stokes Twins",platform:"YouTube",brand:"merch",niche:"Shorts challenges",followers:"20.0M",eng:6.0,safety:"g",tier:"core",status:"Sourced",fit:81,note:"Short-form challenge machine with global reach. Merch reveals ride their high-volume Shorts output."},
+    {name:"Topper Guild",platform:"YouTube",brand:"merch",niche:"Shorts stunts",followers:"15.0M",eng:6.3,safety:"g",tier:"rising",status:"Sourced",fit:79,note:"Viral Shorts stunts with a family-safe tone. Cheap, fast, high-reach placements for a drop."},
+    {name:"Chris Rowe",platform:"TikTok",brand:"merch",niche:"Street magic",followers:"12.0M",eng:7.2,safety:"g",tier:"rising",status:"Sourced",fit:78,note:"Street-magic reveals are perfect for an on-camera merch 'appear' moment. Highly shareable."},
+    {name:"Hingaflips",platform:"YouTube",brand:"merch",niche:"Trampoline flips",followers:"3.0M",eng:6.6,safety:"g",tier:"micro",status:"Sourced",fit:72,note:"Niche flips-and-tricks community, tight and loyal. Good for a sporty, family-safe merch tie-in."}
   ];
 
   var brandName={all:"All brands",feastables:"Feastables",lunchly:"Lunchly",merch:"Beast Merch"};
@@ -1313,7 +1351,26 @@
     "IShowSpeed":["gaming","streaming","gen-z","global","youtube"],
     "Sketch":["gaming","streaming","gen-z","wholesome","twitch"],
     "Dude Perfect":["challenge","stunt","family-safe","sports","merch","youtube"],
-    "Mark Rober":["challenge","family-safe","science","global","youtube"]
+    "Mark Rober":["challenge","family-safe","science","global","youtube"],
+    "lazypotnoodle":["food","dorm","college","cooking","tiktok","gen-z"],
+    "FitWaffle":["food","baking","dessert","snack","tiktok"],
+    "Eitan Bernath":["food","chef","cooking","gen-z","tiktok"],
+    "Dollar Tree Dinners":["food","budget","cooking","tiktok"],
+    "Poppy O'Toole":["food","chef","cooking","tiktok"],
+    "Markie Devo":["snack","candy","news","launch","instagram"],
+    "Snackolator":["snack","candy","news","instagram","niche"],
+    "Caseoh":["gaming","streaming","gen-z","twitch"],
+    "Cinna":["gaming","streaming","gen-z","twitch"],
+    "Fanum":["gaming","gen-z","comedy","youtube"],
+    "Duke Dennis":["gaming","streaming","gen-z","youtube"],
+    "ExtraEmily":["gaming","streaming","gen-z","twitch"],
+    "PlaqueBoyMax":["gaming","streaming","music","gen-z","twitch"],
+    "Emiru":["gaming","streaming","cosplay","gen-z","twitch"],
+    "Ben Azelart":["challenge","stunt","family-safe","youtube"],
+    "Stokes Twins":["challenge","family-safe","shorts","youtube"],
+    "Topper Guild":["challenge","stunt","shorts","family-safe","youtube"],
+    "Chris Rowe":["magic","reveal","unboxing","tiktok"],
+    "Hingaflips":["challenge","stunt","sports","family-safe","youtube"]
   };
   C.forEach(function(c){c.tags=TAGS[c.name]||[];});
   var SYN={
@@ -1336,7 +1393,10 @@
     'magic':['magic','vfx'],'vfx':['vfx','magic'],
     'tiktok':['tiktok'],'youtube':['youtube'],'instagram':['instagram'],'insta':['instagram'],
     'ecosystem':['ecosystem'],'mrbeast':['ecosystem','collab'],'beast':['ecosystem'],
-    'launch':['launch','news'],'premium':['premium'],'global':['global'],'story':['storytelling','documentary']
+    'launch':['launch','news'],'premium':['premium'],'global':['global'],'story':['storytelling','documentary'],
+    'dessert':['dessert','baking','snack'],'sweet':['dessert','candy'],'budget':['budget'],'cheap':['budget'],
+    'music':['music'],'cosplay':['cosplay'],'sports':['sports','stunt'],'comedy':['comedy','sketch','humor'],
+    'funny':['comedy','humor'],'science':['science'],'shorts':['shorts'],'amp':['gen-z','gaming']
   };
   var QUICK=[
     {b:'feastables',label:"Feastables · back-to-school bar",q:"Feastables back to school bar, Gen-Z, honest food reviewers, TikTok-first"},
@@ -1347,62 +1407,78 @@
     {b:'merch',label:"Merch · family-safe global",q:"Beast Merch family-safe global reach, magic and unboxing reveals"}
   ];
   function scopeFor(q){q=q.toLowerCase();if(q.indexOf('feastables')>=0)return'feastables';if(q.indexOf('lunchly')>=0)return'lunchly';if(q.indexOf('merch')>=0)return'merch';return curBrand||'all';}
-  function runScout(query){
+  var tierRank={marquee:4,rising:3,core:3,emerging:2,micro:1,niche:1};
+  function runScout(query,deep){
     var q=' '+query.toLowerCase().replace(/[-_]/g,' ')+' ';
     var brand=scopeFor(query);
     var wanted={};
     Object.keys(SYN).forEach(function(k){ if(q.indexOf(k)>=0) SYN[k].forEach(function(t){wanted[t]=1;}); });
     var pool=brand==='all'?C:C.filter(function(c){return c.brand===brand;});
-    var tierRank={marquee:2,core:1,niche:0};
     var scored=pool.map(function(c){
       var hits=[];
       c.tags.forEach(function(t){ var tt=t.replace(/-/g,' '); if(wanted[t]||q.indexOf(' '+tt+' ')>=0){ if(hits.indexOf(t)<0)hits.push(t); } });
-      // relevance leads; tier (name strength) and fit only break ties
-      var score=Math.min(99,Math.round(hits.length*13 + (tierRank[c.tier]||0)*6 + c.fit*0.25));
+      var score=Math.min(99,Math.round(hits.length*13 + (tierRank[c.tier]||0)*4 + c.fit*0.22));
       return {c:c,hits:hits,rel:hits.length,score:score};
     });
-    // only surface creators that genuinely fit; if none, fall back to the strongest names in scope
     var relevant=scored.filter(function(r){return r.rel>0;});
     var fallback=relevant.length===0;
-    var list=fallback?scored:relevant;
+    var list=fallback?scored.slice():relevant;
+    // name-weighted order = the obvious top names first
     list.sort(function(a,b){ return b.rel-a.rel || (tierRank[b.c.tier]-tierRank[a.c.tier]) || b.c.fit-a.c.fit; });
-    return {brand:brand,list:list.slice(0,7),fallback:fallback};
+    if(!deep) return {brand:brand,fallback:fallback,top:list.slice(0,7),deepcuts:[]};
+    // deep dive: keep a few obvious names, then surface relevant smaller/rising creators the top-line search skips
+    var top=list.slice(0,4);
+    var rest=list.slice(4);
+    rest.sort(function(a,b){ return b.rel-a.rel || (tierRank[a.c.tier]-tierRank[b.c.tier]) || b.c.fit-a.c.fit; }); // smaller names first
+    return {brand:brand,fallback:fallback,top:top,deepcuts:rest.slice(0,14)};
+  }
+  var scoutDeep=false, scoutLastQuery=QUICK[0].q;
+  var tierLbl={marquee:"Marquee",rising:"Rising",core:"Core",emerging:"Emerging",micro:"Micro",niche:"Niche"};
+  function scoutCard(r,rank){
+    var c=r.c;
+    var chips=r.hits.slice(0,4).map(function(t){return '<span class="mtag">'+t.replace(/-/g,' ')+'</span>';}).join('');
+    if(!chips)chips='<span class="mtag" style="background:var(--panel-2);color:var(--ink-dim)">closest fit</span>';
+    return '<div class="rescard" data-name="'+c.name+'">'+
+      '<div class="rank">#'+rank+'</div>'+
+      '<span class="av" style="background:'+brandColor[c.brand]+'">'+initials(c.name)+'</span>'+
+      '<div class="rmeta"><b>'+c.name+'</b> <span class="tier '+c.tier+'">'+(tierLbl[c.tier]||c.tier)+'</span> '+
+      '<span class="rsub">'+c.platform+' · '+c.followers+' · '+brandName[c.brand]+'</span>'+
+      '<div class="rwhy">'+chips+'</div><div class="rnote">'+c.note+'</div></div>'+
+      '<div class="rscore"><div class="rv" style="color:'+scoreColor(r.score)+'">'+r.score+'</div><div class="rl">match</div></div>'+
+      '</div>';
   }
   function renderScoutResults(query){
-    var out=runScout(query);
-    document.getElementById('scoutResults').innerHTML=
-      '<div class="scout-rescount"><b style="color:var(--ink)">'+out.list.length+' creators</b> ranked for this brief · scope: '+brandName[out.brand]+
-      '<span style="margin-left:auto;opacity:.75">Prototype: matched against the sample roster</span></div>'+
-      out.list.map(function(r,i){
-        var c=r.c;
-        var chips=r.hits.slice(0,4).map(function(t){return '<span class="mtag">'+t.replace(/-/g,' ')+'</span>';}).join('');
-        if(!chips)chips='<span class="mtag" style="background:var(--panel-2);color:var(--ink-dim)">closest fit</span>';
-        return '<div class="rescard" data-name="'+c.name+'">'+
-          '<div class="rank">#'+(i+1)+'</div>'+
-          '<span class="av" style="background:'+brandColor[c.brand]+'">'+initials(c.name)+'</span>'+
-          '<div class="rmeta"><b>'+c.name+'</b> <span class="rsub">'+c.platform+' · '+c.followers+' · '+brandName[c.brand]+'</span>'+
-          '<div class="rwhy">'+chips+'</div><div class="rnote">'+c.note+'</div></div>'+
-          '<div class="rscore"><div class="rv" style="color:'+scoreColor(r.score)+'">'+r.score+'</div><div class="rl">match</div></div>'+
-          '</div>';
-      }).join('');
+    var out=runScout(query,scoutDeep);
+    var total=out.top.length+out.deepcuts.length, rank=0;
+    var html='<div class="scout-rescount"><b style="color:var(--ink)">'+total+' creators</b> ranked for this brief · scope: '+brandName[out.brand]+
+      (scoutDeep?' · <span style="color:var(--accent-ink)">deep dive on</span>':'')+
+      '<span style="margin-left:auto;opacity:.75">Prototype: matched against the sample roster</span></div>';
+    html+=out.top.map(function(r){rank++;return scoutCard(r,rank);}).join('');
+    if(out.deepcuts.length){
+      html+='<div class="deepdiv"><span>Deeper cuts · beyond the usual names</span></div>';
+      html+=out.deepcuts.map(function(r){rank++;return scoutCard(r,rank);}).join('');
+    }
+    document.getElementById('scoutResults').innerHTML=html;
   }
   var AUDIT=["Reading your brief","Scanning roster · 3,412 creators","Cross-checking engagement quality","Mapping audience overlap","Screening brand safety","Ranking by fit"];
+  var AUDIT_DEEP=["Reading your brief","Scanning roster · 3,412 creators","Dropping into rising & micro tiers","Cross-referencing niche communities","Reading long-tail engagement","Mapping audience overlap","Screening brand safety","Ranking every tier by fit"];
   var auditTimer=null;
   function playAudit(cb){
-    var el=document.getElementById('scoutAudit');el.hidden=false;
-    el.innerHTML=AUDIT.map(function(s,i){return '<div class="audit-step" data-i="'+i+'"><span class="as">'+(i+1)+'</span>'+s+'</div>';}).join('');
-    var steps=el.querySelectorAll('.audit-step'),i=0;
+    var steps=scoutDeep?AUDIT_DEEP:AUDIT, el=document.getElementById('scoutAudit');el.hidden=false;
+    el.innerHTML=steps.map(function(s,i){return '<div class="audit-step" data-i="'+i+'"><span class="as">'+(i+1)+'</span>'+s+'</div>';}).join('');
+    var nodes=el.querySelectorAll('.audit-step'),i=0;
     if(auditTimer)clearInterval(auditTimer);
     function tick(){
-      if(i>0){steps[i-1].classList.remove('run');steps[i-1].classList.add('on');steps[i-1].querySelector('.as').textContent='✓';}
-      if(i<steps.length){steps[i].classList.add('on','run');i++;}
+      if(i>0){nodes[i-1].classList.remove('run');nodes[i-1].classList.add('on');nodes[i-1].querySelector('.as').textContent='✓';}
+      if(i<nodes.length){nodes[i].classList.add('on','run');i++;}
       else{clearInterval(auditTimer);setTimeout(function(){el.hidden=true;cb();},260);}
     }
-    tick();auditTimer=setInterval(tick,230);
+    tick();auditTimer=setInterval(tick,scoutDeep?190:230);
   }
   function doScout(query,animate){
     query=(query||'').trim(); var inp=document.getElementById('scoutInput');
     if(!query){query=QUICK[0].q;inp.value=query;}
+    scoutLastQuery=query;
     if(animate){document.getElementById('scoutResults').innerHTML='';playAudit(function(){renderScoutResults(query);});}
     else{renderScoutResults(query);}
   }
@@ -1411,6 +1487,7 @@
   document.getElementById('scoutRun').addEventListener('click',function(){doScout(document.getElementById('scoutInput').value,true);});
   document.getElementById('scoutInput').addEventListener('keydown',function(e){if((e.metaKey||e.ctrlKey)&&e.key==='Enter'){e.preventDefault();doScout(this.value,true);}});
   document.getElementById('shuffleBtn').addEventListener('click',function(){var x=QUICK[Math.floor(Math.random()*QUICK.length)];document.getElementById('scoutInput').value=x.q;doScout(x.q,true);});
+  document.getElementById('deepToggle').addEventListener('click',function(){scoutDeep=!scoutDeep;this.classList.toggle('on',scoutDeep);this.setAttribute('aria-checked',scoutDeep);doScout(scoutLastQuery,true);});
   document.getElementById('scoutFile').addEventListener('change',function(){var f=this.files&&this.files[0];var chip=document.getElementById('fileChip');if(f){chip.hidden=false;chip.textContent='⎘ '+f.name;var base=f.name.replace(/\.[^.]+$/,'').replace(/[-_]/g,' ');var inp=document.getElementById('scoutInput');inp.value=(inp.value?inp.value+', ':'')+base;}});
   document.getElementById('scoutResults').addEventListener('click',function(e){var r=e.target.closest('.rescard');if(r){selectCreator(r.getAttribute('data-name'));go('score');}});
   function initScout(){var inp=document.getElementById('scoutInput');inp.value=QUICK[0].q;renderScoutResults(QUICK[0].q);}
