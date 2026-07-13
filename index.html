@@ -7,7 +7,7 @@
 <meta name="description" content="Creator Partnerships operating console for Beast Industries.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2788%27%3E%F0%9F%8D%AB%3C/text%3E%3C/svg%3E">
 <meta property="og:title" content="Beast Creator Partnerships OS">
-<meta property="og:description" content="One console for every creator deal across the portfolio.">
+<meta property="og:description" content="Describe a drop, get the creators who fit.">
 </head>
 <body>
 <style>
@@ -436,6 +436,43 @@
   .rescard .rscore .rl{font-size:9px;letter-spacing:.6px;text-transform:uppercase;color:var(--ink-dim)}
   @media(max-width:640px){.rescard{grid-template-columns:26px 1fr auto}.rescard .av{display:none}}
 
+  /* ---------- scout · loud blue treatment (always blue, brand-independent) ---------- */
+  .scout-hero{position:relative;overflow:hidden;
+    background:radial-gradient(130% 150% at 0% 0%,#2f6bff33,transparent 55%),linear-gradient(160deg,#13233f,#0e1117);
+    border:1px solid #2f6bff80;
+    box-shadow:0 0 0 1px #2f6bff30,0 22px 64px -30px #2f6bffb3,inset 0 0 72px -34px #2f6bffaa;
+    animation:scoutpulse 3.8s ease-in-out infinite}
+  @keyframes scoutpulse{0%,100%{box-shadow:0 0 0 1px #2f6bff33,0 20px 54px -32px #2f6bff99,inset 0 0 66px -36px #2f6bff99}
+    50%{box-shadow:0 0 0 1px #2f6bff66,0 30px 78px -26px #2f6bffdd,inset 0 0 82px -30px #2f6bffbb}}
+  :root[data-theme="light"] .scout-hero{background:radial-gradient(130% 150% at 0% 0%,#2f6bff26,transparent 55%),linear-gradient(160deg,#eaf1ff,#ffffff)}
+  @media (prefers-reduced-motion:reduce){.scout-hero{animation:none}}
+  .scout-hero .eyebrow{color:#5b8dff;display:inline-flex;align-items:center;gap:8px}
+  .scout-hero .eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:#2F6BFF;
+    box-shadow:0 0 12px 2px #2f6bff;animation:pulse 2s infinite}
+  .scout-hero h2{color:var(--ink);font-size:clamp(24px,3.7vw,40px);text-shadow:0 0 44px #2f6bff88,0 0 14px #2f6bff44}
+  .scout-box:focus-within{border-color:#2F6BFF;box-shadow:0 0 0 3px #2f6bff33,0 0 42px -8px #2f6bffcc}
+  .scout-hero .btn.primary{background:#2F6BFF;border-color:#2F6BFF;color:#fff;
+    box-shadow:0 0 0 1px #2f6bff,0 10px 30px -6px #2f6bffcc;animation:btnglow 2.6s ease-in-out infinite}
+  @keyframes btnglow{0%,100%{box-shadow:0 0 0 1px #2f6bff,0 10px 28px -8px #2f6bff99}50%{box-shadow:0 0 0 1px #2f6bff,0 14px 42px -6px #2f6bffee}}
+  .scout-hero .btn.primary:hover{filter:brightness(1.08)}
+  .qchip:hover{border-color:#2F6BFF;box-shadow:0 0 20px -7px #2f6bffcc}
+  .audit-step.run .as{border-color:#2F6BFF;border-top-color:transparent}
+  .mtag{background:#2f6bff29;color:#7ba6ff}
+  .filechip{color:#7ba6ff;background:#2f6bff26;border-color:#2F6BFF}
+  .rescard:hover{border-color:#2f6bff8c;box-shadow:0 10px 30px -18px #2f6bffcc}
+  /* scout nav item · draw the eye */
+  .nav-i[data-v="scout"] .ic{color:#7ba6ff;text-shadow:0 0 10px #2f6bffcc}
+  .nav-i[data-v="scout"].on{box-shadow:inset 0 0 0 1px #2f6bff,0 8px 22px -13px #2f6bff}
+
+  /* ---------- builder / prototype mark ---------- */
+  .proto{display:inline-block;margin-top:6px;font-size:10px;font-family:var(--mono);letter-spacing:.5px;
+    color:var(--warn);border:1px solid var(--warn);border-radius:20px;padding:2px 8px}
+  .protochip{display:inline-flex;align-items:center;gap:7px;font-size:11px;color:var(--ink-dim);
+    border:1px solid var(--line);border-radius:20px;padding:5px 11px;background:var(--panel-2);white-space:nowrap}
+  .protochip .dot{width:6px;height:6px;border-radius:50%;background:var(--warn);flex:none;box-shadow:0 0 8px 1px var(--warn)}
+  .protochip b{color:var(--ink);font-weight:600}
+  @media(max-width:960px){.protochip .lbl{display:none}}
+
   @media print{.rail,.topbar,.coach,.palette,.scrim{display:none!important}.app{grid-template-columns:1fr}.view{display:block!important;page-break-inside:avoid}}
 
   @media(max-width:760px){
@@ -455,7 +492,7 @@
       <div>
         <b>Creator Partnerships OS</b>
         <span>Beast Industries</span>
-        <div class="verbadge"><span class="live"></span>v2.0 · operational</div>
+        <div class="verbadge"><span class="live"></span>v2.0 · prototype</div>
       </div>
     </div>
 
@@ -486,8 +523,8 @@
     </nav>
 
     <div class="railfoot">
-      <b>Austin Bailey</b><br>Creator Partnerships lead<br>
-      <span style="opacity:.7">Beast Industries · signed in</span>
+      <b>Operating engine</b><br>Built by Austin Bailey<br>
+      <span class="proto">Prototype</span>
     </div>
   </aside>
 
@@ -505,6 +542,7 @@
         <div class="tstat"><span class="v" style="color:var(--good)">96%</span><span class="k">On-time</span></div>
       </div>
       <div class="tb-controls">
+        <span class="protochip" title="A working prototype built by Austin Bailey"><span class="dot"></span><span class="lbl">Prototype · built by <b>Austin Bailey</b></span></span>
         <button class="ctlbtn" id="tourBtn" title="Guided tour">◇ <span class="lbl">Tour</span></button>
         <button class="ctlbtn" id="paletteBtn" title="Jump anywhere">⌘ <kbd>K</kbd></button>
         <button class="theme-t" id="themeT" title="Toggle theme">◐</button>
@@ -516,7 +554,7 @@
       <!-- ===== SCOUT ===== -->
       <section class="view on" id="v-scout">
         <div class="scout-hero">
-          <div class="eyebrow">Sourcing</div>
+          <div class="eyebrow">Sourcing engine · Live</div>
           <h2>Describe the drop. Meet the creators who fit.</h2>
           <p class="scout-sub">Type the brand, the concept, the audience, or attach a brief. Scout audits the roster and live signals, then ranks the creators who actually make sense for this exact task, with the reasons why.</p>
           <div class="scout-box">
@@ -943,6 +981,8 @@
     {name:"Owen Han",platform:"TikTok",brand:"feastables",niche:"Sandwich / food ASMR",followers:"6.1M",eng:6.9,safety:"g",tier:"core",status:"Negotiation",fit:84,note:"Clean, cinematic food shots. Great for the 'snap the bar' hero moment."},
     {name:"Zach Choi",platform:"YouTube",brand:"feastables",niche:"Eating ASMR",followers:"14.9M",eng:4.2,safety:"g",tier:"core",status:"Sourced",fit:80,note:"Massive reach, mute-friendly ASMR travels globally. Lower eng-rate but huge absolute engagement."},
     {name:"candyhunting",platform:"Instagram",brand:"feastables",niche:"New-candy news",followers:"0.9M",eng:9.1,safety:"g",tier:"niche",status:"Sourced",fit:83,note:"The authority account for new-candy drops. Small, but the exact buyers. Perfect for a launch leak."},
+    {name:"Joshua Weissman",platform:"YouTube",brand:"feastables",niche:"Chef · But Better",followers:"10.1M",eng:6.0,safety:"g",tier:"marquee",status:"Sourced",fit:89,note:"High-production food creator with a huge, engaged base. The 'but better' format is a natural for a real-ingredients bar."},
+    {name:"Emily Mariko",platform:"TikTok",brand:"feastables",niche:"Aesthetic food",followers:"12.5M",eng:5.5,safety:"g",tier:"core",status:"Sourced",fit:84,note:"Calm, aspirational food aesthetic with heavy saves. Reaches the Gen-Z audience Feastables wants."},
 
     {name:"Alix Earle",platform:"TikTok",brand:"lunchly",niche:"College lifestyle / GRWM",followers:"7.9M",eng:8.8,safety:"w",tier:"marquee",status:"Rate gap",fit:90,note:"Owns the college-girl daily-life feed. Dorm-lunch placement is native; watch rate ceiling."},
     {name:"Jynxzi",platform:"Twitch",brand:"lunchly",niche:"Gaming / Gen-Z",followers:"5.6M",eng:9.4,safety:"w",tier:"marquee",status:"Outreach sent",fit:89,note:"One of the fastest-growing Gen-Z gaming voices. Snack-while-streaming is the most native placement there is."},
@@ -950,11 +990,15 @@
     {name:"Corporate Natalie",platform:"Instagram",brand:"lunchly",niche:"Workplace humor",followers:"2.4M",eng:6.2,safety:"g",tier:"core",status:"Sourced",fit:78,note:"Desk-lunch comedy angle opens the 20-something office audience Lunchly under-indexes on."},
     {name:"Dylan Anderson",platform:"TikTok",brand:"lunchly",niche:"Corporate comedy",followers:"3.1M",eng:6.8,safety:"g",tier:"core",status:"Sourced",fit:76,note:"Same office-lunch lane, sketch format. Pairs well with Corporate Natalie for a coordinated moment."},
     {name:"Kaeli Mae",platform:"TikTok",brand:"lunchly",niche:"Aesthetic routines",followers:"7.2M",eng:5.4,safety:"g",tier:"core",status:"Sourced",fit:74,note:"'Aesthetic lunch prep' format. High saves, strong female Gen-Z reach; eng-rate softer."},
+    {name:"IShowSpeed",platform:"YouTube",brand:"lunchly",niche:"Gaming · live energy",followers:"38.0M",eng:8.5,safety:"w",tier:"marquee",status:"Sourced",fit:88,note:"Global Gen-Z gaming reach and viral energy. Enormous pull; needs a tight brand-safety plan around the live moments."},
+    {name:"Sketch",platform:"Twitch",brand:"lunchly",niche:"Gaming · wholesome",followers:"4.2M",eng:8.0,safety:"g",tier:"core",status:"Sourced",fit:83,note:"Wholesome, fast-rising gaming voice with a loyal Gen-Z crowd. Snack-while-streaming reads as native, not an ad."},
 
     {name:"Ryan Trahan",platform:"YouTube",brand:"merch",niche:"Challenge storytelling",followers:"19.5M",eng:7.3,safety:"g",tier:"marquee",status:"In production",fit:94,note:"MrBeast-adjacent, elite storyteller. Merch drops ride his narrative arcs naturally."},
     {name:"Zach King",platform:"TikTok",brand:"merch",niche:"Magic / VFX",followers:"81M",eng:4.9,safety:"g",tier:"marquee",status:"Sourced",fit:88,note:"Global family reach, brand-safe. Merch reveal as a magic 'appear' is on-format and shareable."},
     {name:"Michelle Khare",platform:"YouTube",brand:"merch",niche:"Challenge / doc",followers:"5.4M",eng:8.1,safety:"g",tier:"core",status:"Negotiation",fit:82,note:"High-production challenge docs; premium merch fits her aspirational, high-effort audience."},
-    {name:"Airrack",platform:"YouTube",brand:"merch",niche:"Challenge / vlog",followers:"14.1M",eng:5.7,safety:"w",tier:"core",status:"Sourced",fit:80,note:"MrBeast-ecosystem challenge creator; big reach, merch tie-ins land with his 'stunt' format."}
+    {name:"Airrack",platform:"YouTube",brand:"merch",niche:"Challenge / vlog",followers:"14.1M",eng:5.7,safety:"w",tier:"core",status:"Sourced",fit:80,note:"MrBeast-ecosystem challenge creator; big reach, merch tie-ins land with his 'stunt' format."},
+    {name:"Dude Perfect",platform:"YouTube",brand:"merch",niche:"Trick shots · family",followers:"60.1M",eng:5.0,safety:"g",tier:"marquee",status:"Sourced",fit:90,note:"Family-safe stunt and trick-shot machine with its own merch empire. Built-in audience for a Beast drop."},
+    {name:"Mark Rober",platform:"YouTube",brand:"merch",niche:"Science · challenge",followers:"62.0M",eng:6.5,safety:"g",tier:"marquee",status:"Sourced",fit:86,note:"Family-safe science and challenge content at massive scale. Aspirational fit for premium merch tie-ins."}
   ];
 
   var brandName={all:"All brands",feastables:"Feastables",lunchly:"Lunchly",merch:"Beast Merch"};
@@ -1263,7 +1307,13 @@
     "Ryan Trahan":["challenge","storytelling","ecosystem","youtube"],
     "Zach King":["magic","vfx","family-safe","global","unboxing","tiktok"],
     "Michelle Khare":["challenge","documentary","premium","youtube"],
-    "Airrack":["challenge","vlog","stunt","ecosystem","youtube"]
+    "Airrack":["challenge","vlog","stunt","ecosystem","youtube"],
+    "Joshua Weissman":["food","chef","cooking","taste-test","youtube","family-safe"],
+    "Emily Mariko":["food","aesthetic","gen-z","snack","tiktok"],
+    "IShowSpeed":["gaming","streaming","gen-z","global","youtube"],
+    "Sketch":["gaming","streaming","gen-z","wholesome","twitch"],
+    "Dude Perfect":["challenge","stunt","family-safe","sports","merch","youtube"],
+    "Mark Rober":["challenge","family-safe","science","global","youtube"]
   };
   C.forEach(function(c){c.tags=TAGS[c.name]||[];});
   var SYN={
@@ -1303,13 +1353,20 @@
     var wanted={};
     Object.keys(SYN).forEach(function(k){ if(q.indexOf(k)>=0) SYN[k].forEach(function(t){wanted[t]=1;}); });
     var pool=brand==='all'?C:C.filter(function(c){return c.brand===brand;});
-    var res=pool.map(function(c){
+    var tierRank={marquee:2,core:1,niche:0};
+    var scored=pool.map(function(c){
       var hits=[];
       c.tags.forEach(function(t){ var tt=t.replace(/-/g,' '); if(wanted[t]||q.indexOf(' '+tt+' ')>=0){ if(hits.indexOf(t)<0)hits.push(t); } });
-      return {c:c,hits:hits,score:Math.min(99,Math.round(c.fit*0.5+hits.length*9))};
+      // relevance leads; tier (name strength) and fit only break ties
+      var score=Math.min(99,Math.round(hits.length*13 + (tierRank[c.tier]||0)*6 + c.fit*0.25));
+      return {c:c,hits:hits,rel:hits.length,score:score};
     });
-    res.sort(function(a,b){return b.score-a.score||b.c.fit-a.c.fit;});
-    return {brand:brand,list:res.slice(0,7)};
+    // only surface creators that genuinely fit; if none, fall back to the strongest names in scope
+    var relevant=scored.filter(function(r){return r.rel>0;});
+    var fallback=relevant.length===0;
+    var list=fallback?scored:relevant;
+    list.sort(function(a,b){ return b.rel-a.rel || (tierRank[b.c.tier]-tierRank[a.c.tier]) || b.c.fit-a.c.fit; });
+    return {brand:brand,list:list.slice(0,7),fallback:fallback};
   }
   function renderScoutResults(query){
     var out=runScout(query);
