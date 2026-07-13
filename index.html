@@ -489,6 +489,71 @@
   .deepdiv::before,.deepdiv::after{content:"";height:1px;background:linear-gradient(90deg,transparent,#2f6bff66,transparent);flex:1}
   .deepdiv span{white-space:nowrap}
 
+  /* ---------- smart features ---------- */
+  .minibtn{font-family:inherit;font-size:11px;font-weight:600;color:var(--ink-dim);background:var(--panel-2);
+    border:1px solid var(--line);border-radius:7px;padding:4px 9px;cursor:pointer;margin-top:6px;white-space:nowrap}
+  .minibtn:hover{color:var(--ink);border-color:var(--accent)}
+  .minibtn.accent{color:var(--accent-ink);border-color:var(--accent);background:var(--accent-soft)}
+  /* roster builder */
+  .rosterbar{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;
+    background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 15px;margin-top:16px}
+  .rb-head{display:flex;flex-direction:column;gap:1px}
+  .rb-t{font-weight:640;font-size:14px}
+  .rb-s{font-size:12px;color:var(--ink-dim)}
+  .rb-ctl{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .budget-presets{display:inline-flex;background:var(--panel-2);border:1px solid var(--line);border-radius:9px;padding:3px;gap:2px}
+  .budget-presets button{border:0;background:transparent;color:var(--ink-dim);font-family:inherit;font-size:12px;padding:5px 9px;border-radius:6px;cursor:pointer}
+  .budget-presets button.on{background:var(--accent-soft);color:var(--accent-ink);font-weight:600}
+  .budget-field{display:inline-flex;align-items:center;gap:4px;background:var(--panel-2);border:1px solid var(--line);border-radius:9px;padding:6px 11px;color:var(--ink-dim);font-size:13px}
+  .budget-field input{border:0;background:transparent;color:var(--ink);font-family:var(--mono);font-size:13px;width:74px;outline:none}
+  .roster-card{margin-top:12px;background:var(--panel);border:1px solid var(--accent);border-radius:13px;padding:15px 16px;box-shadow:0 14px 40px -26px var(--accent)}
+  .roster-top{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+  .rt-title{font-weight:640;font-size:14px}
+  .rt-sub{font-size:12px;color:var(--ink-dim)}
+  .roster-row{display:grid;grid-template-columns:28px 1fr auto auto;gap:12px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line);cursor:pointer}
+  .roster-row:hover{background:var(--panel-2)}
+  .rr-meta b{font-size:13.5px}
+  .rr-meta .tier{margin-left:4px}
+  .rr-sub{font-size:11px;color:var(--ink-dim);display:block;margin-top:1px}
+  .rr-reach{font-family:var(--mono);font-size:13px;text-align:right;color:var(--ink)}
+  .rr-reach span{display:block;font-size:9px;color:var(--ink-dim);text-transform:uppercase;letter-spacing:.5px}
+  .rr-rate{font-family:var(--mono);font-size:14px;font-weight:700;text-align:right;min-width:56px}
+  .roster-totals{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:13px}
+  .roster-totals>div{background:var(--panel-2);border:1px solid var(--line);border-radius:9px;padding:9px 11px}
+  .roster-totals b{font-family:var(--mono);font-size:17px;display:block}
+  .roster-totals span{font-size:9.5px;color:var(--ink-dim);text-transform:uppercase;letter-spacing:.5px}
+  .roster-note{font-size:12px;color:var(--ink-dim);margin-top:11px}
+  @media(max-width:640px){.roster-totals{grid-template-columns:1fr 1fr}.roster-row{grid-template-columns:24px 1fr auto}.rr-reach{display:none}}
+  /* insights */
+  .insights{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-top:16px}
+  .ins-head{font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:var(--accent-ink);font-weight:700;margin-bottom:9px}
+  .ins-row{display:flex;gap:11px;align-items:flex-start;font-size:13.5px;padding:5px 0;line-height:1.45}
+  .ins-i{font-family:var(--mono);flex:none;width:16px;text-align:center}
+  /* scorecard head, compare, similar */
+  .sd-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+  .sd-head .rsub{font-size:12px;color:var(--ink-dim)}
+  .sd-actions{display:flex;gap:8px;align-items:center}
+  .sd-actions .minibtn{margin-top:0}
+  .cmpsel{background:var(--panel-2);border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:6px 9px;font-family:inherit;font-size:12px;cursor:pointer;max-width:150px}
+  .simrow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:12px 0 2px}
+  .simlbl{font-size:10px;letter-spacing:.8px;text-transform:uppercase;color:var(--ink-dim)}
+  .simchip{display:inline-flex;align-items:center;gap:7px;font-size:12px;background:var(--panel-2);border:1px solid var(--line);border-radius:20px;padding:4px 11px 4px 4px;cursor:pointer}
+  .simchip:hover{border-color:var(--accent);color:var(--accent-ink)}
+  .cmp-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px}
+  .cmp-name{display:flex;align-items:center;gap:8px;font-weight:640;font-size:14px}
+  .cmp-name.r{flex-direction:row-reverse;text-align:right}
+  .cmp-vs{font-size:11px;color:var(--ink-dim);font-family:var(--mono)}
+  .cmp-grid{display:flex;flex-direction:column;gap:9px}
+  .cmp-row{display:grid;grid-template-columns:1.2fr 1fr 28px 1fr 28px;gap:8px;align-items:center;font-size:12px}
+  .cmp-k{color:var(--ink-dim)}
+  .cmp-bar{height:7px;background:var(--panel-2);border:1px solid var(--line);border-radius:4px;overflow:hidden}
+  .cmp-bar.r{transform:scaleX(-1)}
+  .cmp-bar i{display:block;height:100%}
+  .cmp-v{font-family:var(--mono);text-align:center;color:var(--ink-dim)}
+  .cmp-v.win{color:var(--ink);font-weight:700}
+  .cmp-verdict{margin-top:14px;font-size:13px;background:var(--panel-2);border:1px solid var(--line);border-radius:9px;padding:11px 13px;line-height:1.5}
+  @media(max-width:640px){.cmp-row{grid-template-columns:1fr 24px 1fr 24px}.cmp-k{grid-column:1/-1}}
+
   @media print{.rail,.topbar,.coach,.palette,.scrim{display:none!important}.app{grid-template-columns:1fr}.view{display:block!important;page-break-inside:avoid}}
 
   @media(max-width:760px){
@@ -588,6 +653,15 @@
           <div class="chips-row" id="quickChips"></div>
         </div>
         <div class="scout-audit" id="scoutAudit" hidden></div>
+        <div class="rosterbar">
+          <div class="rb-head"><span class="rb-t">Build a roster</span><span class="rb-s">Auto-assemble a balanced lineup within budget, from this search</span></div>
+          <div class="rb-ctl">
+            <div class="budget-presets" id="budgetPresets"><button data-v="25000">$25k</button><button data-v="50000" class="on">$50k</button><button data-v="100000">$100k</button><button data-v="250000">$250k</button></div>
+            <div class="budget-field">$<input id="budgetInput" inputmode="numeric" value="50,000" aria-label="Budget"></div>
+            <button class="btn primary" id="buildRosterBtn">Build roster →</button>
+          </div>
+        </div>
+        <div id="rosterOut"></div>
         <div class="scout-results" id="scoutResults"></div>
       </section>
 
@@ -601,6 +675,8 @@
           <div class="card kpi"><span class="lab">Avg engagement rate</span><span class="big">6.4%</span><span class="delta up">▲ 0.7pt</span></div>
           <div class="card kpi"><span class="lab">Cost per 1k views</span><span class="big">$4.10</span><span class="delta up">▼ 14% (better)</span></div>
         </div>
+
+        <div id="dashInsights" class="insights"></div>
 
         <div class="sectlabel">Pipeline this week</div>
         <div class="cards grid-2">
@@ -688,67 +764,9 @@
 
       <!-- ===== BRIEF ===== -->
       <section class="view" id="v-brief">
-        <p class="lead">A brief the creator can act on without a single follow-up call. Talking points, product truth, guardrails, deliverables, usage rights, and disclosure baked in. This is a real one, ready to send.</p>
-        <div class="brief" style="margin-top:18px">
-          <div class="brief-h">
-            <div class="ey">Feastables · Creator Brief</div>
-            <h2>Deluxe Dark Almond · Summer Drop</h2>
-            <p style="font-size:13px;color:var(--ink-dim);margin:2px 0 0;max-width:64ch">Make the first bite look as good as it tastes. We want real reactions from people your audience already trusts on food, not an ad read.</p>
-            <div class="brief-meta">
-              <span>Creator · <b>Keith Lee</b></span>
-              <span>Format · <b>1× TikTok + 1× IG Reel</b></span>
-              <span>Go-live · <b>Aug 14, 7pm ET</b></span>
-              <span>Fee · <b>[locked in contract]</b></span>
-              <span>Usage · <b>60-day whitelist</b></span>
-            </div>
-          </div>
-          <div class="brief-body">
-            <div class="bsec">
-              <h4>The one thing</h4>
-              <p>If a viewer remembers one thing: <b>Deluxe is the real-chocolate upgrade. 55% cacao, whole roasted almonds, nothing fake.</b> Everything else supports that.</p>
-              <h4 style="margin-top:16px">Talking points</h4>
-              <ul>
-                <li>Honest first-bite reaction, your real rating scale.</li>
-                <li>Snap the bar on camera. The clean break is the proof of quality.</li>
-                <li>"Made with better stuff." Real cacao, real almonds, no palm oil.</li>
-                <li>Where to grab it: Walmart + feastables.com, this week.</li>
-              </ul>
-              <h4 style="margin-top:16px">Product truth (don't overclaim)</h4>
-              <ul>
-                <li>55% cacao dark chocolate, whole roasted almonds.</li>
-                <li>Fair Trade cocoa. Say "better ingredients," not "healthy."</li>
-                <li>Contains almonds + milk. Show nothing as allergen-free.</li>
-              </ul>
-            </div>
-            <div class="bsec">
-              <h4>Deliverables</h4>
-              <div class="deliverables">
-                <div class="deliv"><span class="pf">▶</span> 1× TikTok, 30-60s, native taste-test</div>
-                <div class="deliv"><span class="pf">▶</span> 1× IG Reel cross-post, same cut OK</div>
-                <div class="deliv"><span class="pf">◍</span> 2× Story frames w/ product link sticker</div>
-                <div class="deliv"><span class="pf">◷</span> Cut #1 due Aug 9 · 1 revision round</div>
-              </div>
-              <h4 style="margin-top:16px">Guardrails</h4>
-              <div class="dd">
-                <div class="do"><h5>Do</h5><ul>
-                  <li>#ad or "paid partnership" tag on. FTC requires it</li>
-                  <li>Keep your voice; script is a starting point</li>
-                  <li>Good natural light on the snap moment</li>
-                  <li>Tag @feastables + @beast</li>
-                </ul></div>
-                <div class="dont"><h5>Don't</h5><ul>
-                  <li>No health/diet claims</li>
-                  <li>No competitor call-outs by name</li>
-                  <li>No kids as the focus of the video</li>
-                  <li>Don't bury the disclosure in the caption</li>
-                </ul></div>
-              </div>
-              <h4 style="margin-top:16px">Why you</h4>
-              <p>Your audience takes your food takes as gospel. The honest-rating format <em>is</em> the ad. We're not asking you to sell; we're asking you to react.</p>
-            </div>
-          </div>
-        </div>
-        <div class="note"><span class="pf">◎</span><div>Every brief is brand-tuned: swap to <b>Lunchly</b> and the voice goes Gen-Z / dorm-and-gaming; swap to <b>Merch</b> and it's fandom-and-drop energy. Same skeleton, different soul.</div></div>
+        <p class="lead">A brief the creator can act on without a single follow-up call. Draft one from any creator in Scout or the roster, and it tailors itself: the format matches their platform, the angle matches how they actually make content.</p>
+        <div id="briefHost" style="margin-top:18px"></div>
+        <div class="note"><span class="pf">◎</span><div>Every brief tailors itself to the creator and the brand. Talking points, product truth, guardrails, deliverables, usage rights, and disclosure are baked in. Same skeleton, different soul.</div></div>
       </section>
 
       <!-- ===== GIFTING ===== -->
@@ -827,6 +845,8 @@
       <!-- ===== KPI ===== -->
       <section class="view" id="v-kpi">
         <p class="lead">The monthly board deck, on tap. Every number ties to a brand KPI: reach, earned value, engagement quality, conversion, and the operational metric that actually predicts renewal, on-time delivery.</p>
+
+        <div id="kpiInsights" class="insights"></div>
 
         <div class="cards grid-4" style="margin-top:18px">
           <div class="card kpi"><span class="lab">Total reach · Jul</span><span class="big">146M</span><span class="delta up">▲ 9%</span></div>
@@ -1139,7 +1159,7 @@
     'Commercial history':'Track record delivering paid brand work on time and on-brief.',
     'Authenticity / trust':'How much the audience actually believes their recommendations.'
   };
-  var selName=null;
+  var selName=null, cmpName=null;
   function renderPickList(){
     var rows=brandFilter(C).slice().sort(function(a,b){return b.fit-a.fit;});
     if(!selName||!rows.some(function(c){return c.name===selName;})) selName=rows[0]?rows[0].name:null;
@@ -1150,29 +1170,62 @@
     }).join('');
     renderDetail();
   }
-  function selectCreator(n){selName=n;renderPickList();}
+  function selectCreator(n){cmpName=null;selName=n;renderPickList();}
   document.getElementById('pickList').addEventListener('click',function(e){var p=e.target.closest('.pick');if(p)selectCreator(p.getAttribute('data-name'));});
 
+  function axesFor(c){var total=0,wsum=0;var axes=AX.map(function(a){var v=Math.round(a.f(c));total+=v*a.w;wsum+=a.w;return {k:a.k,w:a.w,v:v};});return {axes:axes,comp:Math.round(total/wsum)};}
+  function similarFor(c){
+    return C.filter(function(x){return x.brand===c.brand && x.name!==c.name;})
+      .map(function(x){return {c:x,o:x.tags.filter(function(t){return c.tags.indexOf(t)>=0;}).length};})
+      .filter(function(s){return s.o>0;}).sort(function(a,b){return b.o-a.o||b.c.fit-a.c.fit;}).slice(0,3);
+  }
+  function renderCompare(a,b){
+    var A=axesFor(a),B=axesFor(b);
+    var rows=A.axes.map(function(ax,i){var bv=B.axes[i].v,aw=ax.v>=bv;
+      return '<div class="cmp-row"><div class="cmp-k">'+ax.k+'</div>'+
+        '<div class="cmp-bar"><i style="width:'+ax.v+'%;background:'+scoreColor(ax.v)+'"></i></div><div class="cmp-v'+(aw?' win':'')+'">'+ax.v+'</div>'+
+        '<div class="cmp-bar r"><i style="width:'+bv+'%;background:'+scoreColor(bv)+'"></i></div><div class="cmp-v'+(!aw?' win':'')+'">'+bv+'</div></div>';
+    }).join('');
+    var gaps=A.axes.map(function(ax,i){return {k:ax.k.toLowerCase(),d:ax.v-B.axes[i].v};});
+    var aBest=gaps.slice().sort(function(x,y){return y.d-x.d;})[0], bBest=gaps.slice().sort(function(x,y){return x.d-y.d;})[0];
+    var verdict=A.comp===B.comp?'Line-ball on composite. ':(A.comp>B.comp?a.name+' edges it, '+A.comp+' to '+B.comp+'. ':b.name+' edges it, '+B.comp+' to '+A.comp+'. ');
+    var picks=[]; if(aBest.d>0)picks.push(a.name+' for '+aBest.k); if(bBest.d<0)picks.push(b.name+' for '+bBest.k);
+    verdict+=picks.join(', ')+'.';
+    return '<div class="cmp-head"><div class="cmp-name"><span class="av" style="background:'+brandColor[a.brand]+'">'+initials(a.name)+'</span>'+a.name+' <b style="color:'+scoreColor(A.comp)+'">'+A.comp+'</b></div>'+
+      '<div class="cmp-vs">vs</div><div class="cmp-name r"><span class="av" style="background:'+brandColor[b.brand]+'">'+initials(b.name)+'</span>'+b.name+' <b style="color:'+scoreColor(B.comp)+'">'+B.comp+'</b></div></div>'+
+      '<div class="cmp-grid">'+rows+'</div><div class="cmp-verdict"><b style="color:var(--accent-ink)">Call:</b> '+verdict+'</div>';
+  }
   function renderDetail(){
     var c=C.find(function(x){return x.name===selName;});
-    if(!c){document.getElementById('scoreDetail').innerHTML='<p class="sub">No creators for this brand filter.</p>';return;}
-    var total=0,wsum=0;
-    var axhtml=AX.map(function(a){
-      var v=Math.round(a.f(c)); total+=v*a.w; wsum+=a.w;
-      return '<div class="axis"><div class="atop"><span><b>'+a.k+'</b></span><span><span class="w">wt '+a.w+'%</span> &nbsp;<b class="num" style="color:'+scoreColor(v)+'">'+v+'</b></span></div>'+
-        '<div class="meter"><i style="width:'+v+'%;background:'+scoreColor(v)+'"></i></div>'+
-        '<div class="why">'+axWhy[a.k]+'</div></div>';
-    }).join('');
-    var comp=Math.round(total/wsum);
-    var circ=2*Math.PI*40, off=circ*(1-comp/100);
-    document.getElementById('scoreDetail').innerHTML=
-      '<div class="gauge"><svg class="ring" viewBox="0 0 96 96"><circle cx="48" cy="48" r="40" fill="none" stroke="var(--line)" stroke-width="9"/>'+
-      '<circle cx="48" cy="48" r="40" fill="none" stroke="'+scoreColor(comp)+'" stroke-width="9" stroke-linecap="round" stroke-dasharray="'+circ+'" stroke-dashoffset="'+off+'" transform="rotate(-90 48 48)"/></svg>'+
-      '<div class="verdict"><div style="font-size:11px;letter-spacing:.8px;text-transform:uppercase;color:var(--ink-dim)">Composite fit</div><b style="color:'+scoreColor(comp)+'">'+comp+'</b>'+
-      '<div style="font-size:12px;color:var(--ink-dim)">'+c.name+' · '+brandName[c.brand]+' &nbsp; '+safetyChip(c.safety)+'</div></div></div>'+
-      '<div style="font-size:13px;background:var(--panel-2);border:1px solid var(--line);border-radius:9px;padding:11px 13px;margin:6px 0 2px"><b style="color:var(--accent-ink)">Why this creator:</b> '+c.note+'</div>'+
-      '<div class="axes">'+axhtml+'</div>';
+    var host=document.getElementById('scoreDetail');
+    if(!c){host.innerHTML='<p class="sub">No creators for this brand filter.</p>';return;}
+    var others=brandFilter(C).filter(function(x){return x.name!==c.name;});
+    var opts='<option value="">Compare with…</option>'+others.map(function(x){return '<option value="'+x.name+'"'+(x.name===cmpName?' selected':'')+'>'+x.name+'</option>';}).join('');
+    var head='<div class="sd-head"><div><b>'+c.name+'</b> <span class="rsub">'+c.platform+' · '+c.followers+' · '+brandName[c.brand]+'</span></div>'+
+      '<div class="sd-actions"><select id="cmpSel" class="cmpsel" aria-label="Compare with">'+opts+'</select>'+
+      '<button class="minibtn accent" data-brief="'+c.name+'">Draft brief →</button></div></div>';
+    if(cmpName && C.find(function(x){return x.name===cmpName;})){
+      host.innerHTML=head+renderCompare(c,C.find(function(x){return x.name===cmpName;}));
+    } else {
+      var A=axesFor(c);
+      var axhtml=A.axes.map(function(a){return '<div class="axis"><div class="atop"><span><b>'+a.k+'</b></span><span><span class="w">wt '+a.w+'%</span> &nbsp;<b class="num" style="color:'+scoreColor(a.v)+'">'+a.v+'</b></span></div><div class="meter"><i style="width:'+a.v+'%;background:'+scoreColor(a.v)+'"></i></div><div class="why">'+axWhy[a.k]+'</div></div>';}).join('');
+      var comp=A.comp,circ=2*Math.PI*40,off=circ*(1-comp/100);
+      var sim=similarFor(c);
+      var simhtml=sim.length?'<div class="simrow"><span class="simlbl">Similar creators</span>'+sim.map(function(s){return '<span class="simchip" data-name="'+s.c.name+'"><span class="av" style="background:'+brandColor[s.c.brand]+';width:20px;height:20px;font-size:10px">'+initials(s.c.name)+'</span>'+s.c.name+'</span>';}).join('')+'</div>':'';
+      host.innerHTML=head+
+        '<div class="gauge"><svg class="ring" viewBox="0 0 96 96"><circle cx="48" cy="48" r="40" fill="none" stroke="var(--line)" stroke-width="9"/>'+
+        '<circle cx="48" cy="48" r="40" fill="none" stroke="'+scoreColor(comp)+'" stroke-width="9" stroke-linecap="round" stroke-dasharray="'+circ+'" stroke-dashoffset="'+off+'" transform="rotate(-90 48 48)"/></svg>'+
+        '<div class="verdict"><div style="font-size:11px;letter-spacing:.8px;text-transform:uppercase;color:var(--ink-dim)">Composite fit</div><b style="color:'+scoreColor(comp)+'">'+comp+'</b>'+
+        '<div style="font-size:12px;color:var(--ink-dim)">'+c.name+' · '+brandName[c.brand]+' &nbsp; '+safetyChip(c.safety)+'</div></div></div>'+
+        '<div style="font-size:13px;background:var(--panel-2);border:1px solid var(--line);border-radius:9px;padding:11px 13px;margin:6px 0 2px"><b style="color:var(--accent-ink)">Why this creator:</b> '+c.note+'</div>'+
+        simhtml+'<div class="axes">'+axhtml+'</div>';
+    }
+    var sel=document.getElementById('cmpSel'); if(sel) sel.addEventListener('change',function(){cmpName=this.value||null;renderDetail();});
   }
+  document.getElementById('scoreDetail').addEventListener('click',function(e){
+    var b=e.target.closest('[data-brief]'); if(b){draftBrief(b.getAttribute('data-brief'));return;}
+    var s=e.target.closest('.simchip'); if(s){selectCreator(s.getAttribute('data-name'));}
+  });
 
   /* ---------- calendar ---------- */
   var calRows=[
@@ -1442,7 +1495,7 @@
       '<div class="rmeta"><b>'+c.name+'</b> <span class="tier '+c.tier+'">'+(tierLbl[c.tier]||c.tier)+'</span> '+
       '<span class="rsub">'+c.platform+' · '+c.followers+' · '+brandName[c.brand]+'</span>'+
       '<div class="rwhy">'+chips+'</div><div class="rnote">'+c.note+'</div></div>'+
-      '<div class="rscore"><div class="rv" style="color:'+scoreColor(r.score)+'">'+r.score+'</div><div class="rl">match</div></div>'+
+      '<div class="rscore"><div class="rv" style="color:'+scoreColor(r.score)+'">'+r.score+'</div><div class="rl">match</div><button class="minibtn" data-brief="'+c.name+'">Brief →</button></div>'+
       '</div>';
   }
   function renderScoutResults(query){
@@ -1487,11 +1540,108 @@
   document.getElementById('shuffleBtn').addEventListener('click',function(){var x=QUICK[Math.floor(Math.random()*QUICK.length)];document.getElementById('scoutInput').value=x.q;doScout(x.q,true);});
   document.getElementById('deepToggle').addEventListener('click',function(){scoutDeep=!scoutDeep;this.classList.toggle('on',scoutDeep);this.setAttribute('aria-checked',scoutDeep);doScout(scoutLastQuery,true);});
   document.getElementById('scoutFile').addEventListener('change',function(){var f=this.files&&this.files[0];var chip=document.getElementById('fileChip');if(f){chip.hidden=false;chip.textContent='⎘ '+f.name;var base=f.name.replace(/\.[^.]+$/,'').replace(/[-_]/g,' ');var inp=document.getElementById('scoutInput');inp.value=(inp.value?inp.value+', ':'')+base;}});
-  document.getElementById('scoutResults').addEventListener('click',function(e){var r=e.target.closest('.rescard');if(r){selectCreator(r.getAttribute('data-name'));go('score');}});
+  document.getElementById('scoutResults').addEventListener('click',function(e){var b=e.target.closest('[data-brief]');if(b){e.stopPropagation();draftBrief(b.getAttribute('data-brief'));return;}var r=e.target.closest('.rescard');if(r){selectCreator(r.getAttribute('data-name'));go('score');}});
   function initScout(){var inp=document.getElementById('scoutInput');inp.value=QUICK[0].q;renderScoutResults(QUICK[0].q);}
 
+  /* ================= SMART FEATURES ================= */
+  function parseM(f){var m=parseFloat(f)||0; if(/k/i.test(f))m=m/1000; return m;}
+  function fmtNum(n){return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g,',');}
+  function fmtReach(n){ if(n>=1e6)return (n/1e6).toFixed(n>=1e7?0:1)+'M'; if(n>=1e3)return Math.round(n/1e3)+'k'; return ''+n; }
+  function rateFor(c){var M=parseM(c.followers),base=M*2200; if(c.platform==='YouTube')base*=1.25; if(c.platform==='Twitch')base*=0.9; return Math.max(1500,Math.round(base/500)*500);}
+  function reachFor(c){var M=parseM(c.followers),v=M*0.42; if(c.platform==='YouTube')v=M*0.5; if(c.platform==='Twitch')v=M*0.6; return Math.round(v*1e6);}
+
+  /* --- one-click draft brief (tailored per creator + brand) --- */
+  var PRODUCT={
+    feastables:{brand:"Feastables",product:"Deluxe Dark Almond · Summer Drop",oneThing:"Deluxe is the real-chocolate upgrade: 55% cacao, whole roasted almonds, nothing fake",truth:["55% cacao dark chocolate, whole roasted almonds","Fair Trade cocoa. Say 'better ingredients,' not 'healthy'","Contains almonds and milk. Nothing shown as allergen-free"],tag:"@feastables"},
+    lunchly:{brand:"Lunchly",product:"The new Lunchly pack",oneThing:"Lunchly is the snack that fits your day: real food, grab-and-go, zero prep",truth:["Real components, portioned and portable","Say 'made for your schedule,' not 'nutritious'","Contains common allergens. Point people to the pack"],tag:"@lunchly"},
+    merch:{brand:"Beast Merch",product:"The new Beast drop",oneThing:"This is limited-run gear that sells out: wear it before it's gone",truth:["Limited quantities, real drop energy","Say 'limited,' don't promise restocks","Ships where the store ships"],tag:"@beast"}
+  };
+  function formatFor(c){return c.platform==='YouTube'?'1x YouTube integration, 60-90s':c.platform==='Twitch'?'1x live segment + 1 clip':c.platform==='Instagram'?'1x Reel + 2 Story frames':'1x TikTok, 30-60s';}
+  function delivFor(c){var p=c.platform;
+    if(p==='YouTube')return [["▶","1x YouTube integration, 60-90s, in a normal upload"],["◍","1x Community post with the product link"],["◷","Cut #1 for review 5 days before go-live · 1 revision"]];
+    if(p==='Twitch')return [["▶","1x live segment during a scheduled stream"],["✂","1x clip pulled and posted to Shorts/TikTok"],["◷","Confirm stream date 5 days out · brand-safety check-in"]];
+    if(p==='Instagram')return [["▶","1x Reel, 20-45s, native to your feed"],["◍","2x Story frames with the product link sticker"],["◷","Cut #1 for review 4 days before go-live · 1 revision"]];
+    return [["▶","1x TikTok, 30-60s, native to your style"],["◍","1x Story or second post with the link"],["◷","Cut #1 for review 4 days before go-live · 1 revision"]];}
+  function angleFor(c){var t=c.tags||[];
+    if(t.indexOf('honest')>=0||t.indexOf('review')>=0)return {angle:"An honest first-taste rating in your real format",points:["Your honest first-bite reaction and rating","Snap it on camera, the clean break is the proof","Where to grab it, this week"]};
+    if(t.indexOf('asmr')>=0)return {angle:"A satisfying, close-up taste moment",points:["Close-up unwrap and the clean snap","Let the sound and texture carry it","Tag where to find it"]};
+    if(t.indexOf('gaming')>=0||t.indexOf('streaming')>=0)return {angle:"Snack-while-you-stream, worked into the session",points:["Keep it native to your stream, no hard pivot","React on cam mid-game","Drop the link or code for chat"]};
+    if(t.indexOf('challenge')>=0||t.indexOf('stunt')>=0)return {angle:"Work the product into a challenge or stunt",points:["Build it into the bit, not a read","Make the reveal the payoff","Call the drop at the end"]};
+    if(t.indexOf('cooking')>=0||t.indexOf('chef')>=0||t.indexOf('baking')>=0)return {angle:"Cook or build something around it",points:["Feature it as the hero ingredient","Show the quality up close","Point to where to buy"]};
+    if(t.indexOf('aesthetic')>=0||t.indexOf('routine')>=0)return {angle:"Fold it into your aesthetic daily routine",points:["Style it into your normal day","Keep it calm and aspirational","Soft call to grab it"]};
+    if(t.indexOf('magic')>=0)return {angle:"Make the product 'appear' as the trick",points:["Reveal it as the payoff of a trick","Keep it short and shareable","Tag the drop"]};
+    return {angle:"A native feature in your usual format",points:["Show it in your own voice","Make the product the moment","Point to where to get it"]};}
+  function renderBrief(name){
+    var c=C.find(function(x){return x.name===name;})||C[0]; var pr=PRODUCT[c.brand],ang=angleFor(c),fmt=formatFor(c);
+    var tp=ang.points.map(function(p){return '<li>'+p+'</li>';}).join('');
+    var truth=pr.truth.map(function(t){return '<li>'+t+'</li>';}).join('');
+    var deliv=delivFor(c).map(function(d){return '<div class="deliv"><span class="pf">'+d[0]+'</span> '+d[1]+'</div>';}).join('');
+    document.getElementById('briefHost').innerHTML=
+      '<div class="brief"><div class="brief-h"><div class="ey">'+pr.brand+' · Creator Brief</div><h2>'+pr.product+'</h2>'+
+      '<p style="font-size:13px;color:var(--ink-dim);margin:2px 0 0;max-width:64ch">'+ang.angle+'. We want it in your voice, not an ad read.</p>'+
+      '<div class="brief-meta"><span>Creator · <b>'+c.name+'</b></span><span>Format · <b>'+fmt+'</b></span><span>Go-live · <b>window agreed in contract</b></span><span>Fee · <b>[locked in contract]</b></span><span>Usage · <b>60-day whitelist</b></span></div></div>'+
+      '<div class="brief-body"><div class="bsec"><h4>The one thing</h4><p>If a viewer remembers one thing: <b>'+pr.oneThing+'.</b> Everything else supports that.</p>'+
+      '<h4 style="margin-top:16px">Talking points</h4><ul>'+tp+'</ul><h4 style="margin-top:16px">Product truth (don\'t overclaim)</h4><ul>'+truth+'</ul></div>'+
+      '<div class="bsec"><h4>Deliverables</h4><div class="deliverables">'+deliv+'</div><h4 style="margin-top:16px">Guardrails</h4><div class="dd">'+
+      '<div class="do"><h5>Do</h5><ul><li>#ad or "paid partnership" tag on. FTC requires it</li><li>Keep your voice; the script is a starting point</li><li>Tag '+pr.tag+' and @beast</li></ul></div>'+
+      '<div class="dont"><h5>Don\'t</h5><ul><li>No health or diet claims</li><li>No competitor call-outs by name</li><li>No minors as the focus</li><li>Don\'t bury the disclosure in the caption</li></ul></div></div>'+
+      '<h4 style="margin-top:16px">Why you</h4><p>'+c.note+'</p></div></div></div>';
+  }
+  function draftBrief(name){renderBrief(name);go('brief');}
+
+  /* --- roster builder (budget optimizer) --- */
+  function buildRoster(query,budget){
+    var out=runScout(query,true), pool=out.top.concat(out.deepcuts), seen={},cands=[];
+    pool.forEach(function(r){var c=r.c; if(!seen[c.name]){seen[c.name]=1;cands.push({c:c,rate:rateFor(c),reach:reachFor(c)});}});
+    cands.sort(function(a,b){return b.reach-a.reach;});
+    var chosen=[],spend=0,anchor=null,cap=budget*0.55;
+    // anchor: highest-reach marquee/rising that leaves room for a supporting cast (<=55% of budget)
+    for(var i=0;i<cands.length;i++){if((cands[i].c.tier==='marquee'||cands[i].c.tier==='rising')&&cands[i].rate<=cap){anchor=cands[i];break;}}
+    if(anchor){chosen.push(anchor);spend+=anchor.rate;}
+    cands.filter(function(x){return x!==anchor;}).sort(function(a,b){return (b.reach/b.rate)-(a.reach/a.rate)||b.reach-a.reach;})
+      .forEach(function(x){if(chosen.length<8 && spend+x.rate<=budget){chosen.push(x);spend+=x.rate;}});
+    var reach=chosen.reduce(function(s,x){return s+x.reach;},0);
+    return {chosen:chosen,spend:spend,reach:reach,cpm:reach?(spend/(reach/1000)):0,budget:budget,brand:out.brand};
+  }
+  function renderRoster(res){
+    var el=document.getElementById('rosterOut');
+    if(!res.chosen.length){el.innerHTML='<div class="roster-card"><p class="sub">No lineup fits that budget yet. Try raising it or widening the search.</p></div>';return;}
+    var rows=res.chosen.map(function(x){var c=x.c;return '<div class="roster-row" data-name="'+c.name+'"><span class="av" style="background:'+brandColor[c.brand]+'">'+initials(c.name)+'</span>'+
+      '<div class="rr-meta"><b>'+c.name+'</b> <span class="tier '+c.tier+'">'+(tierLbl[c.tier]||c.tier)+'</span><span class="rr-sub">'+c.platform+' · '+c.followers+'</span></div>'+
+      '<div class="rr-reach">'+fmtReach(x.reach)+'<span>reach</span></div><div class="rr-rate">$'+fmtNum(x.rate)+'</div></div>';}).join('');
+    el.innerHTML='<div class="roster-card"><div class="roster-top"><span class="rt-title">Suggested lineup · '+brandName[res.brand]+'</span><span class="rt-sub">balanced for reach within $'+fmtNum(res.budget)+'</span></div>'+rows+
+      '<div class="roster-totals"><div><b>'+res.chosen.length+'</b><span>creators</span></div><div><b>$'+fmtNum(res.spend)+'</b><span>committed</span></div><div><b>'+fmtReach(res.reach)+'</b><span>projected reach</span></div><div><b>$'+res.cpm.toFixed(2)+'</b><span>blended CPM</span></div></div>'+
+      '<div class="roster-note">One anchor for credibility, mid-tier for coverage, micro for efficiency. Click any name for the full score.</div></div>';
+  }
+  function parseBudget(){var v=parseInt((document.getElementById('budgetInput').value||'').replace(/[^0-9]/g,''),10);return isNaN(v)?50000:v;}
+  function rosterQuery(){return (document.getElementById('scoutInput').value||'').trim()||scoutLastQuery;}
+  document.getElementById('buildRosterBtn').addEventListener('click',function(){renderRoster(buildRoster(rosterQuery(),parseBudget()));document.getElementById('rosterOut').scrollIntoView({behavior:'smooth',block:'nearest'});});
+  document.getElementById('budgetPresets').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(this.children,function(x){x.classList.toggle('on',x===b);});document.getElementById('budgetInput').value=fmtNum(+b.getAttribute('data-v'));renderRoster(buildRoster(rosterQuery(),parseBudget()));});
+  document.getElementById('budgetInput').addEventListener('keydown',function(e){if(e.key==='Enter')document.getElementById('buildRosterBtn').click();});
+  document.getElementById('rosterOut').addEventListener('click',function(e){var r=e.target.closest('.roster-row');if(r){selectCreator(r.getAttribute('data-name'));go('score');}});
+
+  /* --- reading the numbers (auto-insights) --- */
+  var BRANDKPI=[{b:'feastables',reach:78,eng:6.8,cpm:3.90,ontime:97,gmvGrowth:12},{b:'lunchly',reach:51,eng:7.9,cpm:3.40,ontime:95,gmvGrowth:21},{b:'merch',reach:17,eng:5.1,cpm:5.60,ontime:92,gmvGrowth:6}];
+  function generateInsights(){
+    var s=BRANDKPI, out=[];
+    var topG=s.slice().sort(function(a,b){return b.gmvGrowth-a.gmvGrowth;})[0];
+    out.push({t:'up',x:brandName[topG.b]+' GMV is up '+topG.gmvGrowth+'%, the strongest month in the portfolio.'});
+    var lowOT=s.slice().sort(function(a,b){return a.ontime-b.ontime;})[0];
+    out.push({t:lowOT.ontime<95?'warn':'note',x:brandName[lowOT.b]+' on-time is at '+lowOT.ontime+'%, the one number sliding. Fix it before it hits reach.'});
+    var topReach=s.slice().sort(function(a,b){return b.reach-a.reach;})[0];
+    out.push({t:'note',x:brandName[topReach.b]+' carries the most reach at '+topReach.reach+'M, still the widest top of funnel.'});
+    var bestEng=s.slice().sort(function(a,b){return b.eng-a.eng;})[0];
+    out.push({t:'up',x:brandName[bestEng.b]+' leads engagement quality at '+bestEng.eng+'%, driven by the gaming tier.'});
+    return out;
+  }
+  function renderInsights(id,limit){
+    var el=document.getElementById(id); if(!el)return;
+    var ins=generateInsights().slice(0,limit||4), icon={up:'▲',warn:'⚠',note:'◆'}, col={up:'var(--good)',warn:'var(--warn)',note:'var(--accent-ink)'};
+    el.innerHTML='<div class="ins-head">Reading the numbers</div>'+ins.map(function(i){return '<div class="ins-row"><span class="ins-i" style="color:'+col[i.t]+'">'+icon[i.t]+'</span>'+i.x+'</div>';}).join('');
+  }
+
   /* ---------- render all ---------- */
-  function renderAll(){renderTopFits();renderCRM();renderPickList();renderCal();renderCharts();renderSignals();initScout();}
+  function renderAll(){renderTopFits();renderCRM();renderPickList();renderCal();renderCharts();renderSignals();initScout();renderBrief('Keith Lee');renderInsights('kpiInsights',4);renderInsights('dashInsights',3);}
   renderAll();
 })();
 </script>
